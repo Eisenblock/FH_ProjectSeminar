@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://rkqb3oanae11"]
+
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="1_0n5c2"]
+
+[node name="ButtonDmg" type="Button"]
+offset_left = 209.0
+offset_top = 314.0
+offset_right = 259.0
+offset_bottom = 364.0
+script = ExtResource("1_0n5c2")
+fireball_path = NodePath("../Projectile_Player")
+addAttrButton_bool = true
+circleShoot_bool = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

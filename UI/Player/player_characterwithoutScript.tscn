@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw1rwh4bavre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3qdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvlyr"]
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u3qdv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qvlyr")

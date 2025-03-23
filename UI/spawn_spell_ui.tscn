@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkv378lw3o8u6"]
+
+[ext_resource type="Script" uid="uid://crvgijf3thd3w" path="res://UI/spawn_spell_ui.gd" id="1_np0rx"]
+[ext_resource type="PackedScene" uid="uid://b2jqii40x6ev3" path="res://UI/control.tscn" id="2_hl6nm"]
+[ext_resource type="PackedScene" uid="uid://isgqdl8fh5vp" path="res://UI/controlCircleAttr.tscn" id="3_cyklq"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmg3.tscn" id="4_hl6nm"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="5_cyklq"]
+
+[node name="SpawnSpellUI" type="Node2D" groups=["spell_ui"]]
+script = ExtResource("1_np0rx")
+textObject = ExtResource("2_hl6nm")
+CircleObjectUI = ExtResource("3_cyklq")
+buttonObject = ExtResource("4_hl6nm")
+buttonObject2 = ExtResource("5_cyklq")

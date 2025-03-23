@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ohi2jmlvtru"]
+
+[ext_resource type="Script" uid="uid://cafu8o8pi4mng" path="res://UI/Projectiles/projectile_player.gd" id="1_v4s6g"]
+[ext_resource type="PackedScene" uid="uid://ynatxihwqg01" path="res://UI/CharacterNeu.tscn" id="2_l3u2g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvbvf"]
+size = Vector2(18, 20)
+
+[node name="Projectile_Auto" type="Area2D"]
+script = ExtResource("1_v4s6g")
+player = ExtResource("2_l3u2g")
+CircleBall_bool = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nvbvf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.073201, 0.644114, 0.470081, 1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://odji5amif7rw"]
+
+[sub_resource type="GDScript" id="GDScript_0vvm8"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://Projectiles/world1Test.tscn\")
+"
+
+[node name="Button" type="Button"]
+offset_left = 317.0
+offset_top = 123.0
+offset_right = 413.0
+offset_bottom = 183.0
+script = SubResource("GDScript_0vvm8")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

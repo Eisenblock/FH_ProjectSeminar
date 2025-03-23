@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://isgqdl8fh5vp"]
+
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="1_3a7vm"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
+scale = Vector2(0.912995, 0.653338)
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(0.932664, 2.06962e-05, 0.641746, 1)
+layout_mode = 0
+offset_left = 166.0
+offset_right = 174.0
+offset_bottom = 8.0
+rotation = 0.0192668
+scale = Vector2(4.18182, 4.8159)
+script = ExtResource("1_3a7vm")
+changeAttrButton_bool = true
+circleShoot_bool = true
+
+[node name="Button2" type="Button" parent="."]
+modulate = Color(1, 0.266667, 0, 1)
+layout_mode = 0
+offset_left = 204.82
+offset_top = 1.5306
+offset_right = 212.82
+offset_bottom = 9.5306
+rotation = 0.0192668
+scale = Vector2(4.18182, 4.8159)
+script = ExtResource("1_3a7vm")
+upgradeButton_tier = true
+circleShoot_bool = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.19059
+offset_top = 7.65301
+offset_right = 42.1906
+offset_bottom = 30.653
+text = "Hi"
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

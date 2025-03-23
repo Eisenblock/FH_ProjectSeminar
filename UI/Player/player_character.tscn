@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://chwndlvl5kt3q"]
+
+[ext_resource type="Script" uid="uid://ds3xgyob8dfd5" path="res://UI/Player/player_character.gd" id="1_jxsul"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3qdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvlyr"]
+
+[node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_jxsul")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u3qdv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qvlyr")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

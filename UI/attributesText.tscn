@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://co5ut4w4gd6ld"]
+
+[ext_resource type="Script" uid="uid://b811ocx3cgwlv" path="res://UI/attributes_text.gd" id="1_fyilf"]
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="2_6jy7l"]
+
+[node name="Attributes" type="TextEdit"]
+offset_left = 21.0
+offset_top = 24.0
+offset_right = 211.0
+offset_bottom = 79.0
+scale = Vector2(1.4, 1)
+text = "scor"
+script = ExtResource("1_fyilf")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(0.892565, 0, 0.186264, 1)
+z_index = 1
+layout_mode = 0
+offset_left = 167.857
+offset_right = 194.857
+offset_bottom = 51.0
+scale = Vector2(0.716118, 0.979121)
+text = "c"
+script = ExtResource("2_6jy7l")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
