@@ -23,6 +23,7 @@ var isSwitch : bool = false
 
 func _ready() -> void:
 	current_attribute = Global.ChestAttribute
+	updateTextFieldsRef(current_attribute,"autoShoot",Global.countAttrOnAuto)
 
 
 func updateTextFields():

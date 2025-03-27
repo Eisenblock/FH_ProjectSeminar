@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://btq4y2ac7hcs2"]
+
+[ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://portal.tscn" id="1_qxfde"]
+[ext_resource type="PackedScene" path="res://character.tscn" id="2_14hel"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_jsrw8"]
+
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jsrw8"]
+vertices = PackedVector2Array(456.531, 344.406, 117.758, 420.547, 113.133, 178.891, 423.328, 63.1719, 848.719, 103.453, 850.422, 563.227, 1028.96, 439.844)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 0, 4, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(455, 355, 108, 433, 103, 172, 422, 53, 855, 94, 1042, 443, 851, 575)])
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Portal" parent="." instance=ExtResource("1_qxfde")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_14hel")]
+position = Vector2(757, 333)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 57.0
+offset_top = 578.0
+offset_right = 251.0
+offset_bottom = 605.0
+
+[node name="Enemy" parent="." instance=ExtResource("3_jsrw8")]
+position = Vector2(198, 265)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_jsrw8")

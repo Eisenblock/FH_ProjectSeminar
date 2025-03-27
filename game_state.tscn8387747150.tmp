@@ -1,0 +1,24 @@
+[gd_scene load_steps=12 format=3 uid="uid://d0t1smb8wioxq"]
+
+[ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_30ppg"]
+[ext_resource type="PackedScene" uid="uid://d7n1lgb43mkm" path="res://DungeonRooms/EDown/EnemyRoom_Down_Right.tscn" id="2_ukbay"]
+[ext_resource type="PackedScene" uid="uid://cbkijvfwlmgqj" path="res://DungeonRooms/ERight/Corridor_Right_Right.tscn" id="3_8wmbl"]
+[ext_resource type="PackedScene" uid="uid://d1rwk2c5juhsq" path="res://DungeonRooms/ERight/Corridor_Right_Down.tscn" id="3_ukbay"]
+[ext_resource type="PackedScene" uid="uid://h3wt5taby8w2" path="res://DungeonRooms/ERight/EnemyRoom_Right_Down.tscn" id="4_rxqo8"]
+[ext_resource type="PackedScene" uid="uid://cd2ybngytakqw" path="res://DungeonRooms/ERight/EnemyRoom_Right_Right.tscn" id="4_ww4ma"]
+[ext_resource type="PackedScene" uid="uid://cnawcymbeqvif" path="res://DungeonRooms/EDown/EnemyRoom_Down_Down.tscn" id="6_qngls"]
+[ext_resource type="PackedScene" uid="uid://bswqa3lvpvh8x" path="res://DungeonRooms/ERight/Corridor_Right_UP.tscn" id="8_j4exv"]
+[ext_resource type="PackedScene" uid="uid://bbnd7gs4lwu7p" path="res://DungeonRooms/EDown/Corridor_Down_Down.tscn" id="9_4dda0"]
+[ext_resource type="PackedScene" uid="uid://r53ikikiywir" path="res://DungeonRooms/EDown/Corridor_Down_Left.tscn" id="10_8cymf"]
+[ext_resource type="PackedScene" uid="uid://bqymb18qsg7f4" path="res://DungeonRooms/EDown/Corridor_Down_Right.tscn" id="11_qijhy"]
+
+[node name="GameState" type="Node2D"]
+script = ExtResource("1_30ppg")
+room_scene = ExtResource("2_ukbay")
+corridor_scene = ExtResource("3_ukbay")
+max_rooms = null
+room_scene_Start = null
+room_scene_ERight = Array[PackedScene]([ExtResource("4_rxqo8"), ExtResource("4_ww4ma")])
+room_scene_EDown = Array[PackedScene]([ExtResource("6_qngls"), ExtResource("2_ukbay")])
+corridor_scene_ERight = Array[PackedScene]([ExtResource("3_ukbay"), ExtResource("3_8wmbl"), ExtResource("8_j4exv")])
+corridor_scene_EDown = Array[PackedScene]([ExtResource("9_4dda0"), ExtResource("10_8cymf"), ExtResource("11_qijhy")])

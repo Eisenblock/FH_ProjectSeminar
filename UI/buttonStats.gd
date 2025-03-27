@@ -12,6 +12,11 @@ extends Button
 
 var rigthValue : bool = false
 var availableAttributes = {
+	"Fireball" : 1,
+	"Circleball" : 1,
+}
+"""var availableAttributes = {
+	
 	"tier1": {
 		"base_dmg": randi_range(5, 15),          
 		"more_dmg_percent": randi_range(5, 25), 
@@ -28,7 +33,7 @@ var availableAttributes = {
 		"lifetime": randi_range(3, 4),         
 		"lifesteal": randf_range(0.5, 1)  
 			}
-	}
+	}"""
 
 var track_dmg = 0
 var track_bonusdmg = 0
@@ -168,29 +173,34 @@ func UpgradeTierAttr2( attribute_dict: Dictionary):
 func _on_pressed() -> void:
 	# Wähle zufällig ein Attribut aus avaibleAttributes aus
 	rigthValue  = false
-	var keys = availableAttributes["tier1"].keys()
+	#var keys = availableAttributes["tier1"].keys()
+	var keys = availableAttributes.keys()
 	var randNum = randi() % keys.size()
 	var selectedAttribute 
 	
 	if autoShotButton_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(autoShotButton_bool,rigthValue,Global.ChestAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = availableAttributes[selectedAttribute]
 		addAttribute(selectedAttribute, attributeValue)
 	if circleShoot_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(circleShoot_bool,rigthValue,Global.circleShootAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = availableAttributes[selectedAttribute]
 		addAttribute(selectedAttribute, attributeValue)
 		
 	if changeAttrButton_bool:
 		if autoShotButton_bool :
 			selectedAttribute = CheckAttr_isValid(autoShotButton_bool,rigthValue,Global.ChestAttribute,keys)
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = availableAttributes[selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"auto_shoot")
 		# Füge das Attribut und den Wert zum globalen Dictionary hinzu
 		
 		if circleShoot_bool : 
 			selectedAttribute = CheckAttr_isValid(circleShoot_bool,rigthValue,Global.circleShootAttribute,keys)
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = availableAttributes[selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"circle_shoot")
 		
 	if upgradeButton_tier : 

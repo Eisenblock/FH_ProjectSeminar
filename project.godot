@@ -19,6 +19,13 @@ config/icon="res://icon.svg"
 
 Global="*res://Global.gd"
 
+[global_group]
+
+Right=""
+Down=""
+Up=""
+Left=""
+
 [input]
 
 Shoot={

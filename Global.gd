@@ -7,7 +7,7 @@ var enemyList = []
 var enemyList_lost = []
 var ChestAttribute := {}
 var AllAttrItems := {}
-
+var enemySpawnCount = 2
 #OlD Values
 var autoShootAttribute := {}
 var fireballShootAttribute := {}

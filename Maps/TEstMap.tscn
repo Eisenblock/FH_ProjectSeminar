@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bo5lo160c7r8y"]
+
+[ext_resource type="PackedScene" uid="uid://bw1rwh4bavre" path="res://Player/player_characterwithoutScript.tscn" id="1_gmyay"]
+[ext_resource type="Script" uid="uid://ds3xgyob8dfd5" path="res://Player/player_character.gd" id="2_7s50g"]
+[ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="2_seeep"]
+[ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="3_7u057"]
+[ext_resource type="PackedScene" uid="uid://d4blofntpn1c8" path="res://TileMap/TileMap_OnlyMap.tscn" id="3_seeep"]
+[ext_resource type="PackedScene" uid="uid://4i2mn53cfwgg" path="res://Projectiles/projectile_circle.tscn" id="4_a0m1k"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="7_nh1vd"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmg3.tscn" id="8_mgdn7"]
+
+
+[node name="GameState" type="Node2D"]
+position = Vector2(-1, 0)
+
+[node name="PlayerCharacter" parent="." groups=["player"] instance=ExtResource("1_gmyay")]
+script = ExtResource("2_7s50g")
+normalShootScene = ExtResource("3_7u057")
+circleShootScene = ExtResource("4_a0m1k")
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerCharacter"]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="SpawnSpellUI" parent="." instance=ExtResource("2_seeep")]
+
+[node name="Control" type="Control" parent="." groups=["spell_ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -558.0
+offset_top = -306.0
+offset_right = -518.0
+offset_bottom = -283.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ButtonDmg" parent="." instance=ExtResource("7_nh1vd")]
+offset_left = -456.0
+offset_top = -257.0
+offset_right = -406.0
+offset_bottom = -207.0
+text = "Circle"
+
+[node name="ButtonDmg2" parent="." instance=ExtResource("8_mgdn7")]
+offset_left = -520.0
+offset_top = -265.0
+offset_right = -470.0
+offset_bottom = -215.0
+text = "Auto"
+
+[node name="Node2D" parent="." instance=ExtResource("3_seeep")]
+z_index = -1
+position = Vector2(-23, 135)

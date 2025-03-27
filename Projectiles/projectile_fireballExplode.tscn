@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqx20y0charwj"]
+
+[ext_resource type="Script" uid="uid://dj8jeqt1aslxi" path="res://Projectiles/projectile_playerScript.gd" id="1_53j3a"]
+[ext_resource type="PackedScene" uid="uid://3eauyfvdw76s" path="res://explodeProjectile.tscn" id="2_idx2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hlcf"]
+size = Vector2(21, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53j3a"]
+size = Vector2(93, 70)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_53j3a")
+autoShoot = true
+FireBall_bool = true
+explodeScene = ExtResource("2_idx2s")
+castTime = 1.0
+speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8hlcf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.988155, 0.887104, 0.459868, 1)
+
+[node name="Explode" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_53j3a")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

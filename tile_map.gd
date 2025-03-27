@@ -3,12 +3,13 @@ extends TileMap
 @export var ENEMY_SCENE : PackedScene
 const MAP_WIDTH = 90
 const MAP_HEIGHT = 90
-
+const MIN_ROOM_DISTANCE = 3 
 const FLOOR_ATLAS = Vector2i(3, 3)  # Atlas-Koordinaten für Boden
 const WALL_ATLAS = Vector2i(3, 14)  # Atlas-Koordinaten für Wand
 
 var map = []  # 2D-Array für Dungeon-Daten
 var rooms = []
+var enemyRooms = []
 
 func _ready():
 	generate_map()
@@ -22,23 +23,47 @@ func generate_map():
 		map.append([])
 		for x in range(MAP_WIDTH):
 			map[y].append(WALL_ATLAS)  # Standardmäßig Wand
-
-	# 2. Räume generieren
-	rooms = []  # Liste, um die Raum-Positionen zu speichern
-	for i in range(10):  # Anzahl der Räume
-		var room_w = randi_range(5, 20)
-		var room_h = randi_range(5, 20)
-		var room_x = randi_range(1, MAP_WIDTH - room_w - 1)
-		var room_y = randi_range(1, MAP_HEIGHT - room_h - 1)
-
-		# Raum hinzufügen
-		rooms.append(Rect2(room_x, room_y, room_w, room_h))
-
-		# Räume in der Map eintragen
-		for y in range(room_y, room_y + room_h):
-			for x in range(room_x, room_x + room_w):
-				map[y][x] = FLOOR_ATLAS  # Räume mit Boden füllen
-
+	
+	# Spieler-Start-Raum manuell setzen
+	var start_room = Rect2(10, 10, 8, 8)  # Beispielposition für den ersten Raum
+	
+	rooms.append(start_room)
+	# Diesen Raum in die Map eintragen
+	for y in range(start_room.position.y, start_room.position.y + start_room.size.y):
+		for x in range(start_room.position.x, start_room.position.x + start_room.size.x):
+			map[y][x] = FLOOR_ATLAS
+	var player = get_tree().get_nodes_in_group("player")  # Falls der Spieler bereits in der Szene ist
+	var player_x = start_room.position.x + start_room.size.x / 2
+	var player_y = start_room.position.y + start_room.size.y / 2
+	if player :
+		player[0].position = Vector2(player_x * 16, player_y * 16) 
+	# Weitere Räume generieren
+	for i in range(9):  # 9 weitere Räume (insgesamt 10)
+		var valid_room = false
+		var new_room
+	
+		while not valid_room:
+			var room_w = randi_range(5, 20)
+			var room_h = randi_range(5, 20)
+			var room_x = randi_range(1, MAP_WIDTH - room_w - 1)
+			var room_y = randi_range(1, MAP_HEIGHT - room_h - 1)
+		
+			new_room = Rect2(room_x, room_y, room_w, room_h)
+		
+			# Überprüfen, ob der Raum weit genug von anderen entfernt ist
+			valid_room = true
+			for room in rooms:
+				if room.grow(MIN_ROOM_DISTANCE).intersects(new_room):
+					valid_room = false
+					break  # Falls er zu nahe ist, neu generieren
+		
+		rooms.append(new_room)
+		enemyRooms.append(new_room)
+		# Raum in die Map eintragen
+		for y in range(new_room.position.y, new_room.position.y + new_room.size.y):
+			for x in range(new_room.position.x, new_room.position.x + new_room.size.x):
+				map[y][x] = FLOOR_ATLAS
+	
 	# 3. Korridore zwischen den Räumen erstellen
 	for i in range(rooms.size() - 1):
 		var room1 = rooms[i]
@@ -114,10 +139,10 @@ func place_tiles():
 
 func spawn_enemies():
 	var used_positions = []  # Liste der bereits verwendeten Positionen
-	for room in rooms:
+	for room in enemyRooms:
 		# Berechne die Anzahl der Gegner basierend auf der Raumgröße
 		var room_area = room.size.x * room.size.y  # Raumfläche
-		var enemy_count = randi_range(1, max(1, int(room_area / 6)))  # Anzahl der Gegner (Skalierung basierend auf der Raumgröße)
+		var enemy_count = randi_range(1, max(1, int(room_area / 15)))  # Anzahl der Gegner (Skalierung basierend auf der Raumgröße)
 
 		for a in range(enemy_count):
 			var enemy_spawned = false  # Flag, um zu überprüfen, ob ein Gegner erfolgreich gespawnt wurde

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7lpskd1yawxe"]
+
+[ext_resource type="PackedScene" uid="uid://odji5amif7rw" path="res://Thrash/button.tscn" id="1_7g8so"]
+[ext_resource type="Script" uid="uid://bxdxittijsllw" path="res://Projectiles/ui.gd" id="2_hp2lk"]
+[ext_resource type="PackedScene" uid="uid://ddqo8x7761usg" path="res://Thrash/button1.tscn" id="3_cqb4f"]
+[ext_resource type="PackedScene" path="res://projectile_player.tscn" id="4_6kr7u"]
+
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" parent="." instance=ExtResource("1_7g8so")]
+offset_left = 322.0
+offset_top = 129.0
+offset_right = 418.0
+offset_bottom = 189.0
+
+[node name="UI" type="Node2D" parent="."]
+script = ExtResource("2_hp2lk")
+buttonMapChange = Array[PackedScene]([ExtResource("1_7g8so"), ExtResource("3_cqb4f")])
+
+[node name="Projectile_Player" parent="." instance=ExtResource("4_6kr7u")]
+position = Vector2(195, 180)

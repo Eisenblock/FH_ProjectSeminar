@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4mkqathi37f0"]
+
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="1_15nt7"]
+[ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="2_1ydyl"]
+[ext_resource type="Script" uid="uid://nmj8ft0rgtmu" path="res://UI_Movement.gd" id="3_phs7x"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1qwai"]
+vertices = PackedVector2Array(1058.56, 500.844, 454.141, 619.789, 203.961, 178.867, 830.594, 91.8438)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(188, 171, 836, 81, 1074, 508, 449, 631)])
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_15nt7")]
+position = Vector2(347, 240)
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_1ydyl")]
+position = Vector2(525, 397)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-60, -42)
+navigation_polygon = SubResource("NavigationPolygon_1qwai")
+
+[node name="PlayerCharacter2" parent="." instance=ExtResource("2_1ydyl")]
+position = Vector2(807, 386)
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerCharacter2"]
+offset_left = -9.0
+offset_top = 9.0
+offset_right = 11.0
+offset_bottom = 36.0
+rotation = 0.0405826
+scale = Vector2(2.16067, 1)
+
+[node name="Control" type="Control" parent="." groups=["spell_ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_phs7x")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -558.0
+offset_top = -306.0
+offset_right = -518.0
+offset_bottom = -283.0
+
+[node name="Camera2D" type="Camera2D" parent="."]

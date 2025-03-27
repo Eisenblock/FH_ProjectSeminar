@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://chwndlvl5kt3q"]
+
+[ext_resource type="Script" uid="uid://ds3xgyob8dfd5" path="res://Player/player_character.gd" id="1_jxsul"]
+[ext_resource type="PackedScene" uid="uid://yn3rlk6b1kmy" path="res://Projectiles/projectile_auto2.tscn" id="2_a5bt4"]
+[ext_resource type="PackedScene" uid="uid://4i2mn53cfwgg" path="res://Projectiles/projectile_circle.tscn" id="3_l25tn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3qdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvlyr"]
+
+[node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_jxsul")
+normalShootScene = ExtResource("2_a5bt4")
+circleShootScene = ExtResource("3_l25tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u3qdv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qvlyr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -3.0
+offset_top = 16.0
+offset_right = 1.0
+offset_bottom = 43.0
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

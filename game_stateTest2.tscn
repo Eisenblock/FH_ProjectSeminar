@@ -1,0 +1,22 @@
+[gd_scene load_steps=11 format=3 uid="uid://gyxnsjuh5x2r"]
+
+[ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_1lhto"]
+[ext_resource type="PackedScene" uid="uid://d7n1lgb43mkm" path="res://DungeonRooms/EDown/EnemyRoom_Down_Right.tscn" id="2_hpotv"]
+[ext_resource type="PackedScene" uid="uid://d1rwk2c5juhsq" path="res://DungeonRooms/ERight/Corridor_Right_Down.tscn" id="3_ugvvy"]
+[ext_resource type="PackedScene" uid="uid://l1pfi2m2yvys" path="res://DungeonRooms/StartRoom.tscn" id="4_exn6e"]
+[ext_resource type="PackedScene" uid="uid://pv6ryxbeaxoa" path="res://DungeonRooms/Corridor2_LEft_Right.tscn" id="5_cm68q"]
+[ext_resource type="PackedScene" uid="uid://da5c2rrji4efu" path="res://DungeonRooms/Corridor2_Right_Down.tscn" id="6_se0tn"]
+[ext_resource type="PackedScene" uid="uid://c0anluy38uurl" path="res://DungeonRooms/RoomTest2_Left_Down.tscn" id="7_1lhto"]
+[ext_resource type="PackedScene" uid="uid://bkbcl4umjc43o" path="res://DungeonRooms/RoomTest2_Left_Right.tscn" id="8_hpotv"]
+[ext_resource type="PackedScene" uid="uid://byhw43oapf2q" path="res://DungeonRooms/RoomTest2_Down_Right.tscn" id="9_ugvvy"]
+[ext_resource type="PackedScene" uid="uid://dlo5xeyv25mct" path="res://DungeonRooms/Corridor2_Down_LEft.tscn" id="10_se0tn"]
+
+[node name="GameState" type="Node2D"]
+script = ExtResource("1_1lhto")
+room_scene = ExtResource("2_hpotv")
+corridor_scene = ExtResource("3_ugvvy")
+room_scene_Start = Array[PackedScene]([ExtResource("4_exn6e")])
+room_scene_ERight = Array[PackedScene]([ExtResource("5_cm68q"), ExtResource("6_se0tn")])
+room_scene_EDown = Array[PackedScene]([ExtResource("9_ugvvy")])
+corridor_scene_ERight = Array[PackedScene]([ExtResource("7_1lhto"), ExtResource("8_hpotv")])
+corridor_scene_EDown = Array[PackedScene]([ExtResource("10_se0tn")])

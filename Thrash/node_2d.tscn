@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3bmvtcsoyqxo"]
+
+[ext_resource type="PackedScene" path="res://character.tscn" id="1_wtcfe"]
+[ext_resource type="PackedScene" path="res://projectile_player.tscn" id="4_0hol4"]
+[ext_resource type="PackedScene" uid="uid://csffq068w8sdw" path="res://UI/button_dmg.tscn" id="4_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="5_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://c1g10e5gbdnfa" path="res://Thrash/spawner_enemy.tscn" id="6_d21ai"]
+[ext_resource type="PackedScene" uid="uid://7kmqu3nibddt" path="res://Thrash/trigger_spawner.tscn" id="8_4d7sh"]
+[ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="8_x0ka3"]
+[ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_4d7sh"]
+[ext_resource type="Script" uid="uid://crl858vdbakvb" path="res://Thrash/trigger_spawner.gd" id="9_ir8iy"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="10_ir8iy"]
+
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q6r6c"]
+vertices = PackedVector2Array(19.1016, 21.9766, 1149.92, 20.0078, 1145.07, 642.062, 527.141, 645.992, 21, 205.023, 15.1328, 635.203)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 3, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(5, 645, 11, 205, 9, 12, 1160, 10, 1155, 652, 527, 656)])
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_wtcfe")]
+position = Vector2(590, 441)
+normalShoot = NodePath("../Projectile_Player")
+
+[node name="ButtonDmg" parent="." instance=ExtResource("4_q6r6c")]
+offset_left = 16.0
+offset_top = 362.0
+offset_right = 66.0
+offset_bottom = 412.0
+text = "Auto"
+
+[node name="Projectile_Player" parent="." instance=ExtResource("4_0hol4")]
+visible = false
+position = Vector2(474, 171)
+autoShootBase = true
+player = null
+
+[node name="ButtonDmg2" parent="." instance=ExtResource("4_q6r6c")]
+offset_left = 16.0
+offset_top = 419.0
+offset_right = 127.0
+offset_bottom = 515.0
+text = "circle"
+autoShotButton_bool = false
+circleShoot_bool = true
+
+[node name="Projectile_Player2" parent="." instance=ExtResource("4_0hol4")]
+position = Vector2(590, 440)
+player = null
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 57.0
+offset_top = 578.0
+offset_right = 251.0
+offset_bottom = 605.0
+
+[node name="Enemy" parent="." instance=ExtResource("5_q6r6c")]
+position = Vector2(182, 142)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["nav_agents"]]
+position = Vector2(-9, -4)
+navigation_polygon = SubResource("NavigationPolygon_q6r6c")
+
+[node name="SpawnerEnemy" parent="." instance=ExtResource("6_d21ai")]
+position = Vector2(815, 107)
+enemyWeak = ExtResource("5_q6r6c")
+
+[node name="SpawnerEnemy2" parent="." instance=ExtResource("6_d21ai")]
+position = Vector2(243, 107)
+enemyWeak = ExtResource("8_x0ka3")
+
+[node name="TriggerSpawner" parent="." node_paths=PackedStringArray("spawner_enemy") instance=ExtResource("8_4d7sh")]
+position = Vector2(721, 218)
+script = ExtResource("9_ir8iy")
+spawner_enemy = NodePath("../SpawnerEnemy")
+
+[node name="TriggerSpawner2" parent="." node_paths=PackedStringArray("spawner_enemy") instance=ExtResource("8_4d7sh")]
+position = Vector2(374, 305)
+script = ExtResource("9_ir8iy")
+spawner_enemy = NodePath("../SpawnerEnemy2")
+
+[node name="SpawnSpellUI" parent="." instance=ExtResource("9_4d7sh")]
+buttonObject = ExtResource("4_q6r6c")
+buttonObject2 = ExtResource("10_ir8iy")
+
+[node name="ButtonChangeAttr" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.27807, 1.7909)
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 43.0
+offset_right = 141.0
+offset_bottom = 111.0
+text = "dddd"
+
+[connection signal="area_entered" from="TriggerSpawner" to="TriggerSpawner" method="_on_area_entered"]
+[connection signal="area_entered" from="TriggerSpawner2" to="TriggerSpawner2" method="_on_area_entered"]
