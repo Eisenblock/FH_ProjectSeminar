@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://pgawfm3o633l"]
+[gd_scene load_steps=11 format=3 uid="uid://pgawfm3o633l"]
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_vkt77"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_sutgb"]
 [ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_qrenp"]
 [ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="4_sutgb"]
 [ext_resource type="PackedScene" uid="uid://cqx20y0charwj" path="res://Projectiles/projectile_fireballExplode.tscn" id="5_qrenp"]
+[ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="5_rer27"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -292,31 +293,9 @@ vertices = PackedVector2Array(235.109, 76.8594, 247.117, 219.063, -252.156, 221.
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 5, 6, 7, 0), PackedInt32Array(8, 9, 4, 3), PackedInt32Array(7, 10, 11, 0)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-268, -187, 269, -191, 264, -59, 328, -58, 322, 88, 246, 87, 258, 229, -262, 232, -265, 55, -351, 64, -367, -55, -263, -65)])
 
-[sub_resource type="Resource" id="Resource_sutgb"]
-metadata/__load_path__ = "res://UI/Projectiles/projectile_player.gd"
-
-[sub_resource type="Resource" id="Resource_qrenp"]
-metadata/__load_path__ = "res://UI/CharacterNeu.tscn"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvbvf"]
-size = Vector2(20, 19)
-
-[sub_resource type="PackedScene" id="PackedScene_rer27"]
-_bundled = {
-"conn_count": 1,
-"conns": PackedInt32Array(1073741827, 1073741826, 23, 22, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("Projectile_Auto", "Area2D", "script", "autoShoot", "player", "CollisionShape2D", "CollisionShape2D", "shape", "ColorRect", "ColorRect", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "color", "_on_area_entered", "area_entered"),
-"node_count": 3,
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 1073741824, 0, 6, 5, -1, 1, 7, 3, 0, 1073741825, 0, 9, 8, -1, 12, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 15, 9, 16, 10, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 0),
-"variants": [SubResource("Resource_sutgb"), true, SubResource("Resource_qrenp"), SubResource("RectangleShape2D_nvbvf"), 8, 0.5, 0.5, 0.5, 0.5, -10.0, -10.0, 10.0, 10.0, 2, 2, Color(0.792018, 0.457193, 0.247054, 1)],
-"version": 3
-}
-
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["Down"]]
 z_index = -1
 tile_set = SubResource("TileSet_oxlte")
 format = 2
@@ -341,5 +320,20 @@ navigation_polygon = SubResource("NavigationPolygon_sh0nk")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_sutgb")]
 position = Vector2(-30, 17)
-normalShootScene = SubResource("PackedScene_rer27")
-normalShootScene2 = ExtResource("5_qrenp")
+normalShootScene = ExtResource("5_rer27")
+normalShootScene2 = ExtResource("5_rer27")
+fireShootScene = ExtResource("5_qrenp")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
+position = Vector2(-622, 35)
+rotation = -1.5708
+
+[node name="CollisionWall" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(35, 622)
+rotation = 1.5708
+polygon = PackedVector2Array(-298, 81, -298, 269, 302, 260, 297, 100, 351, 113, 346, 344, -315, 339, -369, 295, -366, 87)
+
+[node name="CollisionWall2" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(548, 629)
+rotation = 1.5708
+polygon = PackedVector2Array(-306, 422, -302, 295, 286, 295, 288, 443, 369, 434, 373, 231, -353, 244, -364, 389)

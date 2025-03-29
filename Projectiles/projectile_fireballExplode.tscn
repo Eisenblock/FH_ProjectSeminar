@@ -14,8 +14,8 @@ script = ExtResource("1_53j3a")
 autoShoot = true
 FireBall_bool = true
 explodeScene = ExtResource("2_idx2s")
-castTime = 1.0
-speed = 200.0
+castTime = 3.0
+speed = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)

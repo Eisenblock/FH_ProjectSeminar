@@ -314,3 +314,17 @@ disabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_sh0nk")
+
+[node name="Area2D3" type="Area2D" parent="." groups=["Wall"]]
+position = Vector2(-622, 35)
+rotation = -1.5708
+
+[node name="CollisionWall" type="CollisionPolygon2D" parent="Area2D3" groups=["Wall"]]
+position = Vector2(35, 622)
+rotation = 1.5708
+polygon = PackedVector2Array(-298, 81, -298, 269, 302, 260, 297, 100, 351, 113, 346, 344, -315, 339, -369, 295, -366, 87)
+
+[node name="CollisionWall2" type="CollisionPolygon2D" parent="Area2D3" groups=["Wall"]]
+position = Vector2(548, 629)
+rotation = 1.5708
+polygon = PackedVector2Array(-306, 422, -302, 295, 286, 295, 288, 443, 369, 434, 373, 231, -353, 244, -364, 389)

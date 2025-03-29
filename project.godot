@@ -25,6 +25,7 @@ Right=""
 Down=""
 Up=""
 Left=""
+Wall=""
 
 [input]
 

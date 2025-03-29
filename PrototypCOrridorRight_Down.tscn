@@ -304,3 +304,17 @@ position = Vector2(132, 218)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_d5xrj")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
+position = Vector2(-622, 35)
+rotation = -1.5708
+
+[node name="CollisionWall" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(35, 622)
+rotation = 1.5708
+polygon = PackedVector2Array(-153, 80, 29, 86, 31, 239, -8, 236, -163, 128)
+
+[node name="CollisionWall2" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(548, 629)
+rotation = 1.5708
+polygon = PackedVector2Array(221, 731, 221, 419, -163, 413, -170, 328, 364, 332, 367, 729)

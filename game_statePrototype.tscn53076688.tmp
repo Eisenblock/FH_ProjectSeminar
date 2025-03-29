@@ -21,6 +21,28 @@ room_scene_ERight = Array[PackedScene]([ExtResource("3_tmoub")])
 room_scene_EDown = Array[PackedScene]([ExtResource("4_p76y6")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("5_5f368"), ExtResource("6_u0twx")])
 
+[node name="ButtonDmg" parent="." instance=ExtResource("9_u0twx")]
+offset_left = -197.0
+offset_top = -299.0
+offset_right = -147.0
+offset_bottom = -249.0
+
+[node name="ButtonDmg2" parent="." instance=ExtResource("9_u0twx")]
+offset_left = -123.0
+offset_top = -295.0
+offset_right = -73.0
+offset_bottom = -245.0
+autoShotButton_bool = false
+circleShoot_bool = true
+
+[node name="ButtonDmg3" parent="." instance=ExtResource("9_u0twx")]
+offset_left = -53.0
+offset_top = -295.0
+offset_right = -3.0
+offset_bottom = -245.0
+autoShotButton_bool = false
+chestButton_bool = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -36,40 +58,6 @@ offset_left = 829.0
 offset_top = 18.0
 offset_right = 869.0
 offset_bottom = 58.0
-
-[node name="ButtonDmg" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
-layout_mode = 0
-offset_left = -215.0
-offset_top = 18.0
-offset_right = -165.0
-offset_bottom = 68.0
-text = "auto"
-
-[node name="ButtonDmg2" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
-layout_mode = 0
-offset_left = -141.0
-offset_top = 22.0
-offset_right = -91.0
-offset_bottom = 72.0
-text = "circle"
-autoShotButton_bool = false
-circleShoot_bool = true
-
-[node name="ButtonDmg3" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
-layout_mode = 0
-offset_left = -71.0
-offset_top = 22.0
-offset_right = -21.0
-offset_bottom = 72.0
-text = "Chest"
-autoShotButton_bool = false
-chestButton_bool = true
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 967.0
-offset_top = 114.0
-offset_right = 1007.0
-offset_bottom = 137.0
 
 [node name="SpawnSpellUI" parent="." instance=ExtResource("8_5f368")]
 position = Vector2(85, 470)

@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://cln1ruil1lo3j"]
+
+[ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_fdh2j"]
+[ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_p76y6"]
+[ext_resource type="PackedScene" uid="uid://pgawfm3o633l" path="res://PrototypeMap_Left_RIght_PLayer.tscn" id="3_p76y6"]
+[ext_resource type="PackedScene" uid="uid://c1rb0dkegytna" path="res://PrototypeMap_Left_RIght.tscn" id="3_tmoub"]
+[ext_resource type="PackedScene" uid="uid://bvb5tbikg6mmd" path="res://PrototypMap_UP_Right.tscn" id="4_p76y6"]
+[ext_resource type="PackedScene" uid="uid://ets20a1vg0rn" path="res://ProtoTypeCoridor_Left_Right.tscn" id="5_5f368"]
+[ext_resource type="PackedScene" uid="uid://dtnocsi2crqfk" path="res://PrototypCOrridorRight_Down.tscn" id="6_u0twx"]
+[ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="8_5f368"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmg3.tscn" id="9_u0twx"]
+[ext_resource type="Script" uid="uid://nmj8ft0rgtmu" path="res://UI_Movement.gd" id="10_fq1rg"]
+[ext_resource type="Script" uid="uid://b6iogni3qq2hn" path="res://node_moce.gd" id="11_0m6py"]
+[ext_resource type="Script" uid="uid://cbsjf1ujnk70r" path="res://Button_Abilitys.gd" id="11_fdh2j"]
+
+[node name="GameState" type="Node2D"]
+script = ExtResource("1_fdh2j")
+room_scene = ExtResource("2_p76y6")
+max_rooms = 4
+room_scene_Start = Array[PackedScene]([ExtResource("3_p76y6")])
+room_scene_ERight = Array[PackedScene]([ExtResource("3_tmoub")])
+room_scene_EDown = Array[PackedScene]([ExtResource("4_p76y6")])
+corridor_scene_ERight = Array[PackedScene]([ExtResource("5_5f368"), ExtResource("6_u0twx")])
+
+[node name="SpawnSpellUI" parent="." instance=ExtResource("8_5f368")]
+position = Vector2(85, 470)
+
+[node name="ButtonDmg" parent="." instance=ExtResource("9_u0twx")]
+
+[node name="ButtonDmg2" parent="." instance=ExtResource("9_u0twx")]
+offset_left = 283.0
+offset_top = 318.0
+offset_right = 333.0
+offset_bottom = 368.0
+autoShotButton_bool = false
+circleShoot_bool = true
+
+[node name="ButtonDmg3" parent="." instance=ExtResource("9_u0twx")]
+offset_left = 353.0
+offset_top = 318.0
+offset_right = 403.0
+offset_bottom = 368.0
+autoShotButton_bool = false
+chestButton_bool = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_fq1rg")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("11_0m6py")
+
+[node name="Chest" type="Button" parent="Node2D"]
+offset_left = 186.0
+offset_top = 43.0
+offset_right = 240.0
+offset_bottom = 83.0
+text = "CHest"
+script = ExtResource("11_fdh2j")
+
+[node name="Auto" type="Button" parent="Node2D"]
+offset_left = 123.0
+offset_top = 42.0
+offset_right = 168.0
+offset_bottom = 82.0
+text = "Auto"
+
+[node name="Circle" type="Button" parent="Node2D"]
+offset_left = 54.0
+offset_top = 44.0
+offset_right = 106.0
+offset_bottom = 84.0
+text = "Circle"
+
+[connection signal="pressed" from="Node2D/Chest" to="Control" method="_on_chest_pressedChest"]
+[connection signal="pressed" from="Node2D/Auto" to="Control" method="_on_auto_pressedAuto"]
+[connection signal="pressed" from="Node2D/Circle" to="Control" method="_on_circle_pressedCIrcle"]

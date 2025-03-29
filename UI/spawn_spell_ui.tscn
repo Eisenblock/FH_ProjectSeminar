@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="5_cyklq"]
 
 [node name="SpawnSpellUI" type="Node2D" groups=["spell_ui"]]
+position = Vector2(-2, -2)
 script = ExtResource("1_np0rx")
 textObject = ExtResource("2_hl6nm")
 CircleObjectUI = ExtResource("3_cyklq")

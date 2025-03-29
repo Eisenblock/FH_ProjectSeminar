@@ -8,13 +8,15 @@ extends CharacterBody2D
 @export var speed = 200
 @export var attackSpeed = 3.0
 @export var health = 20
+@export var armor = 0
+@export var life_reg = 1
 @export var max_health = 20
 @onready var node_2d: Node2D = $"../Camera2D/Node2D"
 @onready var healthBar: ProgressBar = $ProgressBar
 @onready var camera_2d: Camera2D = $Camera2D
 
 #Spell Active Bool
-var fireBall : bool = false 
+@export var fireBall : bool = false 
 var circleBall : bool = false
 var attack_method: Callable
 
@@ -22,14 +24,26 @@ var autoShootonCD : bool = false
 var timerautoShoot : Timer
 var circleShootonCD : bool = false
 var timercirleShoot : Timer
+var fireShootonCD : bool = false
+var timerfireShoot : Timer
+var timerLifeReg : Timer 
+#var life_RegStarted_bool : bool = false
 
 var projectileAmount = 1
 var countProjectile = 0
 
 func _ready() -> void:
+	StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "spawnAutoShoot"),"auto")
 	if healthBar :
 		healthBar.max_value = max_health
 		healthBar.value = health
+	#Start Life Reg
+	timerLifeReg = Timer.new()
+	timerLifeReg.wait_time = 0.5
+	timerLifeReg.one_shot = false
+	timerLifeReg.connect("timeout", self.DoLifeReg)
+	add_child(timerLifeReg) 
+	timerLifeReg.start()
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
@@ -54,12 +68,12 @@ func _process(delta: float) -> void:
 	
 	ActivateAbilityAttr()
 	
-	if fireBall and !autoShootonCD:
-		spawnAutoShoot()
-		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "spawnAutoShoot"))
+	if fireBall and !fireShootonCD:
+		spawnFireShoot()
+		StartAttacksRef(fireShootScene,Global.fireballShootAttribute,Callable(self,"spawnFireShoot"),"fire")
 	
 	if circleBall and !circleShootonCD:
-		StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "spawnCircleShoot"))
+		StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "spawnCircleShoot"),"circle")
 	
 	if healthBar :
 		healthBar.value = health
@@ -113,9 +127,20 @@ func spawnAutoShoot():
 			instance.rotation = angle_to_mouse + deg_to_rad(-90) 
 			instance.position = global_position 
 			#var a = get_node(normalShoot)
-			#instance.SetProjectile(Global.ChestAttribute)
+			instance.SetProjectile(Global.autoShootAttribute)
 			get_tree().root.add_child(instance)
 
+func spawnFireShoot():
+	var instance
+	instance = fireShootScene.instantiate()
+	if instance != null :
+			var direction = (get_global_mouse_position() - global_position).normalized()
+			var angle_to_mouse = direction.angle()
+			instance.rotation = angle_to_mouse + deg_to_rad(-90) 
+			instance.position = global_position 
+			#var a = get_node(normalShoot)
+			#instance.SetProjectile(Global.ChestAttribute)
+			get_tree().root.add_child(instance)
 
 func _on_button_pressed() -> void:
 	pass # Replace with function body.
@@ -147,7 +172,7 @@ func ActivateAbilityAttr():
 		circleBall = true
 
 
-func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_method_param: Callable):
+func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_method_param: Callable, nameAbility : String):
 	attack_method = attack_method_param  # Speichere die übergebene Methode
 	var timerRef = null
 	timerRef = Timer.new()
@@ -165,9 +190,26 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	timerRef.connect("timeout", self.attack_method)
 	timerRef.start()
 	
-	if circleBall and !circleShootonCD:
+	if nameAbility == "circle" and circleBall and !circleShootonCD:
 		circleShootonCD = true
 		timercirleShoot = timerRef 
-	if fireBall and !autoShootonCD:
+	if nameAbility == "fire" and fireBall and !fireShootonCD:
+		fireShootonCD = true
+		timerfireShoot = timerRef 
+	if nameAbility == "auto" and  !autoShootonCD :
 		autoShootonCD = true
-		timerautoShoot = timerRef 
+		timerautoShoot = timerRef
+
+func UpdatePlayerAttr(dicRef : Dictionary):
+	if "Health" in Global.ChestAttribute :
+		health += Global.ChestAttribute["Health"]
+	if "Armor" in Global.ChestAttribute :
+		armor += Global.ChestAttribute["Armor"]
+	if "Life_Reg" in Global.ChestAttribute["Life_Reg"] :
+		life_reg += Global.ChestAttribute["Life_Reg"]
+
+func DoLifeReg():
+	print("DOLIfeREg")
+	if health < max_health :
+		health += life_reg
+		print("DOLIfeREg")

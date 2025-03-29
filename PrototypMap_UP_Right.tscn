@@ -292,7 +292,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-78, -214, -77, -150, -
 
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["Wall"]]
 z_index = -1
 tile_set = SubResource("TileSet_7u834")
 format = 2
@@ -313,3 +313,17 @@ polygon = PackedVector2Array(-74, -204, 26, -204, 26, -141, 105, -140, 104, -107
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_h7thh")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
+position = Vector2(-622, 35)
+rotation = -1.5708
+
+[node name="CollisionWall" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(173, 622)
+rotation = 1.5708
+polygon = PackedVector2Array(126, 216, 177, 216, 176, 186, 255, 186, 254, 215, 205, 241, 142, 270, -183, 278, -320, 187, -316, -30, -102, -132, -102, -30, -159, -30, -167, 1, -219, 11, -212, 41, -271, 38, -271, 178, -209, 188, -200, 212, -162, 219, -162, 251, 128, 250)
+
+[node name="CollisionWall2" type="CollisionPolygon2D" parent="Area2D2" groups=["Wall"]]
+position = Vector2(548, 629)
+rotation = 1.5708
+polygon = PackedVector2Array(46, 265, 48, 347, 122, 345, 124, 378, 170, 380, 172, 413, 296, 413, 250, 275)

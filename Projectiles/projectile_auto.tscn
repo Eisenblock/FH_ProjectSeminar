@@ -8,6 +8,7 @@
 script = ExtResource("1_04xgh")
 autoShoot = true
 castTime = 1.0
+speed = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8hlcf")

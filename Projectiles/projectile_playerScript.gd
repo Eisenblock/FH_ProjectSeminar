@@ -102,11 +102,8 @@ func SetProjectile(projetileattr := {} ):
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if tilemap:
-		var tile_pos = tilemap.local_to_map(global_position)  # Position des Projektils in Tile-Koordinaten
-		var tile_data = tilemap.get_cell_tile_data(0, tile_pos)  # Prüft die erste Tile-Layer
-		if tile_data and tile_data.get_collision_polygons_count(0) > 0:
-			queue_free()  # Projektil zerstören
+	if area.is_in_group("Wall") :
+		queue_free()
 	if area.is_in_group("enemy") :
 		print("Hit Enemy")
 		if FireBall_bool :

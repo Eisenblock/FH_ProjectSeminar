@@ -73,7 +73,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		#timerGotHit.connect("timeout", self.resetGotHit)
 		#timerGotHit.start()
 		var player = area.get_parent()
-		player.take_damage(1)
+		player.take_damage(dmg)
 		#gotHit = true
 
 func resetGotHit():
@@ -94,6 +94,7 @@ func take_damage(amount) :
 	if health <= 0 :
 		isDead = true
 		Global.enemyList.erase(self)
+		Global.expAmount += 1
 		queue_free()
 
 func _check_distance():
