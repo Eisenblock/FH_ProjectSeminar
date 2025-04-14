@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://clwe8ycu5xnbs"]
+[gd_scene load_steps=17 format=3 uid="uid://clwe8ycu5xnbs"]
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_n4nmx"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_6k0lk"]
 [ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_ke7u0"]
 [ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://portal.tscn" id="4_6k0lk"]
+[ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="4_pbvkg"]
+[ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="5_vi1nt"]
+[ext_resource type="PackedScene" uid="uid://ceu5divy6t8jj" path="res://Pick_UP.tscn" id="7_vi1nt"]
+[ext_resource type="Script" uid="uid://cv4sh7d5y3y3x" path="res://DungeonRooms/FirstPrototypeRooms/spawn_spells.gd" id="8_n2ewd"]
+[ext_resource type="PackedScene" uid="uid://ck6c2ethilv3r" path="res://Pick_UP_fireball.tscn" id="9_qn1wu"]
+[ext_resource type="PackedScene" uid="uid://dp6shdpmpyc0j" path="res://Pick_UP_darkball.tscn" id="10_76cf8"]
+[ext_resource type="PackedScene" uid="uid://drlvu8encyq73" path="res://Pick_UP_circleball.tscn" id="11_e6ol2"]
+[ext_resource type="PackedScene" uid="uid://c2jpi378ri660" path="res://Pick_UP_bumerang.tscn" id="12_1cjwy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -308,6 +316,9 @@ position = Vector2(283, 5)
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("2_6k0lk")
 enemy_scene = ExtResource("3_ke7u0")
+enemy_10hp = ExtResource("3_ke7u0")
+enemy_30hp = ExtResource("4_pbvkg")
+enemy_50hp = ExtResource("5_vi1nt")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-264, -185, 265, -188, 266, -54, 259, 232, -266, 238)
@@ -319,3 +330,14 @@ navigation_polygon = SubResource("NavigationPolygon_n2ewd")
 [node name="Portal" parent="." instance=ExtResource("4_6k0lk")]
 position = Vector2(142, -9)
 MapChange = "res://game_statePrototype.tscn"
+
+[node name="Node2D" parent="." groups=["pick_up"] instance=ExtResource("7_vi1nt")]
+modulate = Color(1, 0.133333, 1, 1)
+position = Vector2(31.265, -119)
+
+[node name="SpawnSpells" type="Node2D" parent="."]
+script = ExtResource("8_n2ewd")
+fireball_PickUP = ExtResource("9_qn1wu")
+darkball_PickUP = ExtResource("10_76cf8")
+circleball_PickUP = ExtResource("11_e6ol2")
+bumerang_PickUP = ExtResource("12_1cjwy")

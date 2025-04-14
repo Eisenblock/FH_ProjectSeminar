@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="4_myb7b"]
 [ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="4_tyoky"]
 [ext_resource type="Script" uid="uid://nmj8ft0rgtmu" path="res://UI_Movement.gd" id="5_tyoky"]
-[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmg3.tscn" id="6_n8pbl"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="6_n8pbl"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="6_ppanw"]
+
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)

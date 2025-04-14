@@ -8,11 +8,29 @@ var enemyList_lost = []
 var ChestAttribute := {}
 var AllAttrItems := {}
 var enemySpawnCount = 2
+var enemySpawnCount_MEdium = 0
+var enemySpawnCount_high = 0
 var countAttrOnChest = 0
 var expAmount = 0
+var learned_abilities = {} 
+
+#WeakEnemy
+var enemyCount_small_min = 2
+var enemyCount_small_max = 5
+#MediumEnemy
+var enemyCount_medium_min = 0
+var enemyCount_medium_max = 0
+#HighEnemy
+var enemyCount_High_min = 0
+var enemyCount_High_max = 0
 #OlD Values
 var autoShootAttribute := {}
 var fireballShootAttribute := {}
 var circleShootAttribute := {}
+var darkShootAttribute := {}
+var bumerangShootAttribute := {}
 var countAttrOnAuto = 0
 var countAttrOnCircle = 0
+var countAttrOnFire = 0
+var countAttrOnDark = 0
+var countAttrOnBumerang = 0

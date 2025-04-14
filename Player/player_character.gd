@@ -5,19 +5,23 @@ extends CharacterBody2D
 @export var normalShootScene2 : PackedScene
 @export var fireShootScene : PackedScene
 @export var circleShootScene : PackedScene
+@export var DarkShootScene : PackedScene
+@export var BumerangShootScene : PackedScene
 @export var speed = 200
 @export var attackSpeed = 3.0
 @export var health = 20
 @export var armor = 0
-@export var life_reg = 1
+@export var life_reg = 0.0
 @export var max_health = 20
 @onready var node_2d: Node2D = $"../Camera2D/Node2D"
 @onready var healthBar: ProgressBar = $ProgressBar
 @onready var camera_2d: Camera2D = $Camera2D
 
 #Spell Active Bool
-@export var fireBall : bool = false 
+var fireBall : bool = false 
 var circleBall : bool = false
+var darkBall : bool = false
+var bumerang : bool = false
 var attack_method: Callable
 
 var autoShootonCD : bool = false
@@ -27,13 +31,21 @@ var timercirleShoot : Timer
 var fireShootonCD : bool = false
 var timerfireShoot : Timer
 var timerLifeReg : Timer 
+var darkShootonCD : bool = false
+var timerdarkShoot : Timer
+var BumerangShootonCD : bool = false
+var timerbumerangShoot : Timer
 #var life_RegStarted_bool : bool = false
 
 var projectileAmount = 1
 var countProjectile = 0
 
 func _ready() -> void:
-	StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "spawnAutoShoot"),"auto")
+	load_abilities()
+	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
+	#StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "spawnCircleShoot"),"circle")
+	
+	#StartAttacksRef(DarkShootScene,Global.darkShootAttribute,Callable(self, "SPawnDarkBall"),"dark")
 	if healthBar :
 		healthBar.max_value = max_health
 		healthBar.value = health
@@ -66,44 +78,56 @@ func _physics_process(delta):
 
 func _process(delta: float) -> void:
 	
-	ActivateAbilityAttr()
+	#ActivateAbilityAttr()
+	if !autoShootonCD :
+		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
 	
 	if fireBall and !fireShootonCD:
-		spawnFireShoot()
-		StartAttacksRef(fireShootScene,Global.fireballShootAttribute,Callable(self,"spawnFireShoot"),"fire")
+		#spawnFireShoot()
+		StartAttacksRef(fireShootScene,Global.fireballShootAttribute,Callable(self,"ResetAttackTimerFire"),"fire")
 	
 	if circleBall and !circleShootonCD:
-		StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "spawnCircleShoot"),"circle")
+		StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "ResetAttackTimerCircle"),"circle")
+	
+	if darkBall and !darkShootonCD:
+		#SPawnDarkBall()
+		StartAttacksRef(DarkShootScene,Global.darkShootAttribute,Callable(self,"ResetAttackTimerDark"),"dark")
+	
+	if bumerang and !BumerangShootonCD :
+		#SpawnBumerangBall()
+		StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"ResetAttackTimerBumerang"),"bumerang")
 	
 	if healthBar :
 		healthBar.value = health
 	#camera_2d.position = global_position
 
 func spawnCircleShoot() :  
-	"""
-	if Global.circleShootAttributeAttribute.has("more_projectiles") :
+	
+	if Global.circleShootAttribute.has("more_projectiles") :
 		countProjectile = 0
-		var size = Global.circleShootAttributeAttribute["more_projectiles"] + projectileAmount
-		print("CUrrent Size",size)
-		for countProjectile in range(size):  # range(3) geht von 0 bis 2, also insgesamt 3 Durchläufe
+		var size = Global.circleShootAttribute["more_projectiles"] + projectileAmount
+		var radius = 75  # Abstand vom Zentrum (also von global_position)
+		var angle_step = TAU / size  # TAU = 2*PI = voller Kreis
+		
+		for i in range(size):
+			var instance = circleShootScene.instantiate()
+			if instance != null:
+				instance.angle = i * angle_step  # Individueller Startwinkel
+				instance.distance = radius  # Optional
+				instance.player_node = self  # oder übergeben
+				get_tree().root.add_child(instance)
+	else :
 			var instance = circleShootScene.instantiate()
 			if instance != null :
-				var direction = (get_global_mouse_position() - global_position).normalized()
-				instance.position = global_position 
-				instance.SetProjectile(Global.circleShootAttributeAttribute)
-				get_tree().root.add_child(instance)
-			await get_tree().create_timer(0.3).timeout
-	else :"""
-	var instance = circleShootScene.instantiate()
-	if instance != null :
-			var direction = (get_global_mouse_position() - global_position).normalized()
-			instance.position = global_position 
-			instance.SetProjectile(Global.autoShootAttribute)
-			get_tree().root.add_child(instance)
+					var direction = (get_global_mouse_position() - global_position).normalized()
+					instance.position = global_position 
+					instance.SetProjectile(Global.circleShootAttribute)
+					get_tree().root.add_child(instance)
 
 func spawnAutoShoot():
-	var instance
-	"""
+	SpawnAllShots(normalShootScene,Global.autoShootAttribute)
+	"""var instance
+	
 	if Global.autoShootAttribute.has("more_projectiles") :
 		countProjectile = 0
 		var size = Global.autoShootAttribute["more_projectiles"] + projectileAmount
@@ -113,34 +137,64 @@ func spawnAutoShoot():
 			if instance != null :
 				var direction = (get_global_mouse_position() - global_position).normalized()
 				var angle_to_mouse = direction.angle()
-				instance.rotation = angle_to_mouse + deg_to_rad(-90) 
+				instance.rotation = angle_to_mouse #+ deg_to_rad(-90) 
 				instance.position = global_position 
+				instance.SetDirection(direction)
 				#var a = get_node(normalShoot)
 				instance.SetProjectile(Global.autoShootAttribute)
 				get_tree().root.add_child(instance)
 				await get_tree().create_timer(0.2).timeout
-	else :"""
-	instance = normalShootScene2.instantiate()
-	if instance != null :
-			var direction = (get_global_mouse_position() - global_position).normalized()
-			var angle_to_mouse = direction.angle()
-			instance.rotation = angle_to_mouse + deg_to_rad(-90) 
-			instance.position = global_position 
-			#var a = get_node(normalShoot)
-			instance.SetProjectile(Global.autoShootAttribute)
-			get_tree().root.add_child(instance)
+	else :
+		instance = normalShootScene2.instantiate()
+		if instance != null :
+				var direction = (get_global_mouse_position() - global_position).normalized()
+				var angle_to_mouse = direction.angle()
+				instance.rotation = angle_to_mouse #+ deg_to_rad(-90) 
+				instance.position = global_position 
+				instance.SetDirection(direction)
+				#var a = get_node(normalShoot)
+				instance.SetProjectile(Global.autoShootAttribute)
+				get_tree().root.add_child(instance)"""
 
 func spawnFireShoot():
+	SpawnAllShots(fireShootScene,Global.fireballShootAttribute)
+
+func SPawnDarkBall():
+	SpawnAllShots(DarkShootScene,Global.darkShootAttribute)
+
+func SpawnBumerangBall():
+	SpawnAllShots(BumerangShootScene,Global.bumerangShootAttribute)
+
+func SpawnAllShots(sceneShot_ref : PackedScene , dic_ref : Dictionary ):
 	var instance
-	instance = fireShootScene.instantiate()
-	if instance != null :
-			var direction = (get_global_mouse_position() - global_position).normalized()
-			var angle_to_mouse = direction.angle()
-			instance.rotation = angle_to_mouse + deg_to_rad(-90) 
-			instance.position = global_position 
-			#var a = get_node(normalShoot)
-			#instance.SetProjectile(Global.ChestAttribute)
-			get_tree().root.add_child(instance)
+	
+	if dic_ref.has("more_projectiles") :
+		countProjectile = 0
+		var size = dic_ref["more_projectiles"] + projectileAmount
+		print("CUrrent Size",size)
+		for countProjectile in range(size):  # range(3) geht von 0 bis 2, also insgesamt 3 Durchläufe
+			instance = sceneShot_ref.instantiate()
+			if instance != null :
+				var direction = (get_global_mouse_position() - global_position).normalized()
+				var angle_to_mouse = direction.angle()
+				instance.rotation = angle_to_mouse #+ deg_to_rad(-90) 
+				instance.position = global_position 
+				instance.SetDirection(direction)
+				#var a = get_node(normalShoot)
+				instance.SetProjectile(dic_ref)
+				get_tree().root.add_child(instance)
+				await get_tree().create_timer(0.2).timeout
+	else :
+		instance = sceneShot_ref.instantiate()
+		if instance != null :
+				var direction = (get_global_mouse_position() - global_position).normalized()
+				var angle_to_mouse = direction.angle()
+				instance.rotation = angle_to_mouse #+ deg_to_rad(-90) 
+				instance.position = global_position 
+				instance.SetDirection(direction)
+				#var a = get_node(normalShoot)
+				instance.SetProjectile(dic_ref)
+				get_tree().root.add_child(instance)
 
 func _on_button_pressed() -> void:
 	pass # Replace with function body.
@@ -166,7 +220,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
 
 func ActivateAbilityAttr():
-	if Global.ChestAttribute.has("Fireball") and !autoShootonCD:
+	if Global.ChestAttribute.has("Fireball") and !fireShootonCD:
 		fireBall = true
 	if Global.ChestAttribute.has("Circleball") and !circleShootonCD :
 		circleBall = true
@@ -179,37 +233,68 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	add_child(timerRef)
 	if dicRef.has("attack_speed"):
 		var temp_instance = shotSceneRef.instantiate()
-		var cast_time = temp_instance.castTime
+		var cast_time = temp_instance.castTime - dicRef["attack_speed"]
+		timerRef.wait_time = cast_time
 		temp_instance.queue_free() 
 	else :
 		var temp_instance = shotSceneRef.instantiate()
 		var cast_time = temp_instance.castTime
 		temp_instance.queue_free()
 		timerRef.wait_time = cast_time 
-	timerRef.one_shot = false
+	timerRef.one_shot = true
 	timerRef.connect("timeout", self.attack_method)
 	timerRef.start()
 	
 	if nameAbility == "circle" and circleBall and !circleShootonCD:
 		circleShootonCD = true
 		timercirleShoot = timerRef 
+		spawnCircleShoot()
 	if nameAbility == "fire" and fireBall and !fireShootonCD:
 		fireShootonCD = true
 		timerfireShoot = timerRef 
+		spawnFireShoot()
 	if nameAbility == "auto" and  !autoShootonCD :
 		autoShootonCD = true
 		timerautoShoot = timerRef
+		spawnAutoShoot()
+	if nameAbility == "dark" and  !darkShootonCD:
+		darkShootonCD = true
+		timerdarkShoot = timerRef
+		SPawnDarkBall()
+	if nameAbility == "Bumerang" and !BumerangShootonCD :
+		BumerangShootonCD = true
+		timerbumerangShoot = timerRef
+		SpawnBumerangBall()
+
+func ResetAttackTimerAuto():
+	autoShootonCD = false
+func ResetAttackTimerDark():
+	darkShootonCD = false
+func ResetAttackTimerFire():
+	fireShootonCD = false
+func ResetAttackTimerBumerang():
+	BumerangShootonCD = false
+func ResetAttackTimerCircle():
+	circleShootonCD = false
 
 func UpdatePlayerAttr(dicRef : Dictionary):
 	if "Health" in Global.ChestAttribute :
 		health += Global.ChestAttribute["Health"]
 	if "Armor" in Global.ChestAttribute :
 		armor += Global.ChestAttribute["Armor"]
-	if "Life_Reg" in Global.ChestAttribute["Life_Reg"] :
+	if "Life_Reg" in Global.ChestAttribute:
 		life_reg += Global.ChestAttribute["Life_Reg"]
 
 func DoLifeReg():
-	print("DOLIfeREg")
 	if health < max_health :
 		health += life_reg
-		print("DOLIfeREg")
+
+func load_abilities():
+	if Global.learned_abilities.has("fireball"):
+		fireBall = true
+	if Global.learned_abilities.has("circleball"):
+		circleBall = true
+	if Global.learned_abilities.has("darkball"):
+		darkBall = true
+	if Global.learned_abilities.has("bumerang"):
+		bumerang = true

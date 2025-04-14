@@ -1,17 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://pgawfm3o633l"]
+[gd_scene load_steps=12 format=3 uid="uid://pgawfm3o633l"]
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_vkt77"]
-[ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_sutgb"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_qrenp"]
+[ext_resource type="PackedScene" uid="uid://df6ctee02vnn2" path="res://Projectiles/projectile_chainlightning.tscn" id="4_jktng"]
 [ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="4_sutgb"]
+[ext_resource type="PackedScene" uid="uid://cp4b0irdi4trn" path="res://Projectiles/projectile_dark.tscn" id="5_6nno8"]
+[ext_resource type="PackedScene" uid="uid://ceu5divy6t8jj" path="res://Pick_UP.tscn" id="5_jktng"]
 [ext_resource type="PackedScene" uid="uid://cqx20y0charwj" path="res://Projectiles/projectile_fireballExplode.tscn" id="5_qrenp"]
 [ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="5_rer27"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
-vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
-agent_radius = 0.0
+[ext_resource type="PackedScene" uid="uid://djoghlnjumcp7" path="res://Projectiles/projectile_Bumerang.tscn" id="7_6nno8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sutgb"]
 texture = ExtResource("1_vkt77")
@@ -36,7 +32,6 @@ texture = ExtResource("1_vkt77")
 20:2/0 = 0
 2:3/0 = 0
 3:3/0 = 0
-3:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_myb7b")
 4:3/0 = 0
 5:3/0 = 0
 6:3/0 = 0
@@ -289,9 +284,9 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_sutgb")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sh0nk"]
-vertices = PackedVector2Array(235.109, 76.8594, 247.117, 219.063, -252.156, 221.938, -255.188, 43.9219, -252.617, -55.9531, -257.578, -177.07, 258.609, -180.922, 253.617, -49.1563, -342.383, 53.0391, -355.703, -46.0391, 317.578, -48.1563, 312.398, 77.8672)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 5, 6, 7, 0), PackedInt32Array(8, 9, 4, 3), PackedInt32Array(7, 10, 11, 0)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-268, -187, 269, -191, 264, -59, 328, -58, 322, 88, 246, 87, 258, 229, -262, 232, -265, 55, -351, 64, -367, -55, -263, -65)])
+vertices = PackedVector2Array(235.188, 77.8125, 247.117, 219.063, -252.156, 221.938, -255.188, 43.9219, -257.578, -177.07, 258.609, -180.922, 253.703, -51.1406, -252.617, -55.9531, -342.383, 53.0391, -355.703, -46.0391, 300.07, 72.7422, 300.93, -40.0781)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(3, 8, 9, 7, 6), PackedInt32Array(10, 0, 3, 6, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-268, -187, 269, -191, 264, -59, 311, -48, 310, 82, 246, 87, 258, 229, -262, 232, -265, 55, -351, 64, -367, -55, -263, -65)])
 
 [node name="Node2D" type="Node2D"]
 
@@ -307,22 +302,16 @@ position = Vector2(-286, 0)
 [node name="EndPoint" type="Node2D" parent="." groups=["Right"]]
 position = Vector2(283, 5)
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("2_sutgb")
-enemy_scene = ExtResource("3_qrenp")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-264, -185, 265, -188, 266, -54, 259, 232, -266, 238)
-disabled = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["NavigationRegion2D"]]
 navigation_polygon = SubResource("NavigationPolygon_sh0nk")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_sutgb")]
 position = Vector2(-30, 17)
 normalShootScene = ExtResource("5_rer27")
-normalShootScene2 = ExtResource("5_rer27")
+normalShootScene2 = ExtResource("4_jktng")
 fireShootScene = ExtResource("5_qrenp")
+DarkShootScene = ExtResource("5_6nno8")
+BumerangShootScene = ExtResource("7_6nno8")
 
 [node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
 position = Vector2(-622, 35)
@@ -337,3 +326,6 @@ polygon = PackedVector2Array(-298, 81, -298, 269, 302, 260, 297, 100, 351, 113, 
 position = Vector2(548, 629)
 rotation = 1.5708
 polygon = PackedVector2Array(-306, 422, -302, 295, 286, 295, 288, 443, 369, 434, 373, 231, -353, 244, -364, 389)
+
+[node name="Node2D" parent="." groups=["pick_up"] instance=ExtResource("5_jktng")]
+position = Vector2(-100, -117)

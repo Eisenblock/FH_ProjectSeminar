@@ -8,7 +8,6 @@ offset_top = 314.0
 offset_right = 259.0
 offset_bottom = 364.0
 script = ExtResource("1_u6h3e")
-fireball_path = NodePath("../Projectile_Player")
 addAttrButton_bool = true
 autoShotButton_bool = true
 

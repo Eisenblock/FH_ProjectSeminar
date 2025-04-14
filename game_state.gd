@@ -26,20 +26,19 @@ func _ready():
 		if previous_exit != null :
 			if previous_exit.is_in_group("Right"):
 				var randNumi = randi() % 2
-				room = room_scene_ERight[0].instantiate()
-				Global.enemySpawnCount += 1 + i 
+				room = room_scene_ERight[randNumi].instantiate()
+				var spawner = room.get_node("Area2D")
 				add_child(room)
 			if previous_exit.is_in_group("Down"):
 				var randNumi = randi() % 1
 				room = room_scene_EDown[0].instantiate()
-				Global.enemySpawnCount = 1 + i 
+				var spawner = room.get_node("Area2D")
 				add_child(room)
 		else : 
-			room = room_scene_ERight[0].instantiate()
-			Global.enemySpawnCount = 1 + i 
-			add_child(room)
-	
-		# Position des Raums setzen
+				room = room_scene_ERight[0].instantiate()
+				var spawner = room.get_node("Area2D")
+				add_child(room)
+			# Position des Raums setzen
 		if previous_exit and room != null:
 			var room_start = room.get_node("StartPoint")
 			room.position = previous_exit.global_position - room_start.position
@@ -47,7 +46,7 @@ func _ready():
 	
 		if room_exit.is_in_group("Right"):
 			var randNumi = randi() % 2
-			corridor = corridor_scene_ERight[randNumi].instantiate()
+			corridor = corridor_scene_ERight[0].instantiate()
 			add_child(corridor)
 		if room_exit.is_in_group("Down"):
 			var randNumi = randi() % 2
@@ -59,15 +58,36 @@ func _ready():
 		if room_exit.is_in_group("Left"):
 			corridor = corridor_scene.instantiate()
 			add_child(corridor)
-
-
-
+	
+	
 		# Position des Korridors setzen
 		var corridor_start = corridor.get_node("StartPoint")
 		corridor.position = room_exit.global_position - corridor_start.position
-
+	
 		# Den neuen Endpunkt für die nächste Iteration speichern
 		previous_exit = corridor.get_node("EndPoint")
+	#WeakEnemy
+	Global.enemyCount_small_min += 2
+	Global.enemyCount_small_max += 2
+	#MediumENemy
+	Global.enemyCount_medium_min += 1
+	Global.enemyCount_medium_max += 2
+	#Highenemy
+	Global.enemyCount_High_min += 0
+	Global.enemyCount_High_max += 1
+	#More Rooms
+	max_rooms += 1
+	#update_all_navigation_regions()
+
+func update_all_navigation_regions():
+	for region in get_tree().get_nodes_in_group("NavigationRegion2D"):
+		if region is NavigationRegion2D:
+			var nav_map = region.get_navigation_map()
+			if nav_map:
+				# Alle Navigationsdaten aktualisieren
+				NavigationServer2D.map_force_update(nav_map)
+			else:
+				print("Keine Navigation-Map gefunden in Region: ", region.name)
 
 func _process(delta: float) -> void:
 	#print("EnemyLIst",Global.enemyList.size())
@@ -89,11 +109,11 @@ func SpawnStartArea():
 	add_child(room)
 	if room_exit.is_in_group("Right"):
 		var randNumi = randi() % 2
-		corridor = corridor_scene_ERight[randNumi].instantiate()
+		corridor = corridor_scene_ERight[0].instantiate()
 		add_child(corridor)
 	if room_exit.is_in_group("Down"):
 		var randNumi = randi() % 2
-		corridor = corridor_scene_EDown[randNumi].instantiate()
+		corridor = corridor_scene_EDown[0].instantiate()
 		add_child(corridor)
 	if room_exit.is_in_group("Up"):
 		corridor = corridor_scene.instantiate()
@@ -105,3 +125,8 @@ func SpawnStartArea():
 	var corridor_start = corridor.get_node("StartPoint")
 	corridor.position = room_exit.global_position - corridor_start.position
 	previous_exit = corridor.get_node("EndPoint")
+
+func add_new_tilemap(tilemap: TileMap):
+	var nav_map = $TileMap.get_navigation_map()
+	if nav_map:
+		NavigationServer2D.map_force_update(nav_map)

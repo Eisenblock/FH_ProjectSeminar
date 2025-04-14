@@ -1,22 +1,51 @@
 extends Area2D
 
 @export var enemy_scene: PackedScene 
-var enemyCount = 5
+@export var enemy_10hp: PackedScene 
+@export var enemy_30hp: PackedScene 
+@export var enemy_50hp: PackedScene 
+@export var isInCorridor : bool = false
+
+ 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(Global.enemySpawnCount):
-		print("SPawnt")
+	var randNum_small = randi_range(Global.enemyCount_small_min,Global.enemyCount_small_max)
+	print(randNum_small)
+	var randNum_medium = randi_range(Global.enemyCount_medium_min,Global.enemyCount_medium_max)
+	print(randNum_medium)
+	var randNum_High = randi_range(Global.enemyCount_High_min,Global.enemyCount_High_max)
+	print(randNum_High)
+	if isInCorridor :
+		randNum_small = randNum_small / 2
+		if randNum_small < 1  :
+			randNum_small = 0
+		randNum_medium = randNum_medium / 2
+		if randNum_medium < 1  :
+			randNum_medium = 0
+		randNum_High = randNum_High / 2
+		if randNum_High < 1  :
+			randNum_High = 0
+	for i in range(randNum_small):
+		#print("SPawnt")
 		var currentPos = get_random_position()
-		spawn_enemy(currentPos)
+		spawn_enemy(currentPos,enemy_10hp)
+	for q in range(randNum_medium):
+		#print("SPawnt1")
+		var currentPos = get_random_position()
+		spawn_enemy(currentPos,enemy_30hp)
+	for e in range(randNum_High):
+		#print("SPawnt2")
+		var currentPos = get_random_position()
+		spawn_enemy(currentPos,enemy_50hp)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func spawn_enemy(pos : Vector2):
+func spawn_enemy(pos : Vector2 , current_Scene : PackedScene):
 	if enemy_scene:
-		var enemy = enemy_scene.instantiate()
+		var enemy = current_Scene.instantiate()
 		enemy.position = pos  # Spawnt am Ort von Area2D
 		add_child(enemy)  # Fügt den Gegner zur Szene hinzu
 		Global.enemyList.append(enemy)
@@ -27,9 +56,11 @@ func StartSpawning(spawnCountRef : float):
 	for i in range(spawnCountRef):
 		print("SPawnt")
 		var currentPos = get_random_position()
-		spawn_enemy(currentPos)
+		spawn_enemy(currentPos,enemy_10hp)
+	
 
 func get_random_position() -> Vector2:
+	
 	var polygon = $CollisionPolygon2D.polygon  # Zugriff auf das Polygon-Array
 	
 	if polygon.is_empty():

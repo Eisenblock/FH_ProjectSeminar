@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="3_7u057"]
 [ext_resource type="PackedScene" uid="uid://d4blofntpn1c8" path="res://TileMap/TileMap_OnlyMap.tscn" id="3_seeep"]
 [ext_resource type="PackedScene" uid="uid://4i2mn53cfwgg" path="res://Projectiles/projectile_circle.tscn" id="4_a0m1k"]
-[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="7_nh1vd"]
-[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmg3.tscn" id="8_mgdn7"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmgCircle.tscn" id="7_nh1vd"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="8_mgdn7"]
+
 
 
 [node name="GameState" type="Node2D"]

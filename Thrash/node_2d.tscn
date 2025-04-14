@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="8_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_4d7sh"]
 [ext_resource type="Script" uid="uid://crl858vdbakvb" path="res://Thrash/trigger_spawner.gd" id="9_ir8iy"]
-[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmg2.tscn" id="10_ir8iy"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmgCircle.tscn" id="10_ir8iy"]
+
 
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q6r6c"]

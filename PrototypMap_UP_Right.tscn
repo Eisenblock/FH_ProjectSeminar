@@ -307,6 +307,9 @@ position = Vector2(262, -24)
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("2_3jci7")
 enemy_scene = ExtResource("3_x0rf5")
+enemy_10hp = ExtResource("3_x0rf5")
+enemy_30hp = ExtResource("3_x0rf5")
+enemy_50hp = ExtResource("3_x0rf5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-74, -204, 26, -204, 26, -141, 105, -140, 104, -107, 155, -108, 156, -75, 247, -75, 245, 22, 157, 24, 148, 54, 109, 57, 104, 89, -125, 87, -201, 0, -239, 17, -241, -64, -113, -118, -53, -145)

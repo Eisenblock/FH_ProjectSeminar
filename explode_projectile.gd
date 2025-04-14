@@ -1,12 +1,13 @@
 extends Node2D
 @export var dmg : float = 10
 var timerLifetime : Timer
+@onready var animated_sprite_2d: AnimatedSprite2D = $Area2D/AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Timer erstellen und konfigurieren
 	timerLifetime = Timer.new()
-	timerLifetime.wait_time = 1.0  # Nach 1 Sekunde
+	timerLifetime.wait_time = 0.3  # Nach 1 Sekunde
 	timerLifetime.one_shot = true  # Nur einmal ausführen
 	
 	add_child(timerLifetime)  # Timer als Kind-Node hinzufügen
@@ -18,7 +19,8 @@ func _on_timer_timeout() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if animated_sprite_2d :
+		animated_sprite_2d.play("fly")
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
