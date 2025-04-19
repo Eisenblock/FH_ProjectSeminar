@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://chwndlvl5kt3q"]
+[gd_scene load_steps=8 format=3 uid="uid://chwndlvl5kt3q"]
 
 [ext_resource type="Script" uid="uid://ds3xgyob8dfd5" path="res://Player/player_character.gd" id="1_jxsul"]
 [ext_resource type="PackedScene" uid="uid://yn3rlk6b1kmy" path="res://Projectiles/projectile_auto2.tscn" id="2_a5bt4"]
@@ -7,6 +7,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3qdv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvlyr"]
+
+[sub_resource type="Gradient" id="Gradient_a5bt4"]
+offsets = PackedFloat32Array(0.266234, 0.571429)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vbj4"]
+gradient = SubResource("Gradient_a5bt4")
+fill = 1
+fill_from = Vector2(0.504587, 0.522936)
 
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_jxsul")
@@ -41,5 +50,11 @@ offset_left = -3.0
 offset_top = 16.0
 offset_right = 1.0
 offset_bottom = 43.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.964201, 0.468572, 0.390446, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_5vbj4")
+texture_scale = 4.05
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

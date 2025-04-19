@@ -1,10 +1,27 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnq0jg5uun2v0"]
+[gd_scene load_steps=27 format=3 uid="uid://dnq0jg5uun2v0"]
 
 [ext_resource type="Script" uid="uid://cvoqggtun04pv" path="res://Projectiles/projectile_enemy.gd" id="1_3m3wc"]
 [ext_resource type="Texture2D" uid="uid://bfirewqxvrpm" path="res://Assets/LPC imp/walk - vanilla.png" id="2_fckfu"]
+[ext_resource type="Texture2D" uid="uid://ejylamxnvpvi" path="res://Assets/enemy/flyer_0.png" id="3_t3dbl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynhxe"]
 size = Vector2(39, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by62e"]
+atlas = ExtResource("3_t3dbl")
+region = Rect2(0, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gew3s"]
+atlas = ExtResource("3_t3dbl")
+region = Rect2(32, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me8vf"]
+atlas = ExtResource("3_t3dbl")
+region = Rect2(64, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e83gt"]
+atlas = ExtResource("3_t3dbl")
+region = Rect2(96, 64, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3dbl"]
 atlas = ExtResource("2_fckfu")
@@ -23,20 +40,16 @@ atlas = ExtResource("2_fckfu")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhnjm"]
-atlas = ExtResource("2_fckfu")
-region = Rect2(0, 192, 64, 64)
+atlas = ExtResource("3_t3dbl")
+region = Rect2(0, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0cejd"]
-atlas = ExtResource("2_fckfu")
-region = Rect2(64, 192, 64, 64)
+atlas = ExtResource("3_t3dbl")
+region = Rect2(32, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52y4p"]
-atlas = ExtResource("2_fckfu")
-region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_by62e"]
-atlas = ExtResource("2_fckfu")
-region = Rect2(192, 192, 64, 64)
+atlas = ExtResource("3_t3dbl")
+region = Rect2(64, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gi4r4"]
 atlas = ExtResource("2_fckfu")
@@ -72,6 +85,23 @@ region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gew3s"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by62e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gew3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me8vf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e83gt")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"idle",
@@ -103,9 +133,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_52y4p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_by62e")
 }],
 "loop": true,
 "name": &"walk_left",
@@ -146,6 +173,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_t3dbl"]
+offsets = PackedFloat32Array(0.253247, 0.655844)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k72rm"]
+gradient = SubResource("Gradient_t3dbl")
+fill = 1
+fill_from = Vector2(0.477064, 0.495413)
+fill_to = Vector2(1, 0.00917431)
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_3m3wc")
@@ -168,7 +205,15 @@ avoidance_enabled = true
 radius = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5.71429)
 sprite_frames = SubResource("SpriteFrames_gew3s")
 animation = &"walk_left"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-2.85714, -14.2857)
+scale = Vector2(0.142857, 0.240909)
+energy = 0.5
+texture = SubResource("GradientTexture2D_k72rm")
+texture_scale = 2.75
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

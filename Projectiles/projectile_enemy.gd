@@ -71,12 +71,12 @@ func _physics_process(delta: float) -> void:
 		if  !gotHit :
 			var next_path_position = nav.get_next_path_position()
 			direction = (next_path_position - global_position).normalized()
-			global_position += direction * 100 * delta
+			global_position += direction * speed * delta
 			move_and_slide()
 		if gotHit:
 			var next_path_position = nav.get_next_path_position()
 			direction = (next_path_position - global_position).normalized()
-			global_position += direction * -30 * delta
+			global_position += direction * -(speed/6) * delta
 			move_and_slide()
 		#move_and_slide()
 		#_check_distance()
@@ -141,6 +141,15 @@ func take_damage(amount) :
 		isDead = true
 		Global.enemyList.erase(self)
 		Global.expAmount += 1
+		Dead()
+
+func Dead():
+	speed = 0
+	if animated_sprite_2d :
+		animated_sprite_2d.play("dead")
+		await  get_tree().create_timer(0.5).timeout
+		queue_free()
+	else :
 		queue_free()
 
 func _check_distance():

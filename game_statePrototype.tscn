@@ -21,6 +21,8 @@ corridor_scene_ERight = Array[PackedScene]([ExtResource("6_s32iu")])
 corridor_scene_EDown = Array[PackedScene]([ExtResource("7_chbd3")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -59,6 +61,16 @@ offset_bottom = 130.0
 text = "fire"
 autoShotButton_bool = false
 fireballShoot_bool = true
+
+[node name="ButtonDmg9" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
+layout_mode = 0
+offset_left = 1017.0
+offset_top = 80.0
+offset_right = 1067.0
+offset_bottom = 130.0
+text = "fire"
+autoShotButton_bool = false
+darkButton_bool = true
 
 [node name="ButtonDmg2" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
 layout_mode = 0
@@ -102,6 +114,18 @@ autoShotButton_bool = false
 fireballShoot_bool = true
 switchAttrButton_bool = true
 
+[node name="ButtonDmg10" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
+layout_mode = 0
+offset_left = 1018.0
+offset_top = 215.0
+offset_right = 1068.0
+offset_bottom = 265.0
+text = "fire"
+addAttrButton_bool = false
+autoShotButton_bool = false
+darkButton_bool = true
+switchAttrButton_bool = true
+
 [node name="ButtonDmg7" parent="CanvasLayer/Control2" instance=ExtResource("9_u0twx")]
 layout_mode = 0
 offset_left = 1016.0
@@ -127,4 +151,5 @@ chestButton_bool = true
 switchAttrButton_bool = true
 
 [node name="SpawnSpellUI" parent="." instance=ExtResource("8_5f368")]
+process_mode = 3
 position = Vector2(85, 470)

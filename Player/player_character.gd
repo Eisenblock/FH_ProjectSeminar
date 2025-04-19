@@ -36,12 +36,19 @@ var timerdarkShoot : Timer
 var BumerangShootonCD : bool = false
 var timerbumerangShoot : Timer
 #var life_RegStarted_bool : bool = false
+var dash_speed = 500
+var dash_time = 0.2
+var dash_cooldown = 1.0
 
+var is_dashing = false
+var dash_timer = 0.0
+var dash_cooldown_timer = 0.0
 var projectileAmount = 1
 var countProjectile = 0
 
 func _ready() -> void:
 	load_abilities()
+	UpdatePlayerAttr(Global.ChestAttribute)
 	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
 	#StartAttacksRef(circleShootScene,Global.circleShootAttribute,Callable(self, "spawnCircleShoot"),"circle")
 	
@@ -60,19 +67,38 @@ func _ready() -> void:
 func _physics_process(delta):
 	var direction = Vector2.ZERO
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("move_right"):
 		direction.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("move_down"):
 		direction.y += 1
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
 
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()  # Verhindert schnellere diagonale Bewegung
 
-	velocity = direction * speed
+	# Dash starten
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and direction != Vector2.ZERO:
+		is_dashing = true
+		dash_timer = dash_time
+		dash_cooldown_timer = dash_cooldown
+		velocity = direction * dash_speed
+	else:
+		# Normal bewegen, wenn nicht dashing
+		if not is_dashing:
+			velocity = direction * speed
+
+	# Dash-Zeit läuft
+	if is_dashing:
+		dash_timer -= delta
+		if dash_timer <= 0:
+			is_dashing = false
+
+	# Cooldown runterzählen
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
 	move_and_slide()
 	
 
@@ -171,19 +197,31 @@ func SpawnAllShots(sceneShot_ref : PackedScene , dic_ref : Dictionary ):
 	if dic_ref.has("more_projectiles") :
 		countProjectile = 0
 		var size = dic_ref["more_projectiles"] + projectileAmount
-		print("CUrrent Size",size)
-		for countProjectile in range(size):  # range(3) geht von 0 bis 2, also insgesamt 3 Durchläufe
+		var spread_degrees = 8  # Gesamtwinkel z. B. 30°
+		var spread_radians = deg_to_rad(spread_degrees)
+		var half_spread = spread_radians / 2
+	
+		for countProjectile in range(size):
 			instance = sceneShot_ref.instantiate()
-			if instance != null :
-				var direction = (get_global_mouse_position() - global_position).normalized()
-				var angle_to_mouse = direction.angle()
-				instance.rotation = angle_to_mouse #+ deg_to_rad(-90) 
-				instance.position = global_position 
-				instance.SetDirection(direction)
-				#var a = get_node(normalShoot)
+			if instance != null:
+				var base_direction = (get_global_mouse_position() - global_position).normalized()
+				var base_angle = base_direction.angle()
+				
+				# Verteile den Winkel gleichmäßig
+				var t = 0.0
+				if size > 1:
+					t = float(countProjectile) / float(size - 1)  # 0.0 bis 1.0
+				var offset_angle = lerp(-half_spread, half_spread, t)
+				
+				var final_angle = base_angle + offset_angle
+				var adjusted_direction = Vector2(cos(final_angle), sin(final_angle))
+				
+				instance.rotation = final_angle
+				instance.position = global_position
+				instance.SetDirection(adjusted_direction)
 				instance.SetProjectile(dic_ref)
 				get_tree().root.add_child(instance)
-				await get_tree().create_timer(0.2).timeout
+				
 	else :
 		instance = sceneShot_ref.instantiate()
 		if instance != null :
@@ -239,6 +277,7 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	else :
 		var temp_instance = shotSceneRef.instantiate()
 		var cast_time = temp_instance.castTime
+		print(cast_time)
 		temp_instance.queue_free()
 		timerRef.wait_time = cast_time 
 	timerRef.one_shot = true

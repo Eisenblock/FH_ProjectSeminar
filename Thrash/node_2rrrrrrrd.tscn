@@ -24,7 +24,7 @@ navigation_polygon = SubResource("NavigationPolygon_1qwai")
 [node name="PlayerCharacter2" parent="." instance=ExtResource("2_1ydyl")]
 position = Vector2(807, 386)
 
-[node name="ProgressBar" type="ProgressBar" parent="PlayerCharacter2"]
+[node name="ProgressBar2" type="ProgressBar" parent="PlayerCharacter2"]
 offset_left = -9.0
 offset_top = 9.0
 offset_right = 11.0

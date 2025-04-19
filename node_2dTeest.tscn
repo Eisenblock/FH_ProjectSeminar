@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cht3874ul1dnw"]
+
+[ext_resource type="Texture2D" uid="uid://dlhw40qvk7mb" path="res://Assets/New Piskel-1.png (1).png" id="1_ocwig"]
+[ext_resource type="Texture2D" uid="uid://31ptfv488fy" path="res://Assets/sewer_1-2.png.png" id="2_unqxk"]
+
+[sub_resource type="Gradient" id="Gradient_0nwp7"]
+offsets = PackedFloat32Array(0, 0.012987)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c6ik1"]
+gradient = SubResource("Gradient_0nwp7")
+width = 69
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.749998, -5.96046e-07)
+scale = Vector2(0.630435, 0.71875)
+color = Color(1, 0.423529, 0.188235, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_c6ik1")
+
+[node name="NewPiskel-1_png(1)" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_ocwig")
+
+[node name="Sewer1-2_png" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-160, -107.5)
+scale = Vector2(2.2, 2.7)
+texture = ExtResource("2_unqxk")

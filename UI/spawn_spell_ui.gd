@@ -104,7 +104,7 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 			text_edit.text = str(key) + " = " + str(string_value)
 				# Setze die Position des Textfeldes (z. B. vertikal ansteigend)
 			text_instance.position = Vector2(-355.0, -158.0 + y_offset) # Position auf der X-Achse und veränderte Y-Position
-			if i == dicRef.keys().size() and countAttr < 5 :
+			if i == dicRef.keys().size() and countAttr < 4 :
 				var button_instance = buttonRef.instantiate()
 				v_box_container.add_child(button_instance)
 				button_instance.position = Vector2(-355.0, -158.0 + y_offset)
@@ -129,12 +129,13 @@ func _process(delta: float) -> void:
 			child.queue_free()
 		if !isInInterface :
 			isInInterface = true
-			canvas_layer.visible = false
+			canvas_layer.visible = true
 			var arrayChild = get_tree().get_nodes_in_group("spell_ui")  # Spiel pausieren
-			#arrayChild.process_mode = Node.PROCESS_MODE_ALWAYS 
+			get_tree().paused = true
 		else :
 			isInInterface = false
-			canvas_layer.visible = true
+			canvas_layer.visible = false
+			get_tree().paused = false
 	"""
 	if Input.is_action_just_pressed("TestInput"):
 		#updateTextFieldsRef(current_attribute)

@@ -7,7 +7,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var randNum
-	randNum = randi_range(0,3) 
+	randNum = randi_range(0,2) 
 	var instance
 	if randNum == 0:
 		instance = fireball_PickUP.instantiate()
@@ -21,10 +21,10 @@ func _ready() -> void:
 		instance = circleball_PickUP.instantiate()
 		instance.position = Vector2(31.265,-119)
 		add_child(instance)
-	if randNum == 3:
+	"""if randNum == 3:
 		instance = bumerang_PickUP.instantiate()
 		instance.position = Vector2(31.265,-119)
-		add_child(instance)
+		add_child(instance)"""
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

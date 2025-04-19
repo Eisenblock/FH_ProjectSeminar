@@ -7,6 +7,7 @@ extends Button
 @export var circleShoot_bool : bool = false
 @export var fireballShoot_bool : bool = false
 @export var chestButton_bool : bool = false
+@export var darkButton_bool : bool = false
 @export var switchAttrButton_bool : bool = false
 @export var UI_Auto : PackedScene = load("res://UI/controlAuto.tscn")
 @export var UI_Auto_Button : PackedScene = load("res://UI/button_dmgAuto.tscn")
@@ -16,6 +17,8 @@ extends Button
 @export var UI_Chest_Button : PackedScene = load("res://UI/button_dmgChest.tscn")
 @export var UI_Fire : PackedScene = load("res://UI/controlFire.tscn")
 @export var UI_Fire_Button : PackedScene = load("res://UI/button_dmgfire.tscn")
+@export var UI_Dark : PackedScene = load("res://UI/controlFire.tscn")
+@export var UI_Dark_Button : PackedScene = load("res://UI/button_dmgfire.tscn")
 @export var countAttrOnChest = 0
 @export var posInDic = -2
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
@@ -90,7 +93,7 @@ func SetAvaibleAttribute ():
 func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene) -> Array:
 	#Add Attr Chest
 	if Global.expAmount >= 2 :
-		if  countRef < 5 :
+		if  countRef <= 3 :
 			dicRef[name] = value  # Attribut in das globale Dictionary speichern
 			print("Attribut hinzugefügt Auto:", name, "=", value)  # Debug-Ausgabe
 			countRef += 1
@@ -263,6 +266,14 @@ func CheckTypeAddAttr():
 		var result = addAttribute(selectedAttribute, attributeValue,Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
 		Global.fireballShootAttribute = result[0]
 		Global.countAttrOnFire = result[1]
+	if darkButton_bool and addAttrButton_bool:
+		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
+		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		#var attributeValue = availableAttributes[selectedAttribute]
+		var result = addAttribute(selectedAttribute, attributeValue,Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
+		Global.darkShootAttribute = result[0]
+		Global.countAttrOnDark = result[1]
+
 
 func CheckTypeChangeAttr():
 	var keys = availableAttributes.keys()
@@ -285,6 +296,11 @@ func CheckTypeChangeAttr():
 			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
 			var attributeValue = availableAttributes["tier1"][selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
+		if darkButton_bool : 
+			selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
+			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 		if chestButton_bool : 
 			keys = availableAttributes_Armor.keys()
 			selectedAttribute = CheckAttr_isValid(true,rigthValue,Global.ChestAttribute,keys)
@@ -312,6 +328,11 @@ func CheckUPgradeTier():
 		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
 		var attributeValue = availableAttributes["tier1"][selectedAttribute]
 		UpgradeTierAttr2(true,Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
+	if darkButton_bool : 
+		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
+		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		UpgradeTierAttr2(true,Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 	if chestButton_bool : 
 		var newkeys = availableAttributes_Armor.keys()
 		selectedAttribute = CheckAttr_isValid(true,rigthValue,Global.ChestAttribute,newkeys)
@@ -327,6 +348,8 @@ func SwitchAttrShow():
 		spawn_spell_ui.updateTextFieldsRef(Global.circleShootAttribute,"",Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
 	if fireballShoot_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire)
+	if darkButton_bool : 
+		spawn_spell_ui.updateTextFieldsRef(Global.darkShootAttribute,"",Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 	if chestButton_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.ChestAttribute,"",Global.countAttrOnChest,UI_Chest,UI_Chest_Button)
 func _on_pressed() -> void:

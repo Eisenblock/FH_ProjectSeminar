@@ -60,21 +60,28 @@ func StartSpawning(spawnCountRef : float):
 	
 
 func get_random_position() -> Vector2:
-	
-	var polygon = $CollisionPolygon2D.polygon  # Zugriff auf das Polygon-Array
+	var polygon = $CollisionPolygon2D.polygon
 	
 	if polygon.is_empty():
-		return global_position  # Falls das Polygon leer ist, Rückgabe der aktuellen Position
-	
-	# Berechne die Begrenzung (AABB - Axis-Aligned Bounding Box)
+		return global_position
+
+	# AABB berechnen
 	var rect = Rect2()
 	for point in polygon:
 		rect = rect.expand(point)
-	
-	var min_x = global_position.x + rect.position.x
-	var min_y = global_position.y + rect.position.y
 
-	return Vector2(
-		randf_range(min_x, min_x + rect.size.x), 
-		randf_range(min_y, min_y + rect.size.y)
-	)
+	var tries = 100  # Sicherheitsmaßnahme, um Endlosschleifen zu vermeiden
+	while tries > 0:
+		var random_point_local = Vector2(
+			randf_range(rect.position.x, rect.position.x + rect.size.x),
+			randf_range(rect.position.y, rect.position.y + rect.size.y)
+		)
+
+		# Prüfen ob der Punkt im Polygon liegt
+		if Geometry2D.is_point_in_polygon(random_point_local, polygon):
+			return to_global(random_point_local)
+
+		tries -= 1
+
+	# Fallback falls kein Punkt gefunden
+	return global_position

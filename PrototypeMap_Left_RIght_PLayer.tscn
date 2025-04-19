@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://pgawfm3o633l"]
+[gd_scene load_steps=11 format=3 uid="uid://pgawfm3o633l"]
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_vkt77"]
-[ext_resource type="PackedScene" uid="uid://df6ctee02vnn2" path="res://Projectiles/projectile_chainlightning.tscn" id="4_jktng"]
+[ext_resource type="PackedScene" uid="uid://yn3rlk6b1kmy" path="res://Projectiles/projectile_auto2.tscn" id="4_6nno8"]
 [ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="4_sutgb"]
 [ext_resource type="PackedScene" uid="uid://cp4b0irdi4trn" path="res://Projectiles/projectile_dark.tscn" id="5_6nno8"]
-[ext_resource type="PackedScene" uid="uid://ceu5divy6t8jj" path="res://Pick_UP.tscn" id="5_jktng"]
 [ext_resource type="PackedScene" uid="uid://cqx20y0charwj" path="res://Projectiles/projectile_fireballExplode.tscn" id="5_qrenp"]
 [ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="5_rer27"]
 [ext_resource type="PackedScene" uid="uid://djoghlnjumcp7" path="res://Projectiles/projectile_Bumerang.tscn" id="7_6nno8"]
@@ -308,7 +307,7 @@ navigation_polygon = SubResource("NavigationPolygon_sh0nk")
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_sutgb")]
 position = Vector2(-30, 17)
 normalShootScene = ExtResource("5_rer27")
-normalShootScene2 = ExtResource("4_jktng")
+normalShootScene2 = ExtResource("4_6nno8")
 fireShootScene = ExtResource("5_qrenp")
 DarkShootScene = ExtResource("5_6nno8")
 BumerangShootScene = ExtResource("7_6nno8")
@@ -326,6 +325,3 @@ polygon = PackedVector2Array(-298, 81, -298, 269, 302, 260, 297, 100, 351, 113, 
 position = Vector2(548, 629)
 rotation = 1.5708
 polygon = PackedVector2Array(-306, 422, -302, 295, 286, 295, 288, 443, 369, 434, 373, 231, -353, 244, -364, 389)
-
-[node name="Node2D" parent="." groups=["pick_up"] instance=ExtResource("5_jktng")]
-position = Vector2(-100, -117)

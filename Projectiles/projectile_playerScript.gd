@@ -159,7 +159,8 @@ func _on_area_entered(area: Area2D) -> void:
 			var instance = explodeScene.instantiate()
 			instance.position = global_position
 			get_tree().root.add_child(instance)
-			queue_free()
+			var enemy = area.get_parent()
+			enemy.take_damage(dmg)
 		if autoShoot or CircleBall_bool :
 			timerGotHit = Timer.new()
 			add_child(timerGotHit)
@@ -204,7 +205,7 @@ func _on_area_entered(area: Area2D) -> void:
 			$CollisionShape2D.shape = startShapeCOllider
 			$Sprite2D.scale.x = startSizeEffect
 			chain_count += 1
-			if chain_count == 3: 
+			if chain_count >= 4: 
 				$CollisionShape2D.shape = startShapeCOllider
 				$Sprite2D.scale.x = startSizeEffect
 				queue_free()
