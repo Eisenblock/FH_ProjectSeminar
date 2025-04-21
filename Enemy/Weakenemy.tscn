@@ -208,6 +208,7 @@ radius = 16.0
 position = Vector2(0, -5.71429)
 sprite_frames = SubResource("SpriteFrames_gew3s")
 animation = &"walk_left"
+flip_h = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-2.85714, -14.2857)

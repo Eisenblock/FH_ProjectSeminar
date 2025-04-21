@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=11 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
 [ext_resource type="PackedScene" uid="uid://pgawfm3o633l" path="res://PrototypeMap_Left_RIght_PLayer.tscn" id="3_4r4h2"]
 [ext_resource type="PackedScene" uid="uid://dmusn6ot2jch8" path="res://BiggerAreas/RealMAp_Left_RIght.tscn" id="4_u8fsw"]
 [ext_resource type="PackedScene" uid="uid://b2k2mb2ineu74" path="res://BiggerAreas/RealMAps/BiggerArea_UP_Right.tscn" id="5_i2igu"]
+[ext_resource type="PackedScene" uid="uid://b8pxkacfyi362" path="res://BiggerAreas/RealMAps/BiggerArea_Right_Right.tscn" id="5_jprbj"]
 [ext_resource type="PackedScene" uid="uid://bh18g2dkjibqa" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Down.tscn" id="6_jprbj"]
 [ext_resource type="PackedScene" uid="uid://n6bg6jy8u5n2" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Right2.tscn" id="7_i2igu"]
 [ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="8_6ybrc"]
@@ -15,7 +16,7 @@ script = ExtResource("1_i2igu")
 room_scene = ExtResource("2_jprbj")
 max_rooms = 1
 room_scene_Start = Array[PackedScene]([ExtResource("3_4r4h2")])
-room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw")])
+room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw"), ExtResource("5_jprbj")])
 room_scene_EDown = Array[PackedScene]([ExtResource("5_i2igu")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("6_jprbj"), ExtResource("7_i2igu")])
 
