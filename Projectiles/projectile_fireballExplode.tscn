@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqx20y0charwj"]
+[gd_scene load_steps=15 format=3 uid="uid://cqx20y0charwj"]
 
 [ext_resource type="Script" uid="uid://dj8jeqt1aslxi" path="res://Projectiles/projectile_playerScript.gd" id="1_53j3a"]
 [ext_resource type="PackedScene" uid="uid://3eauyfvdw76s" path="res://explodeProjectile.tscn" id="2_idx2s"]
@@ -60,13 +60,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_q5jfo"]
+offsets = PackedFloat32Array(0.0779221, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5xag3"]
+gradient = SubResource("Gradient_q5jfo")
+fill = 1
+fill_from = Vector2(0.522936, 0.518349)
+
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_53j3a")
 autoShoot = true
 FireBall_bool = true
 explodeScene = ExtResource("2_idx2s")
-castTime = 3.0
+castTime = 4.0
 speed = 300.0
+lifetime = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
@@ -96,5 +106,10 @@ shape = SubResource("RectangleShape2D_53j3a")
 position = Vector2(-1, -1)
 sprite_frames = SubResource("SpriteFrames_uafes")
 animation = &"fly"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.337245, 0.287784)
+color = Color(0.871326, 0.353059, 4.62055e-06, 1)
+texture = SubResource("GradientTexture2D_5xag3")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,6 +1,13 @@
 extends CharacterBody2D
 
+@export var MeeleEnemy : bool = false
+@export var  RangeEnemy : bool = false
+@export var ShotScene : PackedScene
+var CDShot : bool = false
+var timerShot : float = 2
 var speed = 200
+var tempSpeed = 2
+var nameAnim : String = "walk_left"
 @export var dmg = 10
 @export var health = 10
 var aggroRange = 500
@@ -31,54 +38,62 @@ func _process(delta: float) -> void:
 		return
 	if aggroRange >= global_position.distance_to(targetPLayer.global_position):
 		gotTriggered = true
-	if animated_sprite_2d :
-		if direction.x < 0:
-			if not animated_sprite_2d.flip_h:  # Nur spiegeln, wenn es noch nicht geschehen ist
-				animated_sprite_2d.flip_h = true  # Flippen für nach links
-		elif direction.x > 0:
-			if animated_sprite_2d.flip_h:  # Nur spiegeln, wenn es nach links gespiegelt ist
-				animated_sprite_2d.flip_h = false  # Zurückflippen für nach rechts
+		animated_sprite_2d.flip_h = targetPLayer.global_position.x < global_position.x
+	"""if animated_sprite_2d :
+		if direction.x > 0:
+			if  animated_sprite_2d.flip_h:  # Nur spiegeln, wenn es noch nicht geschehen ist
+				animated_sprite_2d.flip_h = false  # Flippen für nach links
+		elif direction.x < 0:
+			if not animated_sprite_2d.flip_h:  # Nur spiegeln, wenn es nach links gespiegelt ist
+				animated_sprite_2d.flip_h = true  # Zurückflippen für nach rechts
 		# Animation für "walk" abspielen
 		if not animated_sprite_2d.is_playing():  # Falls die Animation noch nicht läuft
 			animated_sprite_2d.flip_v = true
-			animated_sprite_2d.play("walk_left")
-			look_at(targetPLayer.position)
+			if tempSpeed <= 0 :
+				nameAnim = "idle"
+			animated_sprite_2d.play(nameAnim)
+			#look_at(targetPLayer.position)"""
+	if gotTriggered and RangeEnemy and !CDShot:
+		DoRangeAttack()
+		nameAnim = "shoot"
+		timerShot = 2
+		await get_tree().create_timer(0.5).timeout
+		nameAnim = "walk_left"
+	if CDShot :
+		timerShot -= delta
+		if timerShot <= 0 :
+			CDShot = false
 
 func _physics_process(delta: float) -> void:
-	"""if gotTriggered == true :
-		nav.target_position = targetPLayer.global_position
-		if  !gotHit :
-			direction = nav.get_next_path_position() - global_position
-			direction = direction.normalized()
-			velocity = direction * speed
-			move_and_slide()
-		if gotHit:
-			direction = (targetPLayer.global_position - global_position).normalized()
-			direction *= -0.3  # Richtung umkehren
-			velocity = velocity.lerp(direction * speed, accel * delta)
-			move_and_slide()
-		"""
-	#update_navigation()
+
 	if gotTriggered == true :
 		if targetPLayer: 
 			nav.target_position = targetPLayer.position
-		#if nav.is_navigation_finished() :
-		#	return
+		var next_path_position = nav.get_next_path_position()
+		var distance_to_next = global_position.distance_to(targetPLayer.global_position)
+		if !gotHit and RangeEnemy :
+			if distance_to_next > 200:
+				direction = (next_path_position - global_position).normalized()
+				tempSpeed = speed
+				global_position += direction * tempSpeed * delta
+				nameAnim = "walk_left"
+				move_and_slide()
+			else:
+				tempSpeed = 0
+				nameAnim = "idle"
+				move_and_slide()
 		
-		"""var curren_a_pos = global_position
-		var nextpos = nav.get_next_path_position()
-		velocity = curren_a_pos.direction_to(nextpos) * speed"""
-		if  !gotHit :
-			var next_path_position = nav.get_next_path_position()
+		
+		if  !gotHit  and MeeleEnemy:
+			next_path_position = nav.get_next_path_position()
 			direction = (next_path_position - global_position).normalized()
 			global_position += direction * speed * delta
 			move_and_slide()
-		if gotHit:
-			var next_path_position = nav.get_next_path_position()
+		if gotHit and MeeleEnemy:
+			next_path_position = nav.get_next_path_position()
 			direction = (next_path_position - global_position).normalized()
 			global_position += direction * -(speed/6) * delta
 			move_and_slide()
-		#move_and_slide()
 		#_check_distance()
 
 func update_navigation():
@@ -110,7 +125,7 @@ func getPlayer():
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player") :
+	if area.is_in_group("player") and MeeleEnemy :
 		timerGotHit = Timer.new()
 		add_child(timerGotHit)
 		timerGotHit.wait_time = 1 
@@ -137,7 +152,7 @@ func take_damage(amount) :
 	timerResetTakeDamage.one_shot = true
 	timerResetTakeDamage.connect("timeout", self.ResetModular)
 	timerResetTakeDamage.start()
-	if health <= 0 :
+	if health <= 0 and !isDead :
 		isDead = true
 		Global.enemyList.erase(self)
 		Global.expAmount += 1
@@ -170,3 +185,13 @@ func _adjust_position(distance, other_enemy):
 
 func ResetModular():
 	self.modulate = Color("ffffff")
+
+func DoRangeAttack():
+	var instance = ShotScene.instantiate()
+	if instance != null :
+		instance.position = global_position
+		var dirForShot = (targetPLayer.position - global_position).normalized()
+		instance.SetDir(dirForShot)
+		instance.SetDmg(dmg)
+		CDShot = true
+		get_tree().root.add_child(instance)

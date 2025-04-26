@@ -66,6 +66,6 @@ sprite_frames = SubResource("SpriteFrames_vkaj5")
 position = Vector2(1, -5)
 scale = Vector2(0.484375, 0.53125)
 color = Color(0.935302, 0.351806, 0.0447884, 1)
-energy = 0.37
+energy = 0.8
 texture = SubResource("GradientTexture2D_cfxwm")
 texture_scale = 7.65

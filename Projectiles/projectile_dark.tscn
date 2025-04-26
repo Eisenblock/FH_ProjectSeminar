@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cp4b0irdi4trn"]
+[gd_scene load_steps=13 format=3 uid="uid://cp4b0irdi4trn"]
 
 [ext_resource type="Script" uid="uid://dj8jeqt1aslxi" path="res://Projectiles/projectile_playerScript.gd" id="1_5wpr2"]
 [ext_resource type="Texture2D" uid="uid://dcsys4bgidaj6" path="res://Assets/Spells/pixelart_spells/Pixelart Spells/PNG Files/Magic Orb.png" id="2_5wpr2"]
@@ -55,11 +55,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_gwl15"]
+offsets = PackedFloat32Array(0.0779221, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5wpr2"]
+gradient = SubResource("Gradient_gwl15")
+fill = 1
+fill_from = Vector2(0.522936, 0.518349)
+
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_5wpr2")
 DarkBall_bool = true
-castTime = 1.0
+castTime = 5.0
 speed = 300.0
+lifetime = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8hlcf")
@@ -84,5 +94,10 @@ scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_58ehi")
 animation = &"fly"
 frame_progress = 0.810189
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.337245, 0.287784)
+color = Color(0.733333, 0, 0.611765, 1)
+texture = SubResource("GradientTexture2D_5wpr2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

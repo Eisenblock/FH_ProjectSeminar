@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=13 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
@@ -6,17 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://dmusn6ot2jch8" path="res://BiggerAreas/RealMAp_Left_RIght.tscn" id="4_u8fsw"]
 [ext_resource type="PackedScene" uid="uid://b2k2mb2ineu74" path="res://BiggerAreas/RealMAps/BiggerArea_UP_Right.tscn" id="5_i2igu"]
 [ext_resource type="PackedScene" uid="uid://b8pxkacfyi362" path="res://BiggerAreas/RealMAps/BiggerArea_Right_Right.tscn" id="5_jprbj"]
+[ext_resource type="PackedScene" uid="uid://bl4v6437jrm8e" path="res://BiggerAreas/RealMAps/BiggerArea_Right_Right_Set2.tscn" id="6_4r4h2"]
 [ext_resource type="PackedScene" uid="uid://bh18g2dkjibqa" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Down.tscn" id="6_jprbj"]
 [ext_resource type="PackedScene" uid="uid://n6bg6jy8u5n2" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Right2.tscn" id="7_i2igu"]
-[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="8_6ybrc"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_r13n0"]
+[ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="10_4r4h2"]
+[ext_resource type="Script" uid="uid://cgyjgvokxooyw" path="res://button_GameStates.gd" id="12_xdaf7"]
 
 [node name="GameState" type="Node2D"]
 script = ExtResource("1_i2igu")
 room_scene = ExtResource("2_jprbj")
 max_rooms = 1
 room_scene_Start = Array[PackedScene]([ExtResource("3_4r4h2")])
-room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw"), ExtResource("5_jprbj")])
+room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw"), ExtResource("5_jprbj"), ExtResource("6_4r4h2")])
 room_scene_EDown = Array[PackedScene]([ExtResource("5_i2igu")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("6_jprbj"), ExtResource("7_i2igu")])
 
@@ -31,124 +33,58 @@ offset_left = 383.0
 offset_top = 197.0
 offset_right = 423.0
 offset_bottom = 237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Control3" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 383.0
+offset_top = 197.0
+offset_right = 423.0
+offset_bottom = 237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SpriteUi0" type="Sprite2D" parent="CanvasLayer/Control3"]
+position = Vector2(269, 164)
+scale = Vector2(7.83349, 4.6)
+texture = ExtResource("10_4r4h2")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 967.0
 offset_top = 114.0
 offset_right = 1007.0
 offset_bottom = 137.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Control2" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="ButtonDmg" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 942.0
-offset_top = 18.0
-offset_right = 992.0
-offset_bottom = 68.0
-text = "auto"
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 756.0
+offset_top = 144.0
+offset_right = 796.0
+offset_bottom = 184.0
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="ButtonDmg4" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 944.0
-offset_top = 80.0
-offset_right = 994.0
-offset_bottom = 130.0
-text = "fire"
-autoShotButton_bool = false
-fireballShoot_bool = true
-
-[node name="ButtonDmg9" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1017.0
-offset_top = 80.0
-offset_right = 1067.0
-offset_bottom = 130.0
-text = "fire"
-autoShotButton_bool = false
-darkButton_bool = true
-
-[node name="ButtonDmg2" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1016.0
-offset_top = 22.0
-offset_right = 1066.0
-offset_bottom = 72.0
-text = "circle"
-autoShotButton_bool = false
-circleShoot_bool = true
-
-[node name="ButtonDmg3" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1086.0
-offset_top = 22.0
-offset_right = 1138.0
-offset_bottom = 72.0
-text = "Chest"
-autoShotButton_bool = false
-chestButton_bool = true
-
-[node name="ButtonDmg5" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 942.0
-offset_top = 148.0
-offset_right = 992.0
-offset_bottom = 198.0
-text = "auto"
-addAttrButton_bool = false
-switchAttrButton_bool = true
-
-[node name="ButtonDmg6" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 944.0
-offset_top = 210.0
-offset_right = 994.0
-offset_bottom = 260.0
-text = "fire"
-addAttrButton_bool = false
-autoShotButton_bool = false
-fireballShoot_bool = true
-switchAttrButton_bool = true
-
-[node name="ButtonDmg10" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1018.0
-offset_top = 215.0
-offset_right = 1068.0
-offset_bottom = 265.0
-text = "fire"
-addAttrButton_bool = false
-autoShotButton_bool = false
-darkButton_bool = true
-switchAttrButton_bool = true
-
-[node name="ButtonDmg7" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1016.0
-offset_top = 152.0
-offset_right = 1066.0
-offset_bottom = 202.0
-text = "circle"
-addAttrButton_bool = false
-autoShotButton_bool = false
-circleShoot_bool = true
-switchAttrButton_bool = true
-
-[node name="ButtonDmg8" parent="CanvasLayer/Control2" instance=ExtResource("8_6ybrc")]
-layout_mode = 0
-offset_left = 1086.0
-offset_top = 152.0
-offset_right = 1138.0
-offset_bottom = 202.0
-text = "Chest"
-addAttrButton_bool = false
-autoShotButton_bool = false
-chestButton_bool = true
-switchAttrButton_bool = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -120.0
+offset_right = -256.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+metadata/_edit_use_anchors_ = true
 
 [node name="SpawnSpellUI" parent="." instance=ExtResource("9_r13n0")]
 process_mode = 3
@@ -157,8 +93,21 @@ position = Vector2(85, 470)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 modulate = Color(0.864675, 0.864675, 0.864675, 1)
 position = Vector2(455, 111)
-color = Color(0.505344, 0.505344, 0.505344, 1)
+color = Color(0.248639, 0.343442, 0.249855, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.244479, 0.24443, 0.0673981, 1)
-energy = 0.01
+energy = 0.4
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Button" type="Button" parent="CanvasLayer2"]
+offset_left = 569.0
+offset_top = 239.0
+offset_right = 705.0
+offset_bottom = 375.0
+icon = ExtResource("10_4r4h2")
+script = ExtResource("12_xdaf7")
+
+[connection signal="pressed" from="CanvasLayer2/Button" to="CanvasLayer2/Button" method="_on_pressed"]

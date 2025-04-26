@@ -49,7 +49,7 @@ func _ready():
 		room_exit = room.get_node("EndPoint")
 	
 		if room_exit.is_in_group("Right"):
-			var randNumi = randi() % 2
+			var randNumi = randi() % corridor_scene_ERight.size() - 1
 			corridor = corridor_scene_ERight[randNumi].instantiate()
 			add_child(corridor)
 		if room_exit.is_in_group("Down"):
@@ -81,6 +81,7 @@ func _ready():
 	Global.enemyCount_High_max += 1
 	#More Rooms
 	max_rooms += 1
+	Global.global_maxRooms += 1
 	#update_all_navigation_regions()
 
 func update_all_navigation_regions():

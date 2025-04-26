@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqisi0gmfhti1"]
+[gd_scene load_steps=5 format=3 uid="uid://bqisi0gmfhti1"]
 
 [ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="1_tvrry"]
+[ext_resource type="Texture2D" uid="uid://cp5825ps4mk6l" path="res://Assets/sprite_UI4.png" id="1_v1qg2"]
+[ext_resource type="Texture2D" uid="uid://cfwxs024u4eog" path="res://Assets/sprite_UI5.png" id="3_3lbbw"]
+[ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="4_16bu3"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -17,26 +20,25 @@ offset_bottom = 40.0
 text = "score"
 
 [node name="Button" type="Button" parent="."]
-modulate = Color(0.932664, 2.06962e-05, 0.641746, 1)
 layout_mode = 0
-offset_left = 166.485
-offset_top = 1.5306
-offset_right = 174.485
-offset_bottom = 9.5306
-rotation = 0.0192668
-scale = Vector2(4.18182, 4.8159)
+offset_left = 246.442
+offset_top = 3.0612
+offset_right = 382.442
+offset_bottom = 139.062
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("1_v1qg2")
 script = ExtResource("1_tvrry")
 changeAttrButton_bool = true
 fireballShoot_bool = true
 
 [node name="Button2" type="Button" parent="."]
-modulate = Color(0.932664, 2.06962e-05, 0.641746, 1)
 layout_mode = 0
-offset_left = 202.63
-offset_right = 210.63
-offset_bottom = 8.0
-rotation = 0.0192668
-scale = Vector2(4.18182, 4.8159)
+offset_left = 291.349
+offset_top = 4.5918
+offset_right = 427.349
+offset_bottom = 140.592
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("3_3lbbw")
 script = ExtResource("1_tvrry")
 upgradeButton_tier = true
 fireballShoot_bool = true
@@ -47,7 +49,9 @@ offset_left = 2.19059
 offset_top = 7.65301
 offset_right = 42.1906
 offset_bottom = 30.653
-text = "Hi"
+theme_override_fonts/font = ExtResource("4_16bu3")
+theme_override_font_sizes/font_size = 16
+text = "Hidddddddddddddd"
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

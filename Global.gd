@@ -12,8 +12,8 @@ var enemySpawnCount_MEdium = 0
 var enemySpawnCount_high = 0
 var countAttrOnChest = 0
 var expAmount = 20
-var learned_abilities = {} 
-var global_maxRooms = 5
+var learned_abilities = {"auto": true,"fireball":true,} 
+var global_maxRooms = 0
 #WeakEnemy
 var enemyCount_small_min = 2
 var enemyCount_small_max = 5

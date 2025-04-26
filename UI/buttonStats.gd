@@ -17,8 +17,8 @@ extends Button
 @export var UI_Chest_Button : PackedScene = load("res://UI/button_dmgChest.tscn")
 @export var UI_Fire : PackedScene = load("res://UI/controlFire.tscn")
 @export var UI_Fire_Button : PackedScene = load("res://UI/button_dmgfire.tscn")
-@export var UI_Dark : PackedScene = load("res://UI/controlFire.tscn")
-@export var UI_Dark_Button : PackedScene = load("res://UI/button_dmgfire.tscn")
+@export var UI_Dark : PackedScene = load("res://UI/controlDark.tscn")
+@export var UI_Dark_Button : PackedScene = load("res://UI/button_dmgDark.tscn")
 @export var countAttrOnChest = 0
 @export var posInDic = -2
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
@@ -79,6 +79,7 @@ func _ready() -> void:
 		spawn_spell_ui = ui_nodes[0]  # Nimmt das erste gefundene UI-Element
 	else:
 		print("Fehler: Kein UI-Element in der Gruppe 'spell_ui' gefunden!")
+	
 	if player_nodes.size() > 0:
 		player = player_nodes[0]  # Nimmt das erste gefundene UI-Element
 	else:
@@ -347,7 +348,7 @@ func SwitchAttrShow():
 	if circleShoot_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.circleShootAttribute,"",Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
 	if fireballShoot_bool : 
-		spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire)
+		spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
 	if darkButton_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.darkShootAttribute,"",Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 	if chestButton_bool : 

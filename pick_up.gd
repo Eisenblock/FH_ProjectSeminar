@@ -4,7 +4,7 @@ extends Node2D
 @export var fireball_boolPIckUP : bool = false
 @export var circleball_boolPickUp : bool = false
 @export var darkball_boolPickUp : bool = false
-@export var bumerangball_boolPickUp : bool = false
+
 
 func _ready() -> void:
 	pass
@@ -30,10 +30,6 @@ func _on_pick_up_body_entered(body: Node2D) -> void:
 		if darkball_boolPickUp :
 			body.darkBall = true
 			save_ability("darkball",true)
-		if bumerangball_boolPickUp:
-			print("PIckUp")
-			body.bumerang = true
-			save_ability("bumerang",true)
 		queue_free()
 
 func SetPickUPValue(nameRef :String):
@@ -46,6 +42,3 @@ func SetPickUPValue(nameRef :String):
 	if name == "circleball" :
 		circleball_boolPickUp = true
 		print("circleball")
-	if name == "bumerang" :
-		bumerangball_boolPickUp = true
-		print("bumerang")

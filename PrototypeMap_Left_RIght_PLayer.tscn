@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pgawfm3o633l"]
+[gd_scene load_steps=19 format=3 uid="uid://pgawfm3o633l"]
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_vkt77"]
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="2_6nno8"]
@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cqx20y0charwj" path="res://Projectiles/projectile_fireballExplode.tscn" id="5_qrenp"]
 [ext_resource type="PackedScene" uid="uid://ceyxib674a4us" path="res://Projectiles/projectile_auto.tscn" id="5_rer27"]
 [ext_resource type="PackedScene" uid="uid://djoghlnjumcp7" path="res://Projectiles/projectile_Bumerang.tscn" id="7_6nno8"]
+[ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="9_ecdc3"]
+[ext_resource type="Texture2D" uid="uid://pn5cxqn7vaqd" path="res://Assets/sprite_UI1.png" id="10_vdmrf"]
+[ext_resource type="Texture2D" uid="uid://duo48qh8i5alo" path="res://Assets/sprite_UI3.png" id="11_0xl3v"]
+[ext_resource type="Texture2D" uid="uid://cp5825ps4mk6l" path="res://Assets/sprite_UI4.png" id="12_uilga"]
+[ext_resource type="Texture2D" uid="uid://cfwxs024u4eog" path="res://Assets/sprite_UI5.png" id="13_622y1"]
+[ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="14_vdmrf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sutgb"]
 texture = ExtResource("1_vkt77")
@@ -591,6 +597,7 @@ position = Vector2(-286, 0)
 position = Vector2(347, 6)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["NavigationRegion2D"]]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_sh0nk")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_sutgb")]
@@ -604,3 +611,87 @@ BumerangShootScene = ExtResource("7_6nno8")
 [node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
 position = Vector2(-622, 35)
 rotation = -1.5708
+
+[node name="SpriteUi0" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-11, 15)
+scale = Vector2(5, 5)
+texture = ExtResource("9_ecdc3")
+
+[node name="SpriteUi1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-90, 34)
+scale = Vector2(3, 3)
+texture = ExtResource("10_vdmrf")
+
+[node name="SpriteUi3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(56, -113)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_0xl3v")
+
+[node name="SpriteUi4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(53, -23)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_uilga")
+
+[node name="SpriteUi5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(116, -23)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("13_622y1")
+
+[node name="SpriteUi2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-90, 101)
+scale = Vector2(3, 3)
+texture = ExtResource("10_vdmrf")
+
+[node name="SpriteUi6" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(53, 44)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_uilga")
+
+[node name="SpriteUi7" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(116, 44)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("13_622y1")
+
+[node name="SpriteUi8" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-92, 177)
+scale = Vector2(3, 3)
+texture = ExtResource("10_vdmrf")
+
+[node name="SpriteUi9" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(51, 120)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("12_uilga")
+
+[node name="SpriteUi10" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(114, 120)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("13_622y1")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 122.0
+offset_top = -267.0
+offset_right = 244.0
+offset_bottom = -244.0
+theme_override_fonts/font = ExtResource("14_vdmrf")
+text = "learned Abilitys"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -162.0
+offset_top = -34.0
+offset_right = -40.0
+offset_bottom = -11.0
+theme_override_fonts/font = ExtResource("14_vdmrf")
+text = "learned Abilitys"

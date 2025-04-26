@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var spawnUI 
 @export var normalShoot : NodePath
 @export var normalShootScene : PackedScene
 @export var normalShootScene2 : PackedScene
@@ -16,6 +17,9 @@ extends CharacterBody2D
 @onready var node_2d: Node2D = $"../Camera2D/Node2D"
 @onready var healthBar: ProgressBar = $ProgressBar
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var canvas_layer_2: CanvasLayer = $CanvasLayer2
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 #Spell Active Bool
 var fireBall : bool = false 
@@ -47,6 +51,7 @@ var projectileAmount = 1
 var countProjectile = 0
 
 func _ready() -> void:
+	spawnUI = get_tree().get_first_node_in_group("spell_ui")
 	load_abilities()
 	UpdatePlayerAttr(Global.ChestAttribute)
 	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
@@ -66,7 +71,6 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
-
 	if Input.is_action_pressed("move_right"):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -76,9 +80,25 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
 
-	if direction != Vector2.ZERO:
-		direction = direction.normalized()  # Verhindert schnellere diagonale Bewegung
+	direction = direction.normalized()
 
+	# Mausposition relativ zum Spieler
+	var mouse_pos = get_global_mouse_position()
+	var to_mouse = (mouse_pos - global_position).normalized()
+
+	# Spieler flippen, wenn Maus links oder rechts ist
+	animated_sprite_2d.flip_h = mouse_pos.x < global_position.x
+
+	# Bewegung analysieren
+	if direction != Vector2.ZERO:
+		var angle_diff = direction.angle_to(to_mouse)
+
+		if abs(angle_diff) < PI / 2:
+			animated_sprite_2d.play("walk_front") # nach vorne zur Maus
+		else:
+			animated_sprite_2d.play("walk_back") # von Maus weg
+	else:
+		animated_sprite_2d.stop()
 	# Dash starten
 	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and direction != Vector2.ZERO:
 		is_dashing = true
@@ -89,7 +109,6 @@ func _physics_process(delta):
 		# Normal bewegen, wenn nicht dashing
 		if not is_dashing:
 			velocity = direction * speed
-
 	# Dash-Zeit läuft
 	if is_dashing:
 		dash_timer -= delta
@@ -239,7 +258,9 @@ func _on_button_pressed() -> void:
 
 func take_damage(amount) :
 	health -= amount
-	#print("Lost Health: %s" % health)
+	if health <= 0:
+		spawnUI.DoGameOver()
+
 
 func resetCDAuto():
 	autoShootonCD = false

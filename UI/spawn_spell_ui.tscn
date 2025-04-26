@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="4_hl6nm"]
 [ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmgCircle.tscn" id="5_cyklq"]
 
-
 [node name="SpawnSpellUI" type="Node2D" groups=["spell_ui"]]
 position = Vector2(-2, -2)
 script = ExtResource("1_np0rx")

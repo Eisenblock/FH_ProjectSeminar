@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3eauyfvdw76s"]
+[gd_scene load_steps=11 format=3 uid="uid://3eauyfvdw76s"]
 
 [ext_resource type="Script" uid="uid://r7bx305emt1k" path="res://explode_projectile.gd" id="1_edw22"]
 [ext_resource type="Texture2D" uid="uid://d000g7ijp3fuu" path="res://Assets/i_are_spaceship_0.webp" id="2_vi7nq"]
@@ -42,6 +42,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_vi7nq"]
+offsets = PackedFloat32Array(0.0779221, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7ejuj"]
+gradient = SubResource("Gradient_vi7nq")
+fill = 1
+fill_from = Vector2(0.522936, 0.518349)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_edw22")
 
@@ -71,5 +80,10 @@ sprite_frames = SubResource("SpriteFrames_2nimb")
 animation = &"fly"
 frame = 2
 frame_progress = 0.605546
+
+[node name="PointLight2D" type="PointLight2D" parent="Area2D"]
+scale = Vector2(0.611651, 0.61895)
+color = Color(0.850558, 0.316426, 7.70092e-06, 1)
+texture = SubResource("GradientTexture2D_7ejuj")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

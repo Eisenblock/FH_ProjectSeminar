@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://di5a8048r60vf"]
+
+[ext_resource type="Script" uid="uid://bb0xq8xw3dwiu" path="res://enemy_projectile_scene.gd" id="1_2vyrw"]
+[ext_resource type="Texture2D" uid="uid://4p2oy8un48si" path="res://Assets/singlestoneprojectileanimated.png" id="1_blix8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vyrw"]
+atlas = ExtResource("1_blix8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ees28"]
+atlas = ExtResource("1_blix8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq8l4"]
+atlas = ExtResource("1_blix8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5fb6"]
+atlas = ExtResource("1_blix8")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jloq8"]
+atlas = ExtResource("1_blix8")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnh76"]
+atlas = ExtResource("1_blix8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwbxj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vyrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ees28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq8l4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5fb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jloq8")
+}],
+"loop": true,
+"name": &"destroy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnh76")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2j7hr"]
+radius = 3.5
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2vyrw")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_dwbxj")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 1)
+shape = SubResource("CircleShape2D_2j7hr")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

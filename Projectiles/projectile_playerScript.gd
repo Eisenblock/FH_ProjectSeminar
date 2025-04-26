@@ -153,13 +153,14 @@ func _on_area_entered(area: Area2D) -> void:
 	print("hittttt")
 	if area.is_in_group("Wall") and !CircleBall_bool :
 		queue_free()
-	if area.is_in_group("enemy") :
+	var enemy = area.get_parent()
+	if area.is_in_group("enemy") and !enemy.isDead :
 		#print("Hit Enemy")
 		if FireBall_bool :
 			var instance = explodeScene.instantiate()
 			instance.position = global_position
 			get_tree().root.add_child(instance)
-			var enemy = area.get_parent()
+			enemy = area.get_parent()
 			enemy.take_damage(dmg)
 		if autoShoot or CircleBall_bool :
 			timerGotHit = Timer.new()
@@ -168,7 +169,7 @@ func _on_area_entered(area: Area2D) -> void:
 			timerGotHit.one_shot = false
 			timerGotHit.connect("timeout", self.resetGotHit)
 			timerGotHit.start()
-			var enemy = area.get_parent()
+			enemy = area.get_parent()
 			enemy.take_damage(dmg)
 			if autoShoot :
 				queue_free()
@@ -179,13 +180,13 @@ func _on_area_entered(area: Area2D) -> void:
 			timerGotHit.one_shot = false
 			timerGotHit.connect("timeout", self.resetGotHit)
 			timerGotHit.start()
-			var enemy = area.get_parent()
+			enemy = area.get_parent()
 			countenemyHits += 1;
 			enemy.take_damage(dmg)
 			if countenemyHits == 2: 
 				queue_free()
 		if Bumerang :
-			var enemy = area.get_parent()
+			enemy = area.get_parent()
 			enemy.take_damage(dmg)
 		if ChainLightning :
 			timerGotHit = Timer.new()
@@ -194,7 +195,7 @@ func _on_area_entered(area: Area2D) -> void:
 			timerGotHit.one_shot = false
 			timerGotHit.connect("timeout", self.resetGotHit)
 			timerGotHit.start()
-			var enemy = area.get_parent()
+			enemy = area.get_parent()
 			enemy.take_damage(dmg)
 			lastPosEnemy = enemy.global_position
 			already_hit.append(enemy)

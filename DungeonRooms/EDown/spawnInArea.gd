@@ -4,6 +4,7 @@ extends Area2D
 @export var enemy_10hp: PackedScene 
 @export var enemy_30hp: PackedScene 
 @export var enemy_50hp: PackedScene 
+@export var enemy_10hp_range: PackedScene = preload("res://Enemy/Weakenemy_RAnge.tscn") 
 @export var isInCorridor : bool = false
 
  

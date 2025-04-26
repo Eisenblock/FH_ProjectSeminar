@@ -314,7 +314,7 @@ navigation_polygon = SubResource("NavigationPolygon_n2ewd")
 
 [node name="Portal" parent="." instance=ExtResource("4_6k0lk")]
 position = Vector2(142, -9)
-MapChange = "res://game_statePrototype.tscn"
+MapChange = "res://game_statePrototypeREalMap.tscn"
 
 [node name="Node2D" parent="." groups=["pick_up"] instance=ExtResource("7_vi1nt")]
 modulate = Color(1, 0.133333, 1, 1)
