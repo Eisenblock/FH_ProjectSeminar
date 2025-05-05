@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=14 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://n6bg6jy8u5n2" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Right2.tscn" id="7_i2igu"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_r13n0"]
 [ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="10_4r4h2"]
+[ext_resource type="PackedScene" uid="uid://2v5yvoqbw5ky" path="res://UI/button_ShowChest.tscn" id="11_d6t2y"]
 [ext_resource type="Script" uid="uid://cgyjgvokxooyw" path="res://button_GameStates.gd" id="12_xdaf7"]
 
 [node name="GameState" type="Node2D"]
@@ -86,6 +87,20 @@ grow_vertical = 2
 theme_override_constants/separation = 35
 metadata/_edit_use_anchors_ = true
 
+[node name="ButtonDmg" parent="CanvasLayer" instance=ExtResource("11_d6t2y")]
+z_index = 3
+offset_left = 202.0
+offset_top = -62.0
+offset_right = 274.0
+offset_bottom = 10.0
+
+[node name="CurrentSpekk" type="Label" parent="CanvasLayer" groups=["NameAbility"]]
+offset_left = 295.0
+offset_top = 142.0
+offset_right = 335.0
+offset_bottom = 165.0
+text = "None"
+
 [node name="SpawnSpellUI" parent="." instance=ExtResource("9_r13n0")]
 process_mode = 3
 position = Vector2(85, 470)
@@ -103,6 +118,7 @@ energy = 0.4
 visible = false
 
 [node name="Button" type="Button" parent="CanvasLayer2"]
+process_mode = 3
 offset_left = 569.0
 offset_top = 239.0
 offset_right = 705.0

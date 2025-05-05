@@ -9,7 +9,7 @@ extends Area2D
 @export var Bumerang : bool = false
 @export var ChainLightning : bool = false
 @export var explodeScene : PackedScene
-@export var distance : float = 100.0  # Der Abstand des Objekts vom Player
+@export var distance : float = 30.0  # Der Abstand des Objekts vom Player
 @export var castTime: float = 2
 @export var tilemap: TileMap 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -18,6 +18,9 @@ extends Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var max_chains = 3
+@export var countPiece = 0
+@export var sizeValue : float = 0
+var AniSprite 
 var startShapeCOllider = 0
 var startSizeEffect = 0
 var lastPosEnemy = 0
@@ -46,6 +49,7 @@ var Explode_bool : bool = false
 var attributes := {}
 
 func _ready() -> void:
+	AniSprite = get_node("AnimatedSprite2D")
 	"""startShapeCOllider = $CollisionShape2D.shape.duplicate()
 	startShapeCOllider.extents.x = 10  # Für eine Breite von 20
 	startShapeCOllider.extents.y = 10  # Für eine Höhe von 20
@@ -113,6 +117,11 @@ func ResetMovementNegativ():
 
 func _process(delta: float) -> void:
 	#compareAttributes()
+	if sizeValue != 0:
+		sizeValue = attributes["size"]
+		AniSprite.scale = Vector2(sizeValue, sizeValue)
+		print(sizeValue)
+	distance += 20 * delta
 	if animated_sprite_2d :
 		animated_sprite_2d.play("fly")
 	if ChainLightning :
@@ -129,8 +138,12 @@ func SetAttributes():
 		dmg = dmg + dmg * (attributes["more_dmg_percent"]/100)
 	if "lifetime" in attributes :
 		lifetime += attributes["lifetime"]
-	if "lifesteal" in attributes :
-		lifesteal_value += attributes["lifesteal"]
+	if "pierce" in attributes :
+		countPiece = attributes["pierce"]
+		print(countPiece)
+	if "size" in attributes :
+		sizeValue = attributes["size"] 
+		print(sizeValue)
 	#print_all_attributes()
 
 func addAttribute(name :String , value : float):
@@ -150,7 +163,7 @@ func SetProjectile(projetileattr := {} ):
 
 
 func _on_area_entered(area: Area2D) -> void:
-	print("hittttt")
+	#print("hittttt")
 	if area.is_in_group("Wall") and !CircleBall_bool :
 		queue_free()
 	var enemy = area.get_parent()
@@ -162,6 +175,11 @@ func _on_area_entered(area: Area2D) -> void:
 			get_tree().root.add_child(instance)
 			enemy = area.get_parent()
 			enemy.take_damage(dmg)
+			if countenemyHits == countPiece and countPiece != 0: 
+				queue_free()
+			if countPiece == 0 :
+				queue_free()
+			countenemyHits += 1;
 		if autoShoot or CircleBall_bool :
 			timerGotHit = Timer.new()
 			add_child(timerGotHit)
@@ -171,8 +189,11 @@ func _on_area_entered(area: Area2D) -> void:
 			timerGotHit.start()
 			enemy = area.get_parent()
 			enemy.take_damage(dmg)
-			if autoShoot :
+			if countenemyHits == countPiece and countPiece != 0: 
 				queue_free()
+			if countPiece == 0 :
+				queue_free()
+			countenemyHits += 1;
 		if DarkBall_bool :
 			timerGotHit = Timer.new()
 			add_child(timerGotHit)
@@ -283,7 +304,7 @@ func DoChainLightning(current_target):
 		# Dein Sprite2D, das den Strahl darstellt
 		var sprite = sprite_2d
 		if sprite == null:
-			print("Das Sprite existiert nicht mehr.")
+			#print("Das Sprite existiert nicht mehr.")
 			return
 		# Hole die Breite der Textur des Strahls
 		var texture_width = sprite_2d.texture.get_width()

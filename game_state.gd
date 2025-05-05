@@ -70,6 +70,18 @@ func _ready():
 	
 		# Den neuen Endpunkt für die nächste Iteration speichern
 		previous_exit = corridor.get_node("EndPoint")
+	
+	room = room_scene.instantiate()
+	add_child(room)
+	var roomStart =  room.get_node("StartPoint")
+	var roomPortal = room.get_node("Portal")
+	roomPortal.portalActive = true
+	lastRoom = true
+	
+	if previous_exit and room != null:
+		var room_start = room.get_node("StartPoint")
+		room.position = previous_exit.global_position - room_start.position
+	
 	#WeakEnemy
 	Global.enemyCount_small_min += 2
 	Global.enemyCount_small_max += 2
@@ -96,7 +108,7 @@ func update_all_navigation_regions():
 
 func _process(delta: float) -> void:
 	#print("EnemyLIst",Global.enemyList.size())
-	if Global.enemyList.size() <= 0 and !lastRoom :
+	"""if Global.enemyList.size() <= 0 and !lastRoom :
 		room = room_scene.instantiate()
 		add_child(room)
 		var roomStart =  room.get_node("StartPoint")
@@ -106,7 +118,7 @@ func _process(delta: float) -> void:
 		
 		if previous_exit and room != null:
 			var room_start = room.get_node("StartPoint")
-			room.position = previous_exit.global_position - room_start.position
+			room.position = previous_exit.global_position - room_start.position"""
 
 func SpawnStartArea():
 	room = room_scene_Start[0].instantiate()

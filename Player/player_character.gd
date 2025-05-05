@@ -63,7 +63,7 @@ func _ready() -> void:
 		healthBar.value = health
 	#Start Life Reg
 	timerLifeReg = Timer.new()
-	timerLifeReg.wait_time = 0.5
+	timerLifeReg.wait_time = 1
 	timerLifeReg.one_shot = false
 	timerLifeReg.connect("timeout", self.DoLifeReg)
 	add_child(timerLifeReg) 
@@ -298,7 +298,7 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	else :
 		var temp_instance = shotSceneRef.instantiate()
 		var cast_time = temp_instance.castTime
-		print(cast_time)
+		#print(cast_time)
 		temp_instance.queue_free()
 		timerRef.wait_time = cast_time 
 	timerRef.one_shot = true

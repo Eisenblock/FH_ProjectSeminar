@@ -67,7 +67,7 @@ fill_from = Vector2(0.522936, 0.518349)
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_04xgh")
 autoShoot = true
-speed = 200.0
+speed = 250.0
 lifetime = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

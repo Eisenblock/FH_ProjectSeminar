@@ -36,6 +36,7 @@ Wall=""
 NavigationRegion2D=""
 pick_up=""
 keep=""
+NameAbility=""
 
 [input]
 

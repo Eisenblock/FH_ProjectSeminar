@@ -23,6 +23,7 @@ extends Button
 @export var posInDic = -2
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
 @onready var label: Label = $"../../../Label"
+@onready var current_spekk: Label = $"../CurrentSpekk"
 
 var player
 var rigthValue : bool = false
@@ -46,22 +47,25 @@ var availableAttributes_Armor = {
 var availableAttributes = {
 	
 	"tier1": {
-		"base_dmg": 2,          
-		"more_dmg_percent": 5, 
+		"base_dmg": 2,    
+		"pierce"  : 1,  
+		"size"  : 5,  
 		"more_projectiles": 1,   
 		"attack_speed": 0.2,     
 		"lifetime": 0.5,         
 			},
 	"tier2": {
-		"base_dmg": 4,          
-		"more_dmg_percent": 10, 
+		"base_dmg": 4,      
+		"pierce"  : 2,  
+		"size"  : 10,      
 		"more_projectiles": 2,   
 		"attack_speed": 0.5,     
 		"lifetime": 0.7,         
 			},
 	"tier3": {
-		"base_dmg": 8,          
-		"more_dmg_percent": 15, 
+		"base_dmg": 8,    
+		"pierce"  : 3,  
+		"size"  : 15,     
 		"more_projectiles": 3,   
 		"attack_speed": 0.8,     
 		"lifetime": 0.9,         
@@ -72,6 +76,7 @@ var track_dmg = 0
 var track_bonusdmg = 0
 
 func _ready() -> void:
+	current_spekk = get_tree().get_first_node_in_group("NameAbility")
 	SetAvaibleAttribute()
 	var ui_nodes = get_tree().get_nodes_in_group("spell_ui")
 	var player_nodes = get_tree().get_nodes_in_group("player")
@@ -93,7 +98,7 @@ func SetAvaibleAttribute ():
 
 func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene) -> Array:
 	#Add Attr Chest
-	if Global.expAmount >= 2 :
+	if Global.expAmount >= 2 + dicRef.size():
 		if  countRef <= 3 :
 			dicRef[name] = value  # Attribut in das globale Dictionary speichern
 			print("Attribut hinzugefügt Auto:", name, "=", value)  # Debug-Ausgabe
@@ -107,14 +112,14 @@ func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,
 		else :
 			print("Auto Attr Full")
 		
-		Global.expAmount -= 2
+		Global.expAmount -= 2 + dicRef.size()
 		self.queue_free()
 		return [dicRef, countRef] 
 	return [dicRef, countRef] 
 
 func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef : Dictionary, countRef, sceneRef : PackedScene,sceneButtonRef : PackedScene):
-	if Global.expAmount >= 1 :
-		Global.expAmount -= 1
+	if Global.expAmount >= dicRef.size() :
+		Global.expAmount -= dicRef.size()
 		var keys = dicRef.keys()
 		
 		if keys.size() > 0:  # Prüfen, ob Einträge existieren
@@ -190,7 +195,6 @@ func UpgradeTierAttr(name: String  ,value: Variant, nameGlobale : String):
 
 func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene):
 	if Global.expAmount >= 5 :
-		Global.expAmount -= 5
 		var keys = dicRef.keys()
 		var new_value
 		if posInDic < 0 or posInDic >= keys.size():
@@ -204,16 +208,20 @@ func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,scene
 				return
 			if availableAttributes["tier1"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes["tier2"][old_key]
+				Global.expAmount -= 5
 			if availableAttributes["tier2"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes["tier3"][old_key]
+				Global.expAmount -= 10
 		else:
 			if not availableAttributes_Armor["tier2"].has(old_key):
 					print("Fehler: Attribut existiert nicht in Tier 2!")
 					return
 			if availableAttributes_Armor["tier1"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes_Armor["tier2"][old_key]
+				Global.expAmount -= 5
 			if availableAttributes_Armor["tier2"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes_Armor["tier3"][old_key]
+				Global.expAmount -= 5
 		
 		var temp_list = []
 		for key in keys:
@@ -345,14 +353,19 @@ func SwitchAttrShow():
 	#Switch AttrShow
 	if autoShotButton_bool:
 		spawn_spell_ui.updateTextFieldsRef(Global.autoShootAttribute,"",Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
+		current_spekk.text = "Auto"
 	if circleShoot_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.circleShootAttribute,"",Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
+		current_spekk.text = "Circle"
 	if fireballShoot_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
+		current_spekk.text = "Fire"
 	if darkButton_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.darkShootAttribute,"",Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
+		current_spekk.text = "Dark"
 	if chestButton_bool : 
 		spawn_spell_ui.updateTextFieldsRef(Global.ChestAttribute,"",Global.countAttrOnChest,UI_Chest,UI_Chest_Button)
+		current_spekk.text = "Chest"
 func _on_pressed() -> void:
 	#print("bUTTON geeeeeeeeeeeht")
 	# Wähle zufällig ein Attribut aus avaibleAttributes aus
