@@ -49,7 +49,7 @@ var availableAttributes = {
 	"tier1": {
 		"base_dmg": 2,    
 		"pierce"  : 1,  
-		"size"  : 5,  
+		"size"  : 1,  
 		"more_projectiles": 1,   
 		"attack_speed": 0.2,     
 		"lifetime": 0.5,         
@@ -57,7 +57,7 @@ var availableAttributes = {
 	"tier2": {
 		"base_dmg": 4,      
 		"pierce"  : 2,  
-		"size"  : 10,      
+		"size"  : 2,      
 		"more_projectiles": 2,   
 		"attack_speed": 0.5,     
 		"lifetime": 0.7,         
@@ -65,7 +65,7 @@ var availableAttributes = {
 	"tier3": {
 		"base_dmg": 8,    
 		"pierce"  : 3,  
-		"size"  : 15,     
+		"size"  : 3,     
 		"more_projectiles": 3,   
 		"attack_speed": 0.8,     
 		"lifetime": 0.9,         

@@ -258,6 +258,9 @@ func _on_button_pressed() -> void:
 
 func take_damage(amount) :
 	health -= amount
+	self.modulate = Color.RED
+	await get_tree().create_timer(0.2).timeout
+	self.modulate = Color.WHITE
 	if health <= 0:
 		spawnUI.DoGameOver()
 
