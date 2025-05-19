@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://blo4gv0bpd0fh"]
+
+[ext_resource type="Script" uid="uid://lyf4b63rojgo" path="res://UI/dmg_text.gd" id="1_qu1vr"]
+
+[node name="DMG_text" type="Label"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 24.0
+text = "22"
+script = ExtResource("1_qu1vr")

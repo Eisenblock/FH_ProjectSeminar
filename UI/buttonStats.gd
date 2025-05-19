@@ -1,7 +1,7 @@
 extends Button
-@onready var reroll_cost: Label = $"../Reroll_cost"
-@onready var upgrade_cost_2: Label = $"../Upgrade_cost2"
-
+@export var reroll_cost: Label 
+@export var upgrade_cost_2: Label 
+@export var add_cost: Label 
 @export var addAttrButton_bool : bool = false
 @export var upgradeButton_tier : bool = false
 @export var changeAttrButton_bool : bool = false
@@ -27,9 +27,9 @@ extends Button
 @onready var label: Label = $"../../../Label"
 @onready var current_spekk: Label = $"../CurrentSpekk"
 
-var changeCost = 1
+var changeCost = 4
 var upgradeCost = 5
-var addCost = 2
+var addCost = 0
 
 var player
 var rigthValue : bool = false
@@ -55,7 +55,7 @@ var availableAttributes = {
 	"tier1": {
 		"base_dmg": 2,    
 		"pierce"  : 1,  
-		"size"  : 1,  
+#		"size"  : 1,  
 		"more_projectiles": 1,   
 		"attack_speed": 0.2,     
 		"lifetime": 0.5,         
@@ -63,7 +63,7 @@ var availableAttributes = {
 	"tier2": {
 		"base_dmg": 4,      
 		"pierce"  : 2,  
-		"size"  : 2,      
+#		"size"  : 2,      
 		"more_projectiles": 2,   
 		"attack_speed": 0.5,     
 		"lifetime": 0.7,         
@@ -71,7 +71,7 @@ var availableAttributes = {
 	"tier3": {
 		"base_dmg": 8,    
 		"pierce"  : 3,  
-		"size"  : 3,     
+#		"size"  : 3,     
 		"more_projectiles": 3,   
 		"attack_speed": 0.8,     
 		"lifetime": 0.9,         
@@ -100,15 +100,14 @@ func _process(delta: float) -> void:
 	if reroll_cost and upgrade_cost_2 :
 		reroll_cost.text = str(changeCost)
 		upgrade_cost_2.text = str(upgradeCost)
-
+	if addCost :
+		add_cost.text = str(addCost)
 
 func SetAvaibleAttribute ():
 	pass
 
 func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene) -> Array:
 	#Add Attr Chest
-	addCost = 2 + dicRef.size()
-	changeCost = dicRef.size() 
 	if reroll_cost :
 		reroll_cost.text = str(changeCost) 
 	if Global.expAmount >= addCost:
@@ -132,7 +131,6 @@ func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,
 	return [dicRef, countRef] 
 
 func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef : Dictionary, countRef, sceneRef : PackedScene,sceneButtonRef : PackedScene):
-	print(changeCost)
 	if Global.expAmount >= changeCost :
 		Global.expAmount -= dicRef.size()
 		var keys = dicRef.keys()
@@ -210,7 +208,6 @@ func UpgradeTierAttr(name: String  ,value: Variant, nameGlobale : String):
 						spawn_spell_ui.updateTextFieldsRef(Global.autoShootAttribute, "autoShoot",Global.countAttrOnAuto)
 
 func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene):
-	upgradeCost = 5
 	if Global.expAmount >= upgradeCost :
 		var keys = dicRef.keys()
 		var new_value

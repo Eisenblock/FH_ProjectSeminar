@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var MeeleEnemy : bool = false
 @export var  RangeEnemy : bool = false
 @export var ShotScene : PackedScene
+@export var DmgText : PackedScene 
 var CDShot : bool = false
 var timerShot : float = 2
 var speed = 200
@@ -152,6 +153,10 @@ func take_damage(amount) :
 	timerResetTakeDamage.one_shot = true
 	timerResetTakeDamage.connect("timeout", self.ResetModular)
 	timerResetTakeDamage.start()
+	var dmgText = DmgText.instantiate()
+	get_tree().root.add_child(dmgText)
+	dmgText.dmg_value = amount
+	dmgText.position = self.global_position #Vector2(5,-40)
 	if health <= 0 and !isDead :
 		isDead = true
 		Global.enemyList.erase(self)

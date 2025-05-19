@@ -34,7 +34,33 @@ var isSwitch : bool = false
 @onready var directional_light_2d: DirectionalLight2D = $"../DirectionalLight2D"
 
 
-
+var availableAttributes = {
+	
+	"tier1": {
+		"base_dmg": 2,    
+		"pierce"  : 1,  
+		"size"  : 1,  
+		"more_projectiles": 1,   
+		"attack_speed": 0.2,     
+		"lifetime": 0.5,         
+			},
+	"tier2": {
+		"base_dmg": 4,      
+		"pierce"  : 2,  
+		"size"  : 2,      
+		"more_projectiles": 2,   
+		"attack_speed": 0.5,     
+		"lifetime": 0.7,         
+			},
+	"tier3": {
+		"base_dmg": 8,    
+		"pierce"  : 3,  
+		"size"  : 3,     
+		"more_projectiles": 3,   
+		"attack_speed": 0.8,     
+		"lifetime": 0.9,         
+			}
+	}
 
 
 func _ready() -> void:
@@ -131,13 +157,16 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 			button_edit = text_instance.get_node("Button") if text_instance.has_node("Button") else null
 			var button_edit2 = text_instance.get_node("Button2") if text_instance.has_node("Button2") else null
 			button_edit.posInDic = trackAutoAttrPos
+			button_edit.changeCost = dicRef.size()
 			button_edit2.posInDic = trackAutoAttrPos
 			text_edit.z_index = 1
 			button_edit.z_index = 1
 			button_edit2.z_index = 1
 			trackAutoAttrPos += 1
-			print("Peeeeeeeeeeeenes")
-			print("pos INdic",button_edit.posInDic)
+			if availableAttributes["tier1"][key] == dicRef[key]:
+				button_edit.upgradeCost = 5
+			if availableAttributes["tier2"][key] == dicRef[key]:
+				button_edit.upgradeCost = 10
 			v_box_container.add_child(text_instance)
 			# Setze den Text des Textfeldes
 			var string_value = "%.2f" % value
@@ -150,6 +179,7 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 				v_box_container.add_child(button_instance)
 				#button_instance.position = Vector2(-355.0, -158.0 + y_offset)
 				button_instance.position = Vector2(17, -37)
+				button_instance.addCost = 1 + dicRef.size()
 			y_offset += 50  # Erhöht den Abstand für jedes neue Textfeld
 	else :
 		var button_instance = buttonRef.instantiate()

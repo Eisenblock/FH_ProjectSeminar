@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ce1qpj6ggarcl" path="res://Assets/New Piskel-1.png (2).png" id="1_dgq8m"]
 [ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="1_kkslt"]
 
-[node name="ButtonDmg" type="Button"]
+[node name="ButtonDmg" type="Button" node_paths=PackedStringArray("add_cost")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,7 +18,14 @@ grow_vertical = 2
 icon = ExtResource("1_dgq8m")
 flat = true
 script = ExtResource("1_kkslt")
+add_cost = NodePath("Label")
 addAttrButton_bool = true
 circleShoot_bool = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = -23.0
+offset_right = 53.0
+text = "1"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

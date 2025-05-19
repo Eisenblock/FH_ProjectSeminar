@@ -3,11 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_u46tx"]
 [ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://node_2dTeest.tscn" id="2_76y8q"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="3_0akaq"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="4_bek0k"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="4_bek0k"]
 [ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="5_pyy85"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="6_00ofd"]
 [ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://torch.tscn" id="7_0u402"]
 [ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://torch2.tscn" id="8_8d04q"]
+
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nwp7"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

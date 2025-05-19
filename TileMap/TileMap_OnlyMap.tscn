@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_w0bi6"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="2_gb3an"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_eegns"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_eegns"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_12ayp"]
 texture = ExtResource("1_w0bi6")

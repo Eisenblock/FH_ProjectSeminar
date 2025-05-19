@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_auntm"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_2kow8"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_tf6ff"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_tf6ff"]
 [ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="4_w8rok"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="5_2umc6"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0nwp7"]
 texture = ExtResource("1_auntm")

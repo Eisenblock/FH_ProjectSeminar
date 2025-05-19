@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_tuce1"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_oa2o3"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_dolxs"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_dolxs"]
+
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)

@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://ehej0muos4k6" path="res://Assets/dungeon_tiles.png" id="1_ctook"]
 [ext_resource type="Script" uid="uid://bxbdmogh2d7ph" path="res://tile_map.gd" id="2_frbv4"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="4_myb7b"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="4_myb7b"]
 [ext_resource type="PackedScene" uid="uid://chwndlvl5kt3q" path="res://Player/player_character.tscn" id="4_tyoky"]
 [ext_resource type="Script" uid="uid://nmj8ft0rgtmu" path="res://UI_Movement.gd" id="5_tyoky"]
 [ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/button_dmgAuto.tscn" id="6_n8pbl"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="6_ppanw"]
+
 
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_myb7b"]
