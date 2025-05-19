@@ -15,6 +15,8 @@ var room = null
 var room_exit = null
 var corridor = null
 var lastRoom : bool = false
+var lastRandValue = -1
+var lastTag = ""
 
 func _ready():
 	if Global.global_maxRooms == 0 :
@@ -29,13 +31,32 @@ func _ready():
 		var randNum = randi() % 2
 		if previous_exit != null :
 			if previous_exit.is_in_group("Right"):
-				var randNumi = randi() % room_scene_ERight.size() -1
+				var randNumi = randi() % room_scene_ERight.size() 
+				if lastTag == "Right":
+					if room_scene_ERight.size() > 1 :
+						while true:
+							randNumi = randi() % room_scene_ERight.size()
+							if randNumi != lastRandValue:
+								break
+					else:
+						randNumi = randi() % room_scene_ERight.size()  
+				lastRandValue = randNumi
+				lastTag = "Right"
 				room = room_scene_ERight[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
 				add_child(room)
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			if previous_exit.is_in_group("Down"):
-				var randNumi = randi() % 1
-				room = room_scene_EDown[0].instantiate()
+				var randNumi = randi() % room_scene_EDown.size() 
+				room = room_scene_EDown[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
 				add_child(room)
 		else : 
