@@ -342,11 +342,25 @@ func ResetAttackTimerCircle():
 
 func UpdatePlayerAttr(dicRef : Dictionary):
 	if "Health" in Global.ChestAttribute :
-		health += Global.ChestAttribute["Health"]
+		if health < 20 + Global.ChestAttribute["Health"] :
+			health += Global.ChestAttribute["Health"]
+			max_health += Global.ChestAttribute["Health"]
+			if healthBar :
+				healthBar.max_value = max_health
+				healthBar.value = health
+	else :
+		health = 20
 	if "Armor" in Global.ChestAttribute :
-		armor += Global.ChestAttribute["Armor"]
+		if armor < 0 + Global.ChestAttribute["Armor"] :
+			armor += Global.ChestAttribute["Armor"]
+	else :
+		armor = 0
 	if "Life_Reg" in Global.ChestAttribute:
-		life_reg += Global.ChestAttribute["Life_Reg"]
+		if life_reg < 0 + Global.ChestAttribute["Life_Reg"] :
+			life_reg += Global.ChestAttribute["Life_Reg"]
+	else :
+		life_reg = 0
+	print("All CHest Attr",health,armor,life_reg)
 
 func DoLifeReg():
 	if health < max_health :

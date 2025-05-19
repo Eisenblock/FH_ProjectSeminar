@@ -53,5 +53,25 @@ theme_override_fonts/font = ExtResource("4_8aryu")
 theme_override_font_sizes/font_size = 16
 text = "Hidddddddddddddd"
 
+[node name="Reroll_cost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 247.537
+offset_top = -30.612
+offset_right = 287.537
+offset_bottom = -7.61203
+scale = Vector2(1.03038, 1.5)
+theme_override_font_sizes/font_size = 16
+text = "c : 1"
+
+[node name="Upgrade_cost2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 295.73
+offset_top = -30.612
+offset_right = 335.73
+offset_bottom = -7.61202
+scale = Vector2(1.03038, 1.5)
+theme_override_font_sizes/font_size = 16
+text = "c : 1"
+
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

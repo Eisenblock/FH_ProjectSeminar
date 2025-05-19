@@ -1,4 +1,6 @@
 extends Button
+@onready var reroll_cost: Label = $"../Reroll_cost"
+@onready var upgrade_cost_2: Label = $"../Upgrade_cost2"
 
 @export var addAttrButton_bool : bool = false
 @export var upgradeButton_tier : bool = false
@@ -24,6 +26,10 @@ extends Button
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
 @onready var label: Label = $"../../../Label"
 @onready var current_spekk: Label = $"../CurrentSpekk"
+
+var changeCost = 1
+var upgradeCost = 5
+var addCost = 2
 
 var player
 var rigthValue : bool = false
@@ -91,14 +97,21 @@ func _ready() -> void:
 		print("Fehler: Kein UI-Element in der Gruppe 'spell_ui' gefunden!")
 
 func _process(delta: float) -> void:
-	pass
+	if reroll_cost and upgrade_cost_2 :
+		reroll_cost.text = str(changeCost)
+		upgrade_cost_2.text = str(upgradeCost)
+
 
 func SetAvaibleAttribute ():
 	pass
 
 func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene) -> Array:
 	#Add Attr Chest
-	if Global.expAmount >= 2 + dicRef.size():
+	addCost = 2 + dicRef.size()
+	changeCost = dicRef.size() 
+	if reroll_cost :
+		reroll_cost.text = str(changeCost) 
+	if Global.expAmount >= addCost:
 		if  countRef <= 3 :
 			dicRef[name] = value  # Attribut in das globale Dictionary speichern
 			print("Attribut hinzugefügt Auto:", name, "=", value)  # Debug-Ausgabe
@@ -106,7 +119,8 @@ func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,
 			spawn_spell_ui.updateTextFieldsRef(dicRef, "chest",countRef,sceneRef,sceneButtonRef)
 			var player_nodes = get_tree().get_nodes_in_group("player")
 			player = player_nodes[0]
-			player.UpdatePlayerAttr(Global.ChestAttribute)
+			if dicRef == Global.ChestAttribute :
+				player.UpdatePlayerAttr(Global.ChestAttribute)
 			for key in dicRef.keys():
 				print(key, ": ", dicRef[key])
 		else :
@@ -118,7 +132,8 @@ func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,
 	return [dicRef, countRef] 
 
 func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef : Dictionary, countRef, sceneRef : PackedScene,sceneButtonRef : PackedScene):
-	if Global.expAmount >= dicRef.size() :
+	print(changeCost)
+	if Global.expAmount >= changeCost :
 		Global.expAmount -= dicRef.size()
 		var keys = dicRef.keys()
 		
@@ -135,7 +150,8 @@ func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef 
 				dicRef[entry[0]] = entry[1]
 			print("Attribut geändert:", old_key, "->", name, "=", value)
 			spawn_spell_ui.updateTextFieldsRef(dicRef, "autoShoot",countRef,sceneRef, sceneButtonRef)
-		
+			if dicRef == Global.ChestAttribute :
+				player.UpdatePlayerAttr(Global.ChestAttribute)
 """func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef : Dictionary, countRef):
 	if Global.expAmount >= 2 :
 		
@@ -194,7 +210,8 @@ func UpgradeTierAttr(name: String  ,value: Variant, nameGlobale : String):
 						spawn_spell_ui.updateTextFieldsRef(Global.autoShootAttribute, "autoShoot",Global.countAttrOnAuto)
 
 func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene):
-	if Global.expAmount >= 5 :
+	upgradeCost = 5
+	if Global.expAmount >= upgradeCost :
 		var keys = dicRef.keys()
 		var new_value
 		if posInDic < 0 or posInDic >= keys.size():
@@ -221,7 +238,7 @@ func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,scene
 				Global.expAmount -= 5
 			if availableAttributes_Armor["tier2"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes_Armor["tier3"][old_key]
-				Global.expAmount -= 5
+				Global.expAmount -= 10
 		
 		var temp_list = []
 		for key in keys:
