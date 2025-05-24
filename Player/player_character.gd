@@ -124,8 +124,8 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	
 	#ActivateAbilityAttr()
-	if !autoShootonCD :
-		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
+	#if !autoShootonCD :
+		#StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
 	
 	if fireBall and !fireShootonCD:
 		#spawnFireShoot()

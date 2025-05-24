@@ -1,5 +1,5 @@
 extends Node2D
-@export var dmg : float = 10
+@export var dmg : float = 1
 var timerLifetime : Timer
 @onready var animated_sprite_2d: AnimatedSprite2D = $Area2D/AnimatedSprite2D
 
@@ -7,7 +7,7 @@ var timerLifetime : Timer
 func _ready() -> void:
 	# Timer erstellen und konfigurieren
 	timerLifetime = Timer.new()
-	timerLifetime.wait_time = 0.3  # Nach 1 Sekunde
+	timerLifetime.wait_time = 0.1  # Nach 1 Sekunde
 	timerLifetime.one_shot = true  # Nur einmal ausführen
 	
 	add_child(timerLifetime)  # Timer als Kind-Node hinzufügen

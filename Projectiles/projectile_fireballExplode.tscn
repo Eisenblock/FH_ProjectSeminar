@@ -71,7 +71,6 @@ fill_from = Vector2(0.522936, 0.518349)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_53j3a")
-autoShoot = true
 FireBall_bool = true
 explodeScene = ExtResource("2_idx2s")
 castTime = 4.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=15 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bl4v6437jrm8e" path="res://BiggerAreas/RealMAps/BiggerArea_Right_Right_Set2.tscn" id="6_4r4h2"]
 [ext_resource type="PackedScene" uid="uid://bh18g2dkjibqa" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Down.tscn" id="6_jprbj"]
 [ext_resource type="PackedScene" uid="uid://n6bg6jy8u5n2" path="res://BiggerAreas/RealMAps/CorridorReal_RIght_Right2.tscn" id="7_i2igu"]
+[ext_resource type="PackedScene" uid="uid://csjo5341d8ntq" path="res://BiggerAreas/RealMAps/BiggerArea_UP_Right2.tscn" id="8_mc7a3"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_r13n0"]
 [ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="10_4r4h2"]
 [ext_resource type="PackedScene" uid="uid://2v5yvoqbw5ky" path="res://UI/button_ShowChest.tscn" id="11_d6t2y"]
@@ -20,7 +21,7 @@ room_scene = ExtResource("2_jprbj")
 max_rooms = 1
 room_scene_Start = Array[PackedScene]([ExtResource("3_4r4h2")])
 room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw"), ExtResource("5_jprbj"), ExtResource("6_4r4h2")])
-room_scene_EDown = Array[PackedScene]([ExtResource("5_i2igu")])
+room_scene_EDown = Array[PackedScene]([ExtResource("5_i2igu"), ExtResource("8_mc7a3")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("6_jprbj"), ExtResource("7_i2igu")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

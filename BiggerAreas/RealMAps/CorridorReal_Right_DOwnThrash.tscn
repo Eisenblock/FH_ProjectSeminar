@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://torch.tscn" id="7_mvi2t"]
 [ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://torch2.tscn" id="8_r2ltt"]
 
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oc3fe"]
 scenes/1/scene = ExtResource("1_cuohc")
 

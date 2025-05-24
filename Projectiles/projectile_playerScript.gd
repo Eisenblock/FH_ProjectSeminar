@@ -92,6 +92,8 @@ func _physics_process(delta: float) -> void:
 	# Berechne den neuen Winkel basierend auf der Zeit und der Geschwindigkeit
 	if DarkBall_bool : 
 		position += direction * speed *delta
+	if FireBall_bool :
+		position += direction * speed *delta
 	if Bumerang :
 		position += direction * speed *delta
 		if elapsed_time >= lifetime / 2:
@@ -174,7 +176,7 @@ func _on_area_entered(area: Area2D) -> void:
 			instance.position = global_position
 			get_tree().root.add_child(instance)
 			enemy = area.get_parent()
-			enemy.take_damage(dmg)
+			#enemy.take_damage(dmg)
 			if countenemyHits == countPiece and countPiece != 0: 
 				queue_free()
 			if countPiece == 0 :
