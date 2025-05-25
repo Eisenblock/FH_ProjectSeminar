@@ -61,7 +61,7 @@ var availableAttributes = {
 		"lifetime": 0.5,         
 			},
 	"tier2": {
-		"base_dmg": 4,      
+		"base_dmg": 5,      
 		"pierce"  : 2,  
 #		"size"  : 2,      
 		"more_projectiles": 2,   
@@ -69,7 +69,7 @@ var availableAttributes = {
 		"lifetime": 0.7,         
 			},
 	"tier3": {
-		"base_dmg": 8,    
+		"base_dmg": 10,    
 		"pierce"  : 3,  
 #		"size"  : 3,     
 		"more_projectiles": 3,   
@@ -99,7 +99,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if reroll_cost and upgrade_cost_2 :
 		reroll_cost.text = str(changeCost)
-		upgrade_cost_2.text = str(upgradeCost)
+		if upgradeCost == 0:
+			upgrade_cost_2.text = "Max"
+		else :
+			upgrade_cost_2.text = str(upgradeCost)
 	if addCost :
 		add_cost.text = str(addCost)
 

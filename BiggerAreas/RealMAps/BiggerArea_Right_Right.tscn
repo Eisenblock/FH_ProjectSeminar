@@ -12,7 +12,7 @@
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nwp7"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvagq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi48g"]
 texture = ExtResource("1_vi48g")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, -5.75548, 8, -5.57562, -5.93534, 8, -5.75548, 8, -8)
@@ -309,7 +309,7 @@ texture = ExtResource("1_vi48g")
 10:21/0 = 0
 11:21/0 = 0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5h6ym"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_niiw5"]
 scenes/1/scene = ExtResource("2_niiw5")
 
 [sub_resource type="TileSet" id="TileSet_i3ca5"]
@@ -318,8 +318,8 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 custom_data_layer_0/name = ""
 custom_data_layer_0/type = 0
-sources/2 = SubResource("TileSetAtlasSource_lvagq")
-sources/4 = SubResource("TileSetScenesCollectionSource_5h6ym")
+sources/2 = SubResource("TileSetAtlasSource_vi48g")
+sources/4 = SubResource("TileSetScenesCollectionSource_niiw5")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5h6ym"]
 vertices = PackedVector2Array(252.258, 413.133, 454.633, 464.969, -367.906, 463.023, -118.57, 408.898, 36.2578, -260.094, 33.4297, -209, 25.0234, -241.172, 23.1406, -259.688, 444.641, 185, 241.891, 325, -131.68, 325, -367.008, 350.602, -350.75, 299.648, 660.398, -44.7578, 672.563, 262.211, 611, 257.703, 611, 185, 597.102, -43.2109, 591.07, 20.2109, 442.883, 16.7734, -393.531, 250.938, -675.109, 254.844, -666.977, 158.18, -358.672, 34.7969, -12.7266, -47.3984, 156.383, -170.047, 442.992, -209.039, 444.992, -160.883, 117.508, -97.8594, -669, 116.773, -670.758, 40.7969, -14.3828, -86.2734, -77.4063, -162.102, -81.9375, -201.383, -59.8906, -204.328, 49.4531, -91.9766, 41.0781, -66.8516, -2.03125, -212, 12.4922, -238.977, 448.477, -319.07, 105.82, -262.18, -370.656, -324.922, -109.711, -255.711, -114.172, -107.398, 75.9219, -194.758, 108.117, -190.969, 113.602, -150.258, 104.453, -135.773, 51.9766, -58.1406, 70.2266, -209, -45.5, -212, -1.82813, -56.9688)

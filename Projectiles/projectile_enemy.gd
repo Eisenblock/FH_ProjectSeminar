@@ -14,7 +14,8 @@ var nameAnim : String = "walk_left"
 var aggroRange = 500
 @export var hitRange = 20
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+const MIN_DISTANCE = 20  # Mindestabstand zwischen Gegnern
+const PUSH_FORCE = 0.5   # Wie stark sie sich wegschieben
 var timerGotHit : Timer
 var timerResetTakeDamage : Timer
 var gotTriggered : bool = false
@@ -95,7 +96,7 @@ func _physics_process(delta: float) -> void:
 			direction = (next_path_position - global_position).normalized()
 			global_position += direction * -(speed/6) * delta
 			move_and_slide()
-		#_check_distance()
+		_check_distance()
 
 func update_navigation():
 	for region in get_tree().get_nodes_in_group("NavigationRegion2D"):
@@ -174,10 +175,11 @@ func Dead():
 
 func _check_distance():
 	for enemy in Global.enemyList:
-		if enemy != self and !isDead and enemy != null:
+		if enemy != self and enemy != null and !enemy.isDead and !self.isDead:
 			var distance = global_position.distance_to(enemy.global_position)
-			if distance < 10:
-				_adjust_position(distance, enemy)
+			if distance < MIN_DISTANCE:
+				var direction = (global_position - enemy.global_position).normalized()
+				global_position += direction * PUSH_FORCE
 
 # Funktion, um die Position des Gegners anzupassen
 func _adjust_position(distance, other_enemy):

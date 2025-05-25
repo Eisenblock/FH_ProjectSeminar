@@ -52,6 +52,7 @@ var countProjectile = 0
 
 func _ready() -> void:
 	spawnUI = get_tree().get_first_node_in_group("spell_ui")
+	health = Global.life_player
 	load_abilities()
 	UpdatePlayerAttr(Global.ChestAttribute)
 	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
@@ -124,8 +125,8 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	
 	#ActivateAbilityAttr()
-	#if !autoShootonCD :
-		#StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
+	if !autoShootonCD :
+		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
 	
 	if fireBall and !fireShootonCD:
 		#spawnFireShoot()
@@ -258,6 +259,7 @@ func _on_button_pressed() -> void:
 
 func take_damage(amount) :
 	health -= amount
+	Global.life_player = health
 	self.modulate = Color.RED
 	await get_tree().create_timer(0.2).timeout
 	self.modulate = Color.WHITE
@@ -341,6 +343,7 @@ func ResetAttackTimerCircle():
 	circleShootonCD = false
 
 func UpdatePlayerAttr(dicRef : Dictionary):
+	health = Global.life_player
 	if "Health" in Global.ChestAttribute :
 		if health < 20 + Global.ChestAttribute["Health"] :
 			health += Global.ChestAttribute["Health"]

@@ -10,6 +10,7 @@ extends Node2D
 @export var corridor_scene_ERight: Array[PackedScene]
 @export var corridor_scene_EDown: Array[PackedScene]
 
+
 var previous_exit = null
 var room = null
 var room_exit = null
@@ -45,17 +46,18 @@ func _ready():
 				room = room_scene_ERight[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
 				add_child(room)
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			if previous_exit.is_in_group("Down"):
 				var randNumi = randi() % room_scene_EDown.size() 
+				if lastTag == "Down":
+					if room_scene_EDown.size() > 1 :
+						while true:
+							randNumi = randi() % room_scene_EDown.size()
+							if randNumi != lastRandValue:
+								break
+					else:
+						randNumi = randi() % room_scene_EDown.size()  
+				lastRandValue = randNumi
+				lastTag = "Down"
 				room = room_scene_EDown[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
 				add_child(room)
@@ -107,14 +109,17 @@ func _ready():
 	Global.enemyCount_small_min += 2
 	Global.enemyCount_small_max += 2
 	#MediumENemy
-	Global.enemyCount_medium_min += 1
-	Global.enemyCount_medium_max += 2
+	if Global.count_stage >= 3 :
+		Global.enemyCount_medium_min += 1
+		Global.enemyCount_medium_max += 1
 	#Highenemy
-	Global.enemyCount_High_min += 0
-	Global.enemyCount_High_max += 1
+	if Global.count_stage >=  5:
+		Global.enemyCount_High_min += 1
+		Global.enemyCount_High_max += 1
 	#More Rooms
 	max_rooms += 1
 	Global.global_maxRooms += 1
+	Global.count_stage += 1
 	#update_all_navigation_regions()
 
 func update_all_navigation_regions():

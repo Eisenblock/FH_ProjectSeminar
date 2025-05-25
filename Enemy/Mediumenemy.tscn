@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://cpnj2mh2nt6rx"]
+[gd_scene load_steps=28 format=3 uid="uid://cpnj2mh2nt6rx"]
 
 [ext_resource type="Script" uid="uid://cvoqggtun04pv" path="res://Projectiles/projectile_enemy.gd" id="1_4xv64"]
+[ext_resource type="PackedScene" uid="uid://blo4gv0bpd0fh" path="res://UI/dmg_text.tscn" id="2_84ifk"]
 [ext_resource type="Texture2D" uid="uid://ejylamxnvpvi" path="res://Assets/enemy/flyer_0.png" id="2_fljw0"]
 [ext_resource type="Texture2D" uid="uid://bfirewqxvrpm" path="res://Assets/LPC imp/walk - vanilla.png" id="3_84ifk"]
 
@@ -187,7 +188,9 @@ fill_to = Vector2(1, 0.00917431)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_4xv64")
 MeeleEnemy = true
+DmgText = ExtResource("2_84ifk")
 dmg = 3
+health = 15
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
@@ -206,7 +209,7 @@ avoidance_enabled = true
 radius = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 0, 1, 1)
+self_modulate = Color(1, 0, 1, 1)
 position = Vector2(0, -5.71429)
 sprite_frames = SubResource("SpriteFrames_dd688")
 animation = &"walk_left"

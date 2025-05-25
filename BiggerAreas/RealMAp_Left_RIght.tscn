@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="4_ntehb"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="5_vmnte"]
 
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjs36"]
 texture = ExtResource("1_2ts64")
 0:0/0 = 0
@@ -319,7 +318,6 @@ position = Vector2(-382, -38)
 position = Vector2(465, -47)
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2(47, -63)
 script = ExtResource("2_yjs36")
 enemy_scene = ExtResource("3_gqmoc")
@@ -332,7 +330,6 @@ polygon = PackedVector2Array(-264, -185, 265, -188, 266, -54, 259, 232, -266, 23
 disabled = true
 
 [node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
 polygon = PackedVector2Array(-408, -134, -408, -357, 486, -356, 483, -175, 554, -177, 542, -416, -464, -414, -464, -134)
@@ -343,5 +340,4 @@ rotation = 3.14159
 polygon = PackedVector2Array(-407, -98, -408, -357, 486, -356, 486, -143, 556, -142, 542, -416, -464, -414, -454, -97)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["NavigationRegion2D"]]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_hmn2y")

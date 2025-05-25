@@ -208,7 +208,6 @@ color = Color(0.776536, 0.472371, 0.0660552, 1)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -5.71429)
