@@ -111,8 +111,6 @@ func SetAvaibleAttribute ():
 
 func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,sceneRef : PackedScene , sceneButtonRef : PackedScene) -> Array:
 	#Add Attr Chest
-	if reroll_cost :
-		reroll_cost.text = str(changeCost) 
 	if Global.expAmount >= addCost:
 		if  countRef <= 3 :
 			dicRef[name] = value  # Attribut in das globale Dictionary speichern
@@ -128,14 +126,14 @@ func addAttribute(name: String, value: Variant, dicRef : Dictionary, countRef  ,
 		else :
 			print("Auto Attr Full")
 		
-		Global.expAmount -= 2 + dicRef.size()
+		Global.expAmount -= addCost
 		self.queue_free()
 		return [dicRef, countRef] 
 	return [dicRef, countRef] 
 
 func changeAttribute(name: String  ,value: Variant, nameGlobale : String,dicRef : Dictionary, countRef, sceneRef : PackedScene,sceneButtonRef : PackedScene):
 	if Global.expAmount >= changeCost :
-		Global.expAmount -= dicRef.size()
+		Global.expAmount -= changeCost
 		var keys = dicRef.keys()
 		
 		if keys.size() > 0:  # Prüfen, ob Einträge existieren
@@ -239,6 +237,7 @@ func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,scene
 			if availableAttributes_Armor["tier2"][old_key] == dicRef[old_key]:
 				new_value = availableAttributes_Armor["tier3"][old_key]
 				Global.expAmount -= 10
+
 		
 		var temp_list = []
 		for key in keys:

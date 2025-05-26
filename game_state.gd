@@ -9,8 +9,8 @@ extends Node2D
 @export var room_scene_EDown: Array[PackedScene]
 @export var corridor_scene_ERight: Array[PackedScene]
 @export var corridor_scene_EDown: Array[PackedScene]
-
-
+@export var portal_scene_ERight: PackedScene
+@export var portal_scene_EDown: PackedScene
 var previous_exit = null
 var room = null
 var room_exit = null
@@ -94,12 +94,20 @@ func _ready():
 		# Den neuen Endpunkt für die nächste Iteration speichern
 		previous_exit = corridor.get_node("EndPoint")
 	
-	room = room_scene.instantiate()
-	add_child(room)
-	var roomStart =  room.get_node("StartPoint")
-	var roomPortal = room.get_node("Portal")
-	roomPortal.portalActive = true
-	lastRoom = true
+	if previous_exit.is_in_group("Right"):
+		room = portal_scene_ERight.instantiate()
+		add_child(room)
+		var roomStart =  room.get_node("StartPoint")
+		var roomPortal = room.get_node("Portal")
+		roomPortal.portalActive = true
+		lastRoom = true
+	if previous_exit.is_in_group("Down"):
+		room = portal_scene_EDown.instantiate()
+		add_child(room)
+		var roomStart =  room.get_node("StartPoint")
+		var roomPortal = room.get_node("Portal")
+		roomPortal.portalActive = true
+		lastRoom = true
 	
 	if previous_exit and room != null:
 		var room_start = room.get_node("StartPoint")

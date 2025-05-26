@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=22 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_r13n0"]
 [ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="10_4r4h2"]
 [ext_resource type="PackedScene" uid="uid://2v5yvoqbw5ky" path="res://UI/button_ShowChest.tscn" id="11_d6t2y"]
+[ext_resource type="PackedScene" uid="uid://c13orlkubj3jr" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap_DOwn.tscn" id="11_r13n0"]
 [ext_resource type="Script" uid="uid://cgyjgvokxooyw" path="res://button_GameStates.gd" id="12_xdaf7"]
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="15_6ybrc"]
 [ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://node_2dTeest.tscn" id="16_r13n0"]
@@ -337,6 +338,8 @@ room_scene_Start = Array[PackedScene]([ExtResource("3_4r4h2")])
 room_scene_ERight = Array[PackedScene]([ExtResource("4_u8fsw"), ExtResource("5_jprbj"), ExtResource("6_4r4h2")])
 room_scene_EDown = Array[PackedScene]([ExtResource("5_i2igu"), ExtResource("8_mc7a3")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("6_jprbj"), ExtResource("7_i2igu")])
+portal_scene_ERight = ExtResource("2_jprbj")
+portal_scene_EDown = ExtResource("11_r13n0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

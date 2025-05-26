@@ -53,6 +53,7 @@ var countProjectile = 0
 func _ready() -> void:
 	spawnUI = get_tree().get_first_node_in_group("spell_ui")
 	health = Global.life_player
+	print("Leeeeeeeeeeeeeeeeben",health)
 	load_abilities()
 	UpdatePlayerAttr(Global.ChestAttribute)
 	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
@@ -144,6 +145,7 @@ func _process(delta: float) -> void:
 		StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"ResetAttackTimerBumerang"),"bumerang")
 	
 	if healthBar :
+		health = Global.life_player
 		healthBar.value = health
 	#camera_2d.position = global_position
 

@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="4_6ypck"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="5_3ca38"]
 
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_leynm"]
 texture = ExtResource("1_3ymd0")
 0:0/0 = 0

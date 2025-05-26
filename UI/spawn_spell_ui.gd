@@ -61,7 +61,23 @@ var availableAttributes = {
 		"lifetime": 0.9,         
 			}
 	}
-
+var availableAttributes_Armor = {
+	"tier1": {
+		"Health" : 15,
+		"Armor" : 2,
+		"Life_Reg" : 0.1
+			},
+	"tier2": {
+		"Health" : 20,
+		"Armor" : 4,
+		"Life_Reg" : 0.2
+			},
+	"tier3": {
+		"Health" :25,
+		"Armor" : 8,
+		"Life_Reg" : 0.4
+			}
+	}
 
 func _ready() -> void:
 	current_attribute = Global.ChestAttribute
@@ -163,16 +179,25 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 			button_edit.z_index = 1
 			button_edit2.z_index = 1
 			trackAutoAttrPos += 1
-			if availableAttributes["tier1"][key] == dicRef[key]:
-				button_edit.upgradeCost = 10
-			if availableAttributes["tier2"][key] == dicRef[key]:
-				button_edit.upgradeCost = 15
-			if availableAttributes["tier2"][key] == dicRef[key]:
-				button_edit.upgradeCost = 0
+			if availableAttributes.has(key):
+				if availableAttributes["tier1"][key] == dicRef[key]:
+					button_edit.upgradeCost = 10
+				if availableAttributes["tier2"][key] == dicRef[key]:
+					button_edit.upgradeCost = 15
+				if availableAttributes["tier3"][key] == dicRef[key]:
+					button_edit.upgradeCost = 0
+			if availableAttributes_Armor.has(key) :
+				if availableAttributes_Armor["tier1"][key] == dicRef[key]:
+					button_edit.upgradeCost = 5
+				if availableAttributes_Armor["tier2"][key] == dicRef[key]:
+					button_edit.upgradeCost = 10
+				if availableAttributes_Armor["tier3"][key] == dicRef[key]:
+					button_edit.upgradeCost = 0
 			v_box_container.add_child(text_instance)
 			# Setze den Text des Textfeldes
+			print("UpgradeVlaue",value)
 			var string_value = "%.2f" % value
-			text_edit.text = str(key) + " = " + str(string_value)
+			text_edit.text = str(key) + " = " + str(value)
 				# Setze die Position des Textfeldes (z. B. vertikal ansteigend)
 			#text_instance.position = Vector2(-355.0, -158.0 + y_offset) # Position auf der X-Achse und veränderte Y-Position
 			if i == dicRef.keys().size() and countAttr < 4 :

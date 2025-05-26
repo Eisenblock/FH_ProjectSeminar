@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://torch.tscn" id="6_0xc4k"]
 [ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://torch2.tscn" id="7_tmstp"]
 
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rx5hl"]
 texture = ExtResource("1_47rop")
 0:0/0 = 0
