@@ -26,10 +26,19 @@ extends Button
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
 @onready var label: Label = $"../../../Label"
 @onready var current_spekk: Label = $"../CurrentSpekk"
+@export var UI_ShowAuto : PackedScene = load("res://UI/button_ShowAuto.tscn")
+@export var UI_ShowFire : PackedScene = load("res://UI/button_ShowFire.tscn")
+@export var UI_ShowDark : PackedScene = load("res://UI/button_Showdark.tscn")
+@export var UI_ShowCircle : PackedScene = load("res://UI/button_ShowCircle.tscn")
+@export var UI_ShowFire_Empthy : PackedScene = load("res://UI/button_ShowFire_empty.tscn")
+@export var UI_ShowDark_Empthy : PackedScene = load("res://UI/button_Showdark_empty.tscn")
+@export var UI_ShowAuto_Empthy : PackedScene = load("res://UI/button_ShowAuto_empty.tscn")
+@export var UI_ShowCircle_Empthy : PackedScene = load("res://UI/button_ShowCircle_empty.tscn")
+@onready var h_box_container: VBoxContainer = $"../HBoxContainer"
 
 var changeCost = 4
 var upgradeCost = 5
-var addCost = 0
+var addCost = 20
 
 var player
 var rigthValue : bool = false
@@ -100,8 +109,7 @@ func _process(delta: float) -> void:
 			upgrade_cost_2.text = "Max"
 		else :
 			upgrade_cost_2.text = str(upgradeCost)
-	if addCost :
-		add_cost.text = str(addCost)
+
 
 func SetAvaibleAttribute ():
 	pass
@@ -427,3 +435,154 @@ func CheckAttr_isValid(refType_bool: bool, ref_RightValue_bool: bool, ref_Dic: D
 			ref_RightValue_bool = true  # Gültiges Attribut gefunden
 			
 	return selectedAttribute
+
+
+func _on_pressedAuto() -> void:
+	if Global.expAmount >= addCost :
+		Global.expAmount -= addCost
+		var player_nodes = get_tree().get_nodes_in_group("player")
+		if player_nodes.size() > 0:
+			var player2 = player_nodes[0]
+
+			Global.learned_abilities["auto"] = true
+			player2.autoBall = true  # <- nur wenn player gültig
+			player2.load_abilities()
+
+			var instance = UI_ShowAuto.instantiate()
+			instance.position = self.position
+			var box = get_tree().get_first_node_in_group("Ability_box")
+			box.add_child(instance)
+			self.queue_free()
+		else:
+			print("Kein Player gefunden!")
+
+
+func _on_pressedCircle() -> void:
+	if Global.expAmount >= addCost :
+		Global.expAmount -= addCost
+		var player_nodes = get_tree().get_nodes_in_group("player")
+		if player_nodes.size() > 0:
+			var player2 = player_nodes[0]
+
+			Global.learned_abilities["circleball"] = true
+			player2.circleBall = true  # <- nur wenn player gültig
+
+			var instance = UI_ShowCircle.instantiate()
+			instance.position = self.position
+			var box = get_tree().get_first_node_in_group("Ability_box")
+			box.add_child(instance)
+			self.queue_free()
+		else:
+			print("Kein Player gefunden!")
+
+
+func _on_pressedDark() -> void:
+	if Global.expAmount >= addCost :
+		Global.expAmount -= addCost
+		var player_nodes = get_tree().get_nodes_in_group("player")
+		if player_nodes.size() > 0:
+			var player2 = player_nodes[0]
+
+			Global.learned_abilities["darkball"] = true
+			player2.darkBall = true  # <- nur wenn player gültig
+			player2.load_abilities()
+
+			var instance = UI_ShowDark.instantiate()
+			instance.position = self.position
+			var box = get_tree().get_first_node_in_group("Ability_box")
+			box.add_child(instance)
+			self.queue_free()
+		else:
+			print("Kein Player gefunden!")
+
+func _on_pressedFire() -> void:
+	if Global.expAmount >= addCost :
+		Global.expAmount -= addCost
+		var player_nodes = get_tree().get_nodes_in_group("player")
+		if player_nodes.size() > 0:
+			var player2 = player_nodes[0]
+
+			Global.learned_abilities["fireball"] = true
+			player2.fireBall = true  # <- nur wenn player gültig
+			player2.load_abilities()
+			var instance = UI_ShowFire.instantiate()
+			instance.position = self.position
+			var box = get_tree().get_first_node_in_group("Ability_box")
+			box.add_child(instance)
+			self.queue_free()
+		else:
+			print("Kein Player gefunden!")
+
+
+
+
+func _on_reste_ability_pressedResetAbilityFire() -> void:
+	var player_nodes = get_tree().get_nodes_in_group("player")
+	if player_nodes.size() > 0:
+		var player2 = player_nodes[0]
+		player2.fireBall = false 
+	if Global.learned_abilities.has("fireball"):
+		Global.learned_abilities.erase("fireball")
+
+
+		var instance = UI_ShowFire_Empthy.instantiate()
+		instance.position = self.position
+		var box = get_tree().get_first_node_in_group("Ability_box")
+		box.add_child(instance)
+		self.queue_free()
+	else:
+		print("Kein Player gefunden!")
+	Global.expAmount += addCost
+
+
+func _on_reste_ability_pressedResetAbilityDark() -> void:
+	var player_nodes = get_tree().get_nodes_in_group("player")
+	if player_nodes.size() > 0:
+		var player2 = player_nodes[0]
+		player2.darkBall = false 
+	if Global.learned_abilities.has("darkball"):
+		Global.learned_abilities.erase("darkball")
+
+
+		var instance = UI_ShowDark_Empthy.instantiate()
+		instance.position = self.position
+		var box = get_tree().get_first_node_in_group("Ability_box")
+		box.add_child(instance)
+		self.queue_free()
+	else:
+		print("Kein Player gefunden!")
+	Global.expAmount += addCost
+
+
+func _on_reste_ability_pressedResetAbilityCircle() -> void:
+	var player_nodes = get_tree().get_nodes_in_group("player")
+	if player_nodes.size() > 0:
+		var player2 = player_nodes[0]
+		player2.circleBall = false 
+	if Global.learned_abilities.has("circleball"):
+		Global.learned_abilities.erase("circleball")
+		var instance = UI_ShowCircle_Empthy.instantiate()
+		instance.position = self.position
+		var box = get_tree().get_first_node_in_group("Ability_box")
+		box.add_child(instance)
+		self.queue_free()
+	else:
+		print("Kein Player gefunden!")
+	Global.expAmount += addCost
+
+
+func _on_reste_ability_pressedResetAbilityAuto() -> void:
+	var player_nodes = get_tree().get_nodes_in_group("player")
+	if player_nodes.size() > 0:
+		var player2 = player_nodes[0]
+		player2.autoBall = false 
+	if Global.learned_abilities.has("auto"):
+		Global.learned_abilities.erase("auto")
+		var instance = UI_ShowAuto_Empthy.instantiate()
+		instance.position = self.position
+		var box = get_tree().get_first_node_in_group("Ability_box")
+		box.add_child(instance)
+		self.queue_free()
+	else:
+		print("Kein Player gefunden!")
+	Global.expAmount += addCost

@@ -63,6 +63,7 @@ radius = 3.5
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_2vyrw")
+speed = 150
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(2, 2)

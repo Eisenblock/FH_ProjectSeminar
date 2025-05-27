@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1oyiy7njsyqh"]
+[gd_scene load_steps=11 format=3 uid="uid://b1oyiy7njsyqh"]
 
 [ext_resource type="PackedScene" uid="uid://d4mkqathi37f0" path="res://Thrash/node_2rrrrrrrd.tscn" id="1_cuohc"]
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="2_4po2m"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="3_wpwh7"]
 [ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="4_qt1vt"]
-[ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="5_loklw"]
-[ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="6_ec570"]
 [ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://torch.tscn" id="7_mvi2t"]
 [ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://torch2.tscn" id="8_r2ltt"]
 
@@ -351,9 +349,6 @@ texture_filter = 1
 position = Vector2(47, -63)
 script = ExtResource("3_wpwh7")
 enemy_scene = ExtResource("4_qt1vt")
-enemy_10hp = ExtResource("4_qt1vt")
-enemy_30hp = ExtResource("5_loklw")
-enemy_50hp = ExtResource("6_ec570")
 isInCorridor = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]

@@ -25,6 +25,7 @@ var spawnUI
 var fireBall : bool = false 
 var circleBall : bool = false
 var darkBall : bool = false
+var autoBall : bool = false
 var bumerang : bool = false
 var attack_method: Callable
 
@@ -126,7 +127,7 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	
 	#ActivateAbilityAttr()
-	if !autoShootonCD :
+	if autoBall and !autoShootonCD :
 		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
 	
 	if fireBall and !fireShootonCD:
@@ -163,6 +164,7 @@ func spawnCircleShoot() :
 				instance.angle = i * angle_step  # Individueller Startwinkel
 				instance.distance = radius  # Optional
 				instance.player_node = self  # oder übergeben
+				instance.SetProjectile(Global.circleShootAttribute)
 				get_tree().root.add_child(instance)
 	else :
 			var instance = circleShootScene.instantiate()
@@ -374,9 +376,19 @@ func DoLifeReg():
 func load_abilities():
 	if Global.learned_abilities.has("fireball"):
 		fireBall = true
+	else :
+		fireBall = false
 	if Global.learned_abilities.has("circleball"):
 		circleBall = true
+	else :
+		circleBall = false
 	if Global.learned_abilities.has("darkball"):
 		darkBall = true
+	else :
+		darkBall = false
+	if Global.learned_abilities.has("auto"):
+		autoBall = true
+	else :
+		autoBall = false
 	if Global.learned_abilities.has("bumerang"):
 		bumerang = true

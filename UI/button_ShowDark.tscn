@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlob4e2hhd0kv"]
+[gd_scene load_steps=5 format=3 uid="uid://dlob4e2hhd0kv"]
 
 [ext_resource type="Texture2D" uid="uid://cfvtj7kuc15ai" path="res://Assets/New Piskel-1.png (4).png" id="1_evcr7"]
 [ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="2_evcr7"]
 [ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="3_qhh85"]
+[ext_resource type="FontFile" uid="uid://bm1g6w65ittlo" path="res://Assets/PixelOperator8.ttf" id="4_qhh85"]
 
 [node name="ButtonDmg" type="Button" groups=["keep"]]
 anchors_preset = 8
@@ -41,4 +42,14 @@ theme_override_font_sizes/font_size = 19
 text = "Show
 Dark"
 
+[node name="ResteAbility" type="Button" parent="."]
+process_mode = 3
+offset_left = -1.0
+offset_top = 74.0
+offset_right = 75.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("4_qhh85")
+text = "Reset"
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="ResteAbility" to="." method="_on_reste_ability_pressedResetAbilityDark"]

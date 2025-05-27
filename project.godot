@@ -38,6 +38,8 @@ pick_up=""
 keep=""
 NameAbility=""
 spell_uiGlobal=""
+player=""
+Ability_box=""
 
 [input]
 

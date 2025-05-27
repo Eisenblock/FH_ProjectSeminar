@@ -114,16 +114,15 @@ func _ready():
 		room.position = previous_exit.global_position - room_start.position
 	
 	#WeakEnemy
-	Global.enemyCount_small_min += 2
-	Global.enemyCount_small_max += 2
+	Global.enemyCount_small_min += 1
+	Global.enemyCount_small_max += 1
 	#MediumENemy
-	if Global.count_stage >= 3 :
-		Global.enemyCount_medium_min += 1
-		Global.enemyCount_medium_max += 1
+	Global.enemyCount_medium_min += 1
+	Global.enemyCount_medium_max += 1
 	#Highenemy
-	if Global.count_stage >=  5:
+	if Global.count_stage >=  1:
 		Global.enemyCount_High_min += 1
-		Global.enemyCount_High_max += 1
+		Global.enemyCount_High_max += 2
 	#More Rooms
 	max_rooms += 1
 	Global.global_maxRooms += 1

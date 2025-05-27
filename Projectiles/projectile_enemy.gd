@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var DmgText : PackedScene 
 var CDShot : bool = false
 var timerShot : float = 2
-var speed = 200
+@export var speed = 200
 var tempSpeed = 2
 var nameAnim : String = "walk_left"
 @export var dmg = 10

@@ -174,6 +174,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if FireBall_bool :
 			var instance = explodeScene.instantiate()
 			instance.position = global_position
+			instance.dmg = dmg
 			get_tree().root.add_child(instance)
 			enemy = area.get_parent()
 			#enemy.take_damage(dmg)

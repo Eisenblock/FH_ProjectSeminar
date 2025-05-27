@@ -1,9 +1,9 @@
 extends Area2D
 
-@export var enemy_scene: PackedScene 
-@export var enemy_10hp: PackedScene 
-@export var enemy_30hp: PackedScene 
-@export var enemy_50hp: PackedScene 
+@export var enemy_scene: PackedScene  = load("res://Enemy/Mediumenemy_tank.tscn") 
+var enemy_10hp: PackedScene = load("res://UI/Weakenemy.tscn") 
+var enemy_30hp: PackedScene = load("res://Enemy/Mediumenemy_tank.tscn") 
+var enemy_50hp: PackedScene = load("res://Enemy/Weakenemy_RAnge.tscn") 
 @export var enemy_10hp_range: PackedScene = preload("res://Enemy/Weakenemy_RAnge.tscn") 
 @export var isInCorridor : bool = false
 

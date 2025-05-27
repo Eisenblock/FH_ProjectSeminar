@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmusn6ot2jch8"]
+[gd_scene load_steps=7 format=3 uid="uid://dmusn6ot2jch8"]
 
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_2ts64"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_yjs36"]
 [ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_gqmoc"]
-[ext_resource type="PackedScene" uid="uid://cpnj2mh2nt6rx" path="res://Enemy/Mediumenemy.tscn" id="4_ntehb"]
-[ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="5_vmnte"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjs36"]
 texture = ExtResource("1_2ts64")
@@ -321,9 +319,6 @@ position = Vector2(465, -47)
 position = Vector2(47, -63)
 script = ExtResource("2_yjs36")
 enemy_scene = ExtResource("3_gqmoc")
-enemy_10hp = ExtResource("3_gqmoc")
-enemy_30hp = ExtResource("4_ntehb")
-enemy_50hp = ExtResource("5_vmnte")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-264, -185, 265, -188, 266, -54, 259, 232, -266, 238)

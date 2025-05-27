@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="3_aoqt7"]
 
 [node name="ButtonDmg" type="Button" groups=["keep"]]
-process_mode = 4
+process_mode = 3
 self_modulate = Color(1, 1, 1, 0.392157)
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,4 +44,4 @@ theme_override_font_sizes/font_size = 19
 text = "Show
 Fire"
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="." to="." method="_on_pressedFire"]
