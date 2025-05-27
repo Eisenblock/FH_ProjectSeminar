@@ -343,7 +343,6 @@ portal_scene_EDown = ExtResource("11_r13n0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -421,6 +420,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = 327.0
+offset_top = -60.0
+offset_right = 463.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -392.0
 offset_top = -120.0
 offset_right = -256.0
@@ -444,7 +459,7 @@ offset_right = 335.0
 offset_bottom = 165.0
 text = "None"
 
-[node name="SpawnSpellUI" parent="." instance=ExtResource("9_r13n0")]
+[node name="SpawnSpellUI" parent="." groups=["spell_uiGlobal"] instance=ExtResource("9_r13n0")]
 process_mode = 3
 position = Vector2(85, 470)
 
@@ -470,6 +485,7 @@ icon = ExtResource("10_4r4h2")
 script = ExtResource("12_xdaf7")
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 z_index = -1
 texture_filter = 1
 position = Vector2(790, 371)

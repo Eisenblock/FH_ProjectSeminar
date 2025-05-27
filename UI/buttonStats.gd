@@ -55,15 +55,13 @@ var availableAttributes = {
 	"tier1": {
 		"base_dmg": 2,    
 		"pierce"  : 1,  
-#		"size"  : 1,  
 		"more_projectiles": 1,   
 		"attack_speed": 0.2,     
 		"lifetime": 0.5,         
 			},
 	"tier2": {
 		"base_dmg": 5,      
-		"pierce"  : 2,  
-#		"size"  : 2,      
+		"pierce"  : 2,      
 		"more_projectiles": 2,   
 		"attack_speed": 0.5,     
 		"lifetime": 0.7,         
@@ -71,7 +69,6 @@ var availableAttributes = {
 	"tier3": {
 		"base_dmg": 10,    
 		"pierce"  : 3,  
-#		"size"  : 3,     
 		"more_projectiles": 3,   
 		"attack_speed": 0.8,     
 		"lifetime": 0.9,         
@@ -368,19 +365,24 @@ func CheckUPgradeTier():
 func SwitchAttrShow():
 	#Switch AttrShow
 	if autoShotButton_bool:
-		spawn_spell_ui.updateTextFieldsRef(Global.autoShootAttribute,"",Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
+		#spawn_spell_ui.updateTextFieldsRef(Global.autoShootAttribute,"",Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
+		spawn_spell_ui.SwitchAttribute(Global.autoShootAttribute,"auto")
 		current_spekk.text = "Auto"
 	if circleShoot_bool : 
-		spawn_spell_ui.updateTextFieldsRef(Global.circleShootAttribute,"",Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
+		#spawn_spell_ui.updateTextFieldsRef(Global.circleShootAttribute,"",Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
+		spawn_spell_ui.SwitchAttribute(Global.circleShootAttribute,"circleball")
 		current_spekk.text = "Circle"
 	if fireballShoot_bool : 
-		spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
+		#spawn_spell_ui.updateTextFieldsRef(Global.fireballShootAttribute,"",Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
+		spawn_spell_ui.SwitchAttribute(Global.fireballShootAttribute,"fireball")
 		current_spekk.text = "Fire"
 	if darkButton_bool : 
-		spawn_spell_ui.updateTextFieldsRef(Global.darkShootAttribute,"",Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
+		#spawn_spell_ui.updateTextFieldsRef(Global.darkShootAttribute,"",Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
+		spawn_spell_ui.SwitchAttribute(Global.darkShootAttribute,"darkball")
 		current_spekk.text = "Dark"
 	if chestButton_bool : 
-		spawn_spell_ui.updateTextFieldsRef(Global.ChestAttribute,"",Global.countAttrOnChest,UI_Chest,UI_Chest_Button)
+		#spawn_spell_ui.updateTextFieldsRef(Global.ChestAttribute,"",Global.countAttrOnChest,UI_Chest,UI_Chest_Button)
+		spawn_spell_ui.SwitchAttribute(Global.ChestAttribute,"chest")
 		current_spekk.text = "Chest"
 func _on_pressed() -> void:
 	#print("bUTTON geeeeeeeeeeeht")

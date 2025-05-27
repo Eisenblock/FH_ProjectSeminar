@@ -37,6 +37,7 @@ NavigationRegion2D=""
 pick_up=""
 keep=""
 NameAbility=""
+spell_uiGlobal=""
 
 [input]
 

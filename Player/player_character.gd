@@ -365,7 +365,7 @@ func UpdatePlayerAttr(dicRef : Dictionary):
 			life_reg += Global.ChestAttribute["Life_Reg"]
 	else :
 		life_reg = 0
-	print("All CHest Attr",health,armor,life_reg)
+	#print("All CHest Attr",health,armor,life_reg)
 
 func DoLifeReg():
 	if health < max_health :

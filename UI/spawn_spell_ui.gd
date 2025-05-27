@@ -7,13 +7,25 @@ extends Node2D
 @export var buttonObject : PackedScene
 @export var buttonObject2 : PackedScene
 @onready var label: Label = $"../CanvasLayer/Label"
+@onready var v_box_container_2: VBoxContainer = $"../CanvasLayer/VBoxContainer2"
+
+@export var UI_Details_text = load("res://UI/DetailsValue.tscn")
+@export var UI_Details_text_emphty = load("res://UI/DetailsValue_empthy.tscn")
 @export var UI_Auto : PackedScene = load("res://UI/controlAuto.tscn")
 @export var UI_Auto_Button : PackedScene = load("res://UI/button_dmgAuto.tscn")
 @export var UI_Auto_Show_Button : PackedScene = load("res://UI/button_ShowAuto.tscn")
+@export var UI_Auto_Show_Button_empty : PackedScene = load("res://UI/button_ShowAuto_empty.tscn")
 @export var UI_Fire_Show_Button : PackedScene = load("res://UI/button_ShowFire.tscn")
+@export var UI_Fire_Show_Button_empty : PackedScene = load("res://UI/button_ShowFire_empty.tscn")
 @export var UI_dark_Show_Button : PackedScene = load("res://UI/button_ShowDark.tscn")
+@export var UI_dark_Show_Button_empty : PackedScene = load("res://UI/button_Showdark_empty.tscn")
 @export var UI_Circle_Show_Button : PackedScene = load("res://UI/button_ShowCircle.tscn")
+@export var UI_circle_Show_Button_empty : PackedScene = load("res://UI/button_ShowCircle_empty.tscn")
 @export var UI_chest_Show_Button : PackedScene = load("res://UI/button_ShowChest.tscn")
+
+#Bool Track current Dic
+var current_Dic_name = ""
+var DicTier1 = {}
 var textInstances : Array 
 var last_attribute : Dictionary = {}  # Speichert das letzte globale Dictionary
 var current_attribute : Dictionary = {}  # Speichert das letzte globale Dictionary
@@ -23,6 +35,7 @@ var trackCircleAttrPos : int = -1
 var isInInterface : bool = false
 var i = 0
 var a = 0
+var b = 0
 #ppaceHolder
 var isSwitch : bool = false
 
@@ -39,23 +52,20 @@ var availableAttributes = {
 	"tier1": {
 		"base_dmg": 2,    
 		"pierce"  : 1,  
-		"size"  : 1,  
 		"more_projectiles": 1,   
 		"attack_speed": 0.2,     
 		"lifetime": 0.5,         
 			},
 	"tier2": {
 		"base_dmg": 4,      
-		"pierce"  : 2,  
-		"size"  : 2,      
+		"pierce"  : 2,     
 		"more_projectiles": 2,   
 		"attack_speed": 0.5,     
 		"lifetime": 0.7,         
 			},
 	"tier3": {
 		"base_dmg": 8,    
-		"pierce"  : 3,  
-		"size"  : 3,     
+		"pierce"  : 3,  	
 		"more_projectiles": 3,   
 		"attack_speed": 0.8,     
 		"lifetime": 0.9,         
@@ -78,18 +88,26 @@ var availableAttributes_Armor = {
 		"Life_Reg" : 0.4
 			}
 	}
-
 func _ready() -> void:
+	DoDetails()
 	current_attribute = Global.ChestAttribute
 	#updateTextFieldsRef(Global.autoShootAttribute, "autoShoot",Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
 	if Global.learned_abilities.has("fireball"):
 		SpawmButtonShow(UI_Fire_Show_Button)
+	else :
+		SpawmButtonShow(UI_Fire_Show_Button_empty)
 	if Global.learned_abilities.has("circleball"):
 		SpawmButtonShow(UI_Circle_Show_Button)
+	else :
+		SpawmButtonShow(UI_circle_Show_Button_empty)
 	if Global.learned_abilities.has("darkball"):
 		SpawmButtonShow(UI_dark_Show_Button)
+	else :
+		SpawmButtonShow(UI_dark_Show_Button_empty)
 	if Global.learned_abilities.has("auto"):
 		SpawmButtonShow(UI_Auto_Show_Button)
+	else :
+		SpawmButtonShow(UI_Auto_Show_Button_empty)
 
 	#updateTextFieldsRef(current_attribute,"autoShoot",Global.countAttrOnAuto)
 
@@ -154,7 +172,7 @@ func areDictionariesEqual(dict1: Dictionary, dict2: Dictionary) -> bool:
 func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , sceneRef : PackedScene, buttonRef : PackedScene):
 	# Entfernen von allen vorherigen Textobjekten
 	var button_edit
-	
+	DoDetails()
 	for child in v_box_container.get_children():
 		child.queue_free()
 	trackAutoAttrPos = 0
@@ -252,6 +270,102 @@ func _process(delta: float) -> void:
 			label.text = "CircleShoot"
 """
 
-func SwitchAttribute(dicRef : Dictionary, name : String, countValue : int):
+func SwitchAttribute(dicRef : Dictionary, name : String):
 	current_attribute = dicRef
+	current_Dic_name = name
+	DoDetails()
 	#updateTextFieldsRef(dicRef,name,countValue)
+	
+
+func DoDetails():
+	print("tessssssssssst-------------------------",current_Dic_name)
+	var children = v_box_container_2.get_children()
+	for child in children :
+		child.queue_free()
+	DicTier1 = availableAttributes["tier1"].duplicate()
+	b = 0
+	for attr in DicTier1.keys():
+		var details_Object
+		match current_Dic_name :
+			"auto":
+				showAttributes(Global.autoShootAttribute)
+				if !Global.autoShootAttribute.has(attr) :
+					details_Object = UI_Details_text_emphty.instantiate()
+				else :
+					details_Object = UI_Details_text.instantiate()
+				var nodeDetailText = details_Object.get_node("Details_Text")
+				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+				details_Object.current_attr = attr
+				details_Object.current_Dic = current_Dic_name
+				details_Object.posInDic = b
+				b+=1
+				#print("tessssssssssst-------------------------auto")
+			"fireball":
+				showAttributes(Global.fireballShootAttribute)
+				if !Global.fireballShootAttribute.has(attr) :
+					details_Object = UI_Details_text_emphty.instantiate()
+				else :
+					details_Object = UI_Details_text.instantiate()
+				var nodeDetailText = details_Object.get_node("Details_Text")
+				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+				details_Object.current_attr = attr
+				details_Object.current_Dic = current_Dic_name
+				details_Object.posInDic = b
+				b+=1
+				#print("tessssssssssst-------------------------fire")
+			"darkball":
+				showAttributes(Global.darkShootAttribute)
+				if !Global.darkShootAttribute.has(attr) :
+					details_Object = UI_Details_text_emphty.instantiate()
+				else :
+					details_Object = UI_Details_text.instantiate()
+				var nodeDetailText = details_Object.get_node("Details_Text")
+				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+				details_Object.current_attr = attr
+				details_Object.current_Dic = current_Dic_name
+				details_Object.posInDic = b
+				b+=1
+				#print("tessssssssssst-------------------------dark")
+			"circleball":
+				showAttributes(Global.circleShootAttribute)
+				if !Global.circleShootAttribute.has(attr) :
+					details_Object = UI_Details_text_emphty.instantiate()
+				else :
+					details_Object = UI_Details_text.instantiate()
+				var nodeDetailText = details_Object.get_node("Details_Text")
+				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+				details_Object.current_attr = attr
+				details_Object.current_Dic = current_Dic_name
+				details_Object.posInDic = b
+				b+=1
+				#print("tessssssssssst-------------------------circle")
+			"chest":
+				showAttributes(Global.ChestAttribute)
+				if !Global.ChestAttribute.has(attr) :
+					details_Object = UI_Details_text_emphty.instantiate()
+				else :
+					details_Object = UI_Details_text.instantiate()
+				var nodeDetailText = details_Object.get_node("Details_Text")
+				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+				details_Object.current_attr = attr
+				details_Object.current_Dic = current_Dic_name
+				details_Object.posInDic = b
+				b+=1
+		v_box_container_2.add_child(details_Object)
+	printAll()
+
+func showAttributes(attr_dict: Dictionary):
+	DicTier1.clear()
+	DicTier1 = availableAttributes["tier1"].duplicate()
+
+	for key in attr_dict.keys():
+		if DicTier1.has(key):
+			# Überschreibt den Wert aus tier1 mit dem Benutzerwert
+			DicTier1[key] = attr_dict[key]
+
+	# Ausgabe oder UI-Anzeige aller Werte
+
+func printAll():
+	print("___________________________------------______________________")
+	for key in DicTier1.keys():
+		print("%s: %s" % [key, str(DicTier1[key])])

@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://8k7gcopam8o2"]
+
+[ext_resource type="Texture2D" uid="uid://cfvtj7kuc15ai" path="res://Assets/New Piskel-1.png (4).png" id="1_bf1c4"]
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="2_mqln1"]
+[ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="3_2ddja"]
+
+[node name="ButtonDmg" type="Button" groups=["keep"]]
+process_mode = 4
+self_modulate = Color(1, 1, 1, 0.392157)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+icon = ExtResource("1_bf1c4")
+script = ExtResource("2_mqln1")
+fireballShoot_bool = true
+switchAttrButton_bool = true
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -25.5
+offset_right = 24.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_2ddja")
+theme_override_font_sizes/font_size = 19
+text = "Show
+Auto"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
