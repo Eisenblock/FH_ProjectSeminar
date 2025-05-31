@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1ldjg6hihw2d"]
+
+[ext_resource type="Texture2D" uid="uid://bh8n5wa4061jp" path="res://Assets/New Piskel-1.png (3).png" id="1_28vn7"]
+[ext_resource type="FontFile" uid="uid://bm1g6w65ittlo" path="res://Assets/PixelOperator8.ttf" id="2_k2vha"]
+[ext_resource type="Script" uid="uid://cgyjgvokxooyw" path="res://NichtSortiert/button_GameStates.gd" id="5_28vn7"]
+[ext_resource type="Script" uid="uid://dorukqliqrqi" path="res://NichtSortiert/enemy_kills_GameOver.gd" id="5_k2vha"]
+[ext_resource type="Script" uid="uid://bgopni4rne7dq" path="res://NichtSortiert/stage_GameOver.gd" id="6_k2vha"]
+[ext_resource type="Texture2D" uid="uid://c315p41v78ssm" path="res://Assets/backgroundgame.jpg" id="7_k2vha"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewPiskel-1_png(3)" type="Sprite2D" parent="."]
+position = Vector2(672, 427)
+scale = Vector2(17.6274, 13.7978)
+texture = ExtResource("1_28vn7")
+
+[node name="NewPiskel-1_png(3)2" type="Sprite2D" parent="."]
+position = Vector2(672, 427)
+scale = Vector2(17.6274, 13.7978)
+texture = ExtResource("1_28vn7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 302.0
+offset_right = 710.0
+offset_bottom = 556.0
+theme_override_constants/separation = 100
+
+[node name="EnemyKills" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k2vha")
+theme_override_font_sizes/font_size = 25
+text = "Score : 10"
+script = ExtResource("5_k2vha")
+
+[node name="Stage" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k2vha")
+theme_override_font_sizes/font_size = 25
+text = "Stage : 10"
+script = ExtResource("6_k2vha")
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k2vha")
+theme_override_font_sizes/font_size = 25
+text = "Reload"
+script = ExtResource("5_28vn7")
+
+[node name="GameOver" type="Label" parent="."]
+layout_mode = 2
+offset_left = 484.0
+offset_top = 88.0
+offset_right = 847.0
+offset_bottom = 139.0
+theme_override_fonts/font = ExtResource("2_k2vha")
+theme_override_font_sizes/font_size = 50
+text = "GameOver"
+
+[node name="Backgroundgame" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(590, 365)
+scale = Vector2(3.97303, 4.30668)
+texture = ExtResource("7_k2vha")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]

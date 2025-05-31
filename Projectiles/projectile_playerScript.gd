@@ -16,7 +16,8 @@ extends Area2D
 @onready var explode: CollisionShape2D = $Explode
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
+@export var crit_chance = 0
+@export var crit_dmg = 0
 @export var max_chains = 3
 @export var countPiece = 0
 @export var sizeValue : float = 0
@@ -140,12 +141,16 @@ func SetAttributes():
 		dmg = dmg + dmg * (attributes["more_dmg_percent"]/100)
 	if "lifetime" in attributes :
 		lifetime += attributes["lifetime"]
-	if "pierce" in attributes :
-		countPiece = attributes["pierce"]
+	if "pierce_count" in attributes :
+		countPiece = attributes["pierce_count"]
 		print(countPiece)
 	if "size" in attributes :
 		sizeValue = attributes["size"] 
 		print(sizeValue)
+	if "crit_chance" in attributes :
+		crit_chance = attributes["crit_chance"]
+	if "crit_dmg" in attributes :
+		crit_dmg = attributes["crit_dmg"]
 	#print_all_attributes()
 
 func addAttribute(name :String , value : float):
@@ -171,6 +176,13 @@ func _on_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
 	if area.is_in_group("enemy") and !enemy.isDead :
 		#print("Hit Enemy")
+		var randCritValue = randi_range(0,100)
+		if randCritValue <= crit_chance :
+			dmg = dmg * 2
+			dmg = dmg * (1.0 + crit_dmg / 100.0)
+			print("----------------CritDmg  ", dmg)
+			enemy = area.get_parent()
+			enemy.GotCritTrue()
 		if FireBall_bool :
 			var instance = explodeScene.instantiate()
 			instance.position = global_position

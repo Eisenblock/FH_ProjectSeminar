@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu0pqlx20eg1c"]
+
+[ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://NichtSortiert/game_state.gd" id="1_1wu3i"]
+[ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_yrang"]
+[ext_resource type="PackedScene" uid="uid://pgawfm3o633l" path="res://NichtSortiert/PrototypeMap_Left_RIght_PLayer.tscn" id="3_i5ki7"]
+[ext_resource type="PackedScene" uid="uid://cehivs2xlvone" path="res://BiggerAreas/Trash/BiggerArea_Left_RIght.tscn" id="4_1wu3i"]
+[ext_resource type="PackedScene" uid="uid://epqk2tnyaguq" path="res://BiggerAreas/Trash/BiggerArea_Left_DOwn.tscn" id="5_yrang"]
+[ext_resource type="PackedScene" uid="uid://dmu0upocejipt" path="res://BiggerAreas/Trash/Corridor_RIght_RIght.tscn" id="6_i5ki7"]
+[ext_resource type="PackedScene" uid="uid://bdt28yaj0dakq" path="res://BiggerAreas/Trash/Corridor_UP_Right.tscn" id="7_8yk0t"]
+[ext_resource type="PackedScene" uid="uid://dyfkjmen883pt" path="res://NichtSortiert/UI_Button.tscn" id="8_x7j7c"]
+[ext_resource type="PackedScene" uid="uid://duhefaem2hp7q" path="res://UI/UI_SkillSystem/button_dmgAuto.tscn" id="9_0wia7"]
+[ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="10_utw11"]
+[ext_resource type="PackedScene" uid="uid://ceu5divy6t8jj" path="res://NichtSortiert/Pick_UP.tscn" id="11_6fvro"]
+
+
+[node name="GameState" type="Node2D"]
+script = ExtResource("1_1wu3i")
+room_scene = ExtResource("2_yrang")
+max_rooms = 1
+room_scene_Start = Array[PackedScene]([ExtResource("3_i5ki7")])
+room_scene_ERight = Array[PackedScene]([ExtResource("4_1wu3i")])
+room_scene_EDown = Array[PackedScene]([ExtResource("5_yrang")])
+corridor_scene_ERight = Array[PackedScene]([ExtResource("6_i5ki7")])
+corridor_scene_EDown = Array[PackedScene]([ExtResource("7_8yk0t")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 389.0
+offset_top = 195.0
+offset_right = 429.0
+offset_bottom = 235.0
+
+[node name="Control2" parent="CanvasLayer" instance=ExtResource("8_x7j7c")]
+offset_left = 829.0
+offset_top = 18.0
+offset_right = 869.0
+offset_bottom = 58.0
+
+[node name="ButtonDmg" parent="CanvasLayer/Control2" instance=ExtResource("9_0wia7")]
+layout_mode = 0
+offset_left = -215.0
+offset_top = 18.0
+offset_right = -165.0
+offset_bottom = 68.0
+text = "auto"
+
+[node name="ButtonDmg2" parent="CanvasLayer/Control2" instance=ExtResource("9_0wia7")]
+layout_mode = 0
+offset_left = -141.0
+offset_top = 22.0
+offset_right = -91.0
+offset_bottom = 72.0
+text = "circle"
+autoShotButton_bool = false
+circleShoot_bool = true
+
+[node name="ButtonDmg3" parent="CanvasLayer/Control2" instance=ExtResource("9_0wia7")]
+layout_mode = 0
+offset_left = -71.0
+offset_top = 22.0
+offset_right = -21.0
+offset_bottom = 72.0
+text = "Chest"
+autoShotButton_bool = false
+chestButton_bool = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 967.0
+offset_top = 114.0
+offset_right = 1007.0
+offset_bottom = 137.0
+
+[node name="SpawnSpellUI" parent="." instance=ExtResource("10_utw11")]
+position = Vector2(85, 470)
+
+[node name="Node2D" parent="." instance=ExtResource("11_6fvro")]
+position = Vector2(-159, -127)
+fireball_boolPIckUP = true
+
+[node name="Node2D2" parent="." instance=ExtResource("11_6fvro")]
+position = Vector2(-46, -138)
+circleball_boolPickUp = true

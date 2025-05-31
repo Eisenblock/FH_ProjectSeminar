@@ -20,7 +20,9 @@ var spawnUI
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 @onready var canvas_layer_2: CanvasLayer = $CanvasLayer2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var progress_bar_2: ProgressBar = $ProgressBar2
+var is_immune = false
+var immune_timer: Timer
 #Spell Active Bool
 var fireBall : bool = false 
 var circleBall : bool = false
@@ -43,11 +45,11 @@ var timerbumerangShoot : Timer
 #var life_RegStarted_bool : bool = false
 var dash_speed = 500
 var dash_time = 0.2
-var dash_cooldown = 1.0
+var dash_cooldown = 2
 
 var is_dashing = false
 var dash_timer = 0.0
-var dash_cooldown_timer = 0.0
+var dash_cooldown_timer = 2
 var projectileAmount = 1
 var countProjectile = 0
 
@@ -64,6 +66,8 @@ func _ready() -> void:
 	if healthBar :
 		healthBar.max_value = max_health
 		healthBar.value = health
+	if progress_bar_2 :
+		progress_bar_2.max_value = dash_cooldown
 	#Start Life Reg
 	timerLifeReg = Timer.new()
 	timerLifeReg.wait_time = 1
@@ -103,10 +107,11 @@ func _physics_process(delta):
 	else:
 		animated_sprite_2d.stop()
 	# Dash starten
-	if Input.is_action_just_pressed("dash") and dash_cooldown_timer <= 0 and direction != Vector2.ZERO:
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer >= 2 and direction != Vector2.ZERO:
 		is_dashing = true
+		is_immune  = true
 		dash_timer = dash_time
-		dash_cooldown_timer = dash_cooldown
+		dash_cooldown_timer = 0
 		velocity = direction * dash_speed
 	else:
 		# Normal bewegen, wenn nicht dashing
@@ -117,10 +122,11 @@ func _physics_process(delta):
 		dash_timer -= delta
 		if dash_timer <= 0:
 			is_dashing = false
+			is_immune  = false
 
 	# Cooldown runterzählen
-	if dash_cooldown_timer > 0:
-		dash_cooldown_timer -= delta
+	if dash_cooldown_timer <= 2:
+		dash_cooldown_timer += delta
 	move_and_slide()
 	
 
@@ -148,6 +154,8 @@ func _process(delta: float) -> void:
 	if healthBar :
 		health = Global.life_player
 		healthBar.value = health
+	if progress_bar_2 :
+		progress_bar_2.value = dash_cooldown_timer
 	#camera_2d.position = global_position
 
 func spawnCircleShoot() :  
@@ -218,9 +226,9 @@ func SpawnBumerangBall():
 func SpawnAllShots(sceneShot_ref : PackedScene , dic_ref : Dictionary ):
 	var instance
 	
-	if dic_ref.has("more_projectiles") :
+	if dic_ref.has("count") :
 		countProjectile = 0
-		var size = dic_ref["more_projectiles"] + projectileAmount
+		var size = dic_ref["count"] + projectileAmount
 		var spread_degrees = 8  # Gesamtwinkel z. B. 30°
 		var spread_radians = deg_to_rad(spread_degrees)
 		var half_spread = spread_radians / 2
@@ -262,13 +270,20 @@ func _on_button_pressed() -> void:
 	pass # Replace with function body.
 
 func take_damage(amount) :
-	health -= amount
-	Global.life_player = health
-	self.modulate = Color.RED
-	await get_tree().create_timer(0.2).timeout
-	self.modulate = Color.WHITE
-	if health <= 0:
-		spawnUI.DoGameOver()
+	if !is_immune :
+		health -= amount
+		Global.life_player = health
+		animated_sprite_2d.modulate = Color.RED
+		is_immune = true
+		immune_timer = Timer.new()
+		immune_timer.wait_time = 0.2
+		immune_timer.one_shot = true
+		immune_timer.timeout.connect(_end_immunity)
+		add_child(immune_timer)
+		immune_timer.start()
+		if health <= 0:
+			Global.ResetValues()
+			var error = get_tree().change_scene_to_file("res://NichtSortiert/game_over.tscn")
 
 
 func resetCDAuto():
@@ -299,15 +314,14 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	var timerRef = null
 	timerRef = Timer.new()
 	add_child(timerRef)
-	if dicRef.has("attack_speed"):
+	if dicRef.has("cooldown"):
 		var temp_instance = shotSceneRef.instantiate()
-		var cast_time = temp_instance.castTime - dicRef["attack_speed"]
+		var cast_time = temp_instance.castTime - dicRef["cooldown"]
 		timerRef.wait_time = cast_time
 		temp_instance.queue_free() 
 	else :
 		var temp_instance = shotSceneRef.instantiate()
 		var cast_time = temp_instance.castTime
-		#print(cast_time)
 		temp_instance.queue_free()
 		timerRef.wait_time = cast_time 
 	timerRef.one_shot = true
@@ -392,3 +406,10 @@ func load_abilities():
 		autoBall = false
 	if Global.learned_abilities.has("bumerang"):
 		bumerang = true
+
+func _end_immunity():
+	is_immune = false
+	animated_sprite_2d.modulate = Color.WHITE
+	immune_timer.queue_free()  # Timer löschen
+	immune_timer = null
+	print("Immunität ist vorbei")

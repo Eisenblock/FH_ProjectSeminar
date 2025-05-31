@@ -190,7 +190,7 @@ script = ExtResource("1_gid26")
 MeeleEnemy = true
 DmgText = ExtResource("2_so86u")
 dmg = 5
-health = 40
+health = 100
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 

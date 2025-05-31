@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://drlvu8encyq73"]
+
+[ext_resource type="Script" uid="uid://if6ry0kk831m" path="res://NichtSortiert/pick_up.gd" id="1_6g0mf"]
+[ext_resource type="Texture2D" uid="uid://c5qm414vdskw6" path="res://Assets/Spells/pixelart_spells/Pixelart Spells/PNG Files/Rock Sling.png" id="2_2qmbp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4uy52"]
+size = Vector2(25, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfsso"]
+atlas = ExtResource("2_2qmbp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4lbt3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfsso")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6g0mf")
+circleball_boolPickUp = true
+
+[node name="PickUP" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUP"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_4uy52")
+
+[node name="ColorRect" type="ColorRect" parent="PickUP"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -11.0
+offset_right = 27.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.60296, 0.528704)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.999999, -0.5)
+scale = Vector2(1.375, 1.1875)
+sprite_frames = SubResource("SpriteFrames_4lbt3")
+
+[connection signal="area_entered" from="PickUP" to="." method="_on_pick_up_area_entered"]
+[connection signal="body_entered" from="PickUP" to="." method="_on_pick_up_body_entered"]

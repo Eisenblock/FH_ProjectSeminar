@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://uxs1xo20f07d"]
+
+[ext_resource type="Texture2D" uid="uid://cfvtj7kuc15ai" path="res://Assets/New Piskel-1.png (4).png" id="1_2xs31"]
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="2_c78ey"]
+[ext_resource type="FontFile" uid="uid://dtl0li6q8dgay" path="res://Assets/PixelifySans-VariableFont_wght.ttf" id="3_g26ke"]
+[ext_resource type="FontFile" uid="uid://bm1g6w65ittlo" path="res://Assets/PixelOperator8.ttf" id="4_jb0gb"]
+
+[node name="ButtonDmg" type="Button" groups=["keep"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+icon = ExtResource("1_2xs31")
+script = ExtResource("2_c78ey")
+fireballShoot_bool = true
+switchAttrButton_bool = true
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -25.5
+offset_right = 24.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_g26ke")
+theme_override_font_sizes/font_size = 19
+text = "Show
+Fire"
+
+[node name="ResteAbility" type="Button" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = -1.0
+offset_top = 74.0
+offset_right = 75.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("4_jb0gb")
+text = "Reset"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="ResteAbility" to="." method="_on_reste_ability_pressedResetAbilityFire"]

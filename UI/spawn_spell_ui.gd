@@ -6,23 +6,24 @@ extends Node2D
 @export var CircleObjectUI : PackedScene
 @export var buttonObject : PackedScene
 @export var buttonObject2 : PackedScene
-@onready var label: Label = $"../CanvasLayer/Label"
+@onready var exp_points: Label = $"../CanvasLayer/ExpPoints"
 @onready var v_box_container_2: VBoxContainer = $"../CanvasLayer/VBoxContainer2"
 
-@export var UI_Details_text = load("res://UI/DetailsValue.tscn")
-@export var UI_Details_text_emphty = load("res://UI/DetailsValue_empthy.tscn")
+@export var UI_Details_text = load("res://UI/UI_SkillSystem/DetailsValue.tscn")
+@export var UI_Details_text_emphty = load("res://UI/UI_SkillSystem/DetailsValue_empthy.tscn")
 @export var UI_Auto : PackedScene = load("res://UI/controlAuto.tscn")
 @export var UI_Auto_Button : PackedScene = load("res://UI/button_dmgAuto.tscn")
-@export var UI_Auto_Show_Button : PackedScene = load("res://UI/button_ShowAuto.tscn")
-@export var UI_Auto_Show_Button_empty : PackedScene = load("res://UI/button_ShowAuto_empty.tscn")
-@export var UI_Fire_Show_Button : PackedScene = load("res://UI/button_ShowFire.tscn")
-@export var UI_Fire_Show_Button_empty : PackedScene = load("res://UI/button_ShowFire_empty.tscn")
-@export var UI_dark_Show_Button : PackedScene = load("res://UI/button_ShowDark.tscn")
-@export var UI_dark_Show_Button_empty : PackedScene = load("res://UI/button_Showdark_empty.tscn")
-@export var UI_Circle_Show_Button : PackedScene = load("res://UI/button_ShowCircle.tscn")
-@export var UI_circle_Show_Button_empty : PackedScene = load("res://UI/button_ShowCircle_empty.tscn")
-@export var UI_chest_Show_Button : PackedScene = load("res://UI/button_ShowChest.tscn")
+@export var UI_Auto_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowAuto.tscn")
+@export var UI_Auto_Show_Button_empty : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowAuto_empty.tscn")
+@export var UI_Fire_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowFire.tscn")
+@export var UI_Fire_Show_Button_empty : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowFire_empty.tscn")
+@export var UI_dark_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowDark.tscn")
+@export var UI_dark_Show_Button_empty : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_Showdark_empty.tscn")
+@export var UI_Circle_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle.tscn")
+@export var UI_circle_Show_Button_empty : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle_empty.tscn")
+@export var UI_chest_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowChest.tscn")
 var upgradeCost = [5,10,"Max"]
+var upgradeCost_higher = [10,20,"Max"]
 #Bool Track current Dic
 var current_Dic_name = ""
 var DicTier1 = {}
@@ -48,30 +49,6 @@ var DicTier2
 @onready var directional_light_2d: DirectionalLight2D = $"../DirectionalLight2D"
 
 
-var availableAttributes = {
-	
-	"tier1": {
-		"base_dmg": 2,    
-		"pierce"  : 1,  
-		"more_projectiles": 1,   
-		"attack_speed": 0.2,     
-		"lifetime": 0.5,         
-			},
-	"tier2": {
-		"base_dmg": 5,      
-		"pierce"  : 2,     
-		"more_projectiles": 2,   
-		"attack_speed": 0.5,     
-		"lifetime": 0.7,         
-			},
-	"tier3": {
-		"base_dmg": 10,    
-		"pierce"  : 3,  	
-		"more_projectiles": 3,   
-		"attack_speed": 0.8,     
-		"lifetime": 0.9,         
-			}
-	}
 var availableAttributes_Armor = {
 	"tier1": {
 		"Health" : 15,
@@ -198,12 +175,12 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 			button_edit.z_index = 1
 			button_edit2.z_index = 1
 			trackAutoAttrPos += 1
-			if availableAttributes.has(key):
-				if availableAttributes["tier1"][key] == dicRef[key]:
+			if Global.availableAttributes.has(key):
+				if Global.availableAttributes["tier1"][key] == dicRef[key]:
 					button_edit.upgradeCost = 10
-				if availableAttributes["tier2"][key] == dicRef[key]:
+				if Global.availableAttributes["tier2"][key] == dicRef[key]:
 					button_edit.upgradeCost = 15
-				if availableAttributes["tier3"][key] == dicRef[key]:
+				if Global.availableAttributes["tier3"][key] == dicRef[key]:
 					button_edit.upgradeCost = 0
 			if availableAttributes_Armor.has(key) :
 				if availableAttributes_Armor["tier1"][key] == dicRef[key]:
@@ -237,14 +214,7 @@ func updateTextFieldsRef(dicRef : Dictionary,name : String , countAttr : int , s
 	last_attribute = dicRef
 
 func _process(delta: float) -> void:
-	#if isSwitch :
-	#	!areDictionariesEqual(Global.autoShootAttribute,last_attribute)
-	#	updateTextFieldsRef(Global.autoShootAttribute, "autoShoot")
-	#else :
-	#	!areDictionariesEqual(Global.circleShootAttribute,last_attribute)
-	#	updateTextFieldsRef(Global.circleShootAttribute, "autoShoot")
-	var valuestr = Global.expAmount
-	label.text = str(valuestr)
+	exp_points.text = str(Global.expAmount)
 	
 	if Input.is_action_just_pressed("InterfacePlayer"):
 		for child in get_children():
@@ -280,109 +250,91 @@ func SwitchAttribute(dicRef : Dictionary, name : String):
 
 func DoDetails():
 	print("tessssssssssst-------------------------",current_Dic_name)
+	var details_Object
 	var children = v_box_container_2.get_children()
 	for child in children :
 		child.queue_free()
-	DicTier1 = availableAttributes["tier1"].duplicate()
+	DicTier1 = Global.availableAttributes["tier1"].duplicate()
 	b = 0
+	match current_Dic_name :
+		"auto" :
+			PrintActiveAttr(Global.autoShootAttribute)
+		"fireball" :
+			PrintActiveAttr(Global.fireballShootAttribute)
+		"circleball" :
+			PrintActiveAttr(Global.circleShootAttribute)
+		"darkball" :
+			PrintActiveAttr(Global.darkShootAttribute)
 	for attr in DicTier1.keys():
-		var details_Object
 		match current_Dic_name :
 			"auto":
 				showAttributes(Global.autoShootAttribute)
-				if !Global.autoShootAttribute.has(attr) :
+				if  !Global.autoShootAttribute.has(attr) :
 					details_Object = UI_Details_text_emphty.instantiate()
-				else :
-					details_Object = UI_Details_text.instantiate()
-					var nodeUpgradeButton = details_Object.get_node("HighetTier")
-					DicTier2 = availableAttributes["tier2"].duplicate()
-					checkHigherTier(Global.autoShootAttribute,attr)
-					if availableAttributes["tier3"].has(attr) and availableAttributes["tier3"][attr] == DicTier1[attr]:
-						nodeUpgradeButton.text = "Max"
-						nodeUpgradeButton.set_process(false)
-						nodeUpgradeButton.release_focus()
-						nodeUpgradeButton.focus_mode = Control.FOCUS_NONE
-						nodeUpgradeButton.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					else:
-						nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
-					details_Object.posInDic = b
-					b+=1
-				var nodeDetailText = details_Object.get_node("Details_Text")
-				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
-				details_Object.current_attr = attr
-				details_Object.current_Dic = current_Dic_name
+					var nodeDetailText = details_Object.get_node("Details_Text")
+					var addButton = details_Object.get_node("AddAttr")
+					if addButton :
+						if attr == "count" or attr == "pierce_count" :
+							details_Object.addCost = 8
+						else :
+							details_Object.addCost = 4
+					if attr == "cooldown" :
+						nodeDetailText.text = "%s: %s s" % [attr, str(DicTier1[attr])]
+					else :
+						nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+					details_Object.current_attr = attr
+					details_Object.current_Dic = current_Dic_name
 			"fireball":
 				showAttributes(Global.fireballShootAttribute)
-				if !Global.fireballShootAttribute.has(attr) :
+				if  !Global.fireballShootAttribute.has(attr) :
 					details_Object = UI_Details_text_emphty.instantiate()
-				else :
-					details_Object = UI_Details_text.instantiate()
-					var nodeUpgradeButton = details_Object.get_node("HighetTier")
-					DicTier2 = availableAttributes["tier2"].duplicate()
-					checkHigherTier(Global.fireballShootAttribute,attr)
-					if availableAttributes["tier3"].has(attr) and availableAttributes["tier3"][attr] == DicTier1[attr]:
-						nodeUpgradeButton.text = "Max"
-						nodeUpgradeButton.set_process(false)
-						nodeUpgradeButton.release_focus()
-						nodeUpgradeButton.focus_mode = Control.FOCUS_NONE
-						nodeUpgradeButton.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					else:
-						nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
-					details_Object.posInDic = b
-					b+=1
-				var nodeDetailText = details_Object.get_node("Details_Text")
-				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
-				details_Object.current_attr = attr
-				details_Object.current_Dic = current_Dic_name
-				#print("tessssssssssst-------------------------fire")
+					var nodeDetailText = details_Object.get_node("Details_Text")
+					var addButton = details_Object.get_node("AddAttr")
+					if addButton :
+						if attr == "count" or attr == "pierce_count" :
+							details_Object.addCost = 8
+						else :
+							details_Object.addCost = 4
+					if attr == "cooldown" :
+						nodeDetailText.text = "%s: %s s" % [attr, str(DicTier1[attr])]
+					else :
+						nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+					details_Object.current_attr = attr
+					details_Object.current_Dic = current_Dic_name
 			"darkball":
 				showAttributes(Global.darkShootAttribute)
-				if !Global.darkShootAttribute.has(attr) :
+				if  !Global.darkShootAttribute.has(attr) :
 					details_Object = UI_Details_text_emphty.instantiate()
-				else :
-					details_Object = UI_Details_text.instantiate()
-					var nodeUpgradeButton = details_Object.get_node("HighetTier")
-					DicTier2 = availableAttributes["tier2"].duplicate()
-					checkHigherTier(Global.darkShootAttribute,attr)
-					if availableAttributes["tier3"].has(attr) and availableAttributes["tier3"][attr] == DicTier1[attr]:
-						nodeUpgradeButton.text = "Max"
-						nodeUpgradeButton.set_process(false)
-						nodeUpgradeButton.release_focus()
-						nodeUpgradeButton.focus_mode = Control.FOCUS_NONE
-						nodeUpgradeButton.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					else:
-						nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
-					details_Object.posInDic = b
-					b+=1
-				var nodeDetailText = details_Object.get_node("Details_Text")
-				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
-				details_Object.current_attr = attr
-				details_Object.current_Dic = current_Dic_name
-				#print("tessssssssssst-------------------------dark")
+					var nodeDetailText = details_Object.get_node("Details_Text")
+					var addButton = details_Object.get_node("AddAttr")
+					if addButton :
+						if attr == "count" or attr == "pierce_count" :
+							details_Object.addCost = 8
+						else :
+							details_Object.addCost = 4
+					if attr == "cooldown" :
+						nodeDetailText.text = "%s: %s s" % [attr, str(DicTier1[attr])]
+					else :
+						nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+					details_Object.current_attr = attr
+					details_Object.current_Dic = current_Dic_name
 			"circleball":
 				showAttributes(Global.circleShootAttribute)
-				if !Global.circleShootAttribute.has(attr) :
+				if  !Global.circleShootAttribute.has(attr) :
 					details_Object = UI_Details_text_emphty.instantiate()
-				else :
-					details_Object = UI_Details_text.instantiate()
-					var nodeUpgradeButton = details_Object.get_node("HighetTier")
-					DicTier2 = availableAttributes["tier2"].duplicate()
-					checkHigherTier(Global.circleShootAttribute,attr)
-					if availableAttributes["tier3"].has(attr) and availableAttributes["tier3"][attr] == DicTier1[attr]:
-						nodeUpgradeButton.text = "Max"
-						nodeUpgradeButton.set_process(false)
-						nodeUpgradeButton.release_focus()
-						nodeUpgradeButton.focus_mode = Control.FOCUS_NONE
-						nodeUpgradeButton.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					else:
-						nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
-					details_Object.posInDic = b
-					b+=1
-				var nodeDetailText = details_Object.get_node("Details_Text")
-				nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
-				details_Object.current_attr = attr
-				details_Object.current_Dic = current_Dic_name
-				#print("tessssssssssst-------------------------circle")
+					var nodeDetailText = details_Object.get_node("Details_Text")
+					var addButton = details_Object.get_node("AddAttr")
+					if addButton :
+						if attr == "count" or attr == "pierce_count" :
+							details_Object.addCost = 8
+						else :
+							details_Object.addCost = 4
+					if attr == "cooldown" :
+						nodeDetailText.text = "%s: %s s" % [attr, str(DicTier1[attr])]
+					else :
+						nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+					details_Object.current_attr = attr
+					details_Object.current_Dic = current_Dic_name
 			"chest":
 				showAttributes(Global.ChestAttribute)
 				if !Global.ChestAttribute.has(attr) :
@@ -390,9 +342,9 @@ func DoDetails():
 				else :
 					details_Object = UI_Details_text.instantiate()
 					var nodeUpgradeButton = details_Object.get_node("HighetTier")
-					DicTier2 = availableAttributes["tier2"].duplicate()
+					DicTier2 = Global.availableAttributes["tier2"].duplicate()
 					checkHigherTier(Global.autoShootAttribute,attr)
-					if availableAttributes["tier3"].has(attr) and availableAttributes["tier3"][attr] == DicTier1[attr]:
+					if Global.availableAttributes["tier3"].has(attr) and Global.availableAttributes["tier3"][attr] == DicTier1[attr]:
 						nodeUpgradeButton.text = "Max"
 						nodeUpgradeButton.set_process(false)
 						nodeUpgradeButton.release_focus()
@@ -407,23 +359,23 @@ func DoDetails():
 				details_Object.current_attr = attr
 				details_Object.current_Dic = current_Dic_name
 				var nodeUpgradeButton = get_node("HigherTier")
-				var DicTier2 = availableAttributes["tier2"].duplicate()
+				var DicTier2 = Global.availableAttributes["tier2"].duplicate()
 				nodeUpgradeButton.text = "%s: " % str(DicTier2[attr])
 		v_box_container_2.add_child(details_Object)
-	printAll()
+
 
 func checkHigherTier(attr_dict: Dictionary,refkey):
 	print("________Doititiit")
 	DicTier2.clear()
-	DicTier2 = availableAttributes["tier2"].duplicate()
+	DicTier2 = Global.availableAttributes["tier2"].duplicate()
 	var key = refkey
 	if DicTier2.has(refkey):
 		# Überschreibt den Wert aus tier1 mit dem Benutzerwert
-		if availableAttributes["tier1"][key] == attr_dict[key]:
-			DicTier2[key] = availableAttributes["tier2"][key]
+		if Global.availableAttributes["tier1"][key] == attr_dict[key]:
+			DicTier2[key] = Global.availableAttributes["tier2"][key]
 			cost_type_upgrade = 0
-		elif availableAttributes["tier2"][key] == attr_dict[key]:
-			DicTier2[key] = availableAttributes["tier3"][key]
+		elif Global.availableAttributes["tier2"][key] == attr_dict[key]:
+			DicTier2[key] = Global.availableAttributes["tier3"][key]
 			cost_type_upgrade = 1
 		else:
 			DicTier2[key] = attr_dict[key]
@@ -433,7 +385,7 @@ func checkHigherTier(attr_dict: Dictionary,refkey):
 
 func showAttributes(attr_dict: Dictionary):
 	DicTier1.clear()
-	DicTier1 = availableAttributes["tier1"].duplicate()
+	DicTier1 = Global.availableAttributes["tier1"].duplicate()
 
 	for key in attr_dict.keys():
 		if DicTier1.has(key):
@@ -444,3 +396,51 @@ func printAll():
 	print("___________________________------------______________________")
 	for key in DicTier1.keys():
 		print("%s: %s" % [key, str(DicTier1[key])])
+
+func PrintActiveAttr(dicRef:Dictionary) :
+	var details_Object
+	for attr in dicRef.keys():
+		showAttributes(dicRef)
+		details_Object = UI_Details_text.instantiate()
+		var nodeUpgradeButton = details_Object.get_node("HighetTier")
+		DicTier2 = Global.availableAttributes["tier2"].duplicate()
+		checkHigherTier(dicRef,attr)
+		if Global.availableAttributes["tier3"].has(attr) and Global.availableAttributes["tier3"][attr] == DicTier1[attr]:
+			nodeUpgradeButton.text = "Max"
+			nodeUpgradeButton.set_process(false)
+			nodeUpgradeButton.release_focus()
+			nodeUpgradeButton.focus_mode = Control.FOCUS_NONE
+			nodeUpgradeButton.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			details_Object.posInDic = b
+			b+=1
+		else:
+			if attr == "count" or attr == "pierce_count" :
+				nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost_higher[cost_type_upgrade])]
+			else :
+				nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
+			details_Object.posInDic = b
+			b+=1
+		var nodeDetailText = details_Object.get_node("Details_Text")
+		if attr == "cooldown" :
+			nodeDetailText.text = "%s: %s s" % [attr, str(DicTier1[attr])]
+		else :
+			nodeDetailText.text = "%s: %s" % [attr, str(DicTier1[attr])]
+		details_Object.current_attr = attr
+		details_Object.current_Dic = current_Dic_name
+		v_box_container_2.add_child(details_Object)
+
+
+func printDefaultAttr(dicRef : Dictionary,attr_ref):
+	var details_Object
+	showAttributes(Global.autoShootAttribute)
+	if  !Global.autoShootAttribute.has(attr_ref) :
+		details_Object = UI_Details_text_emphty.instantiate()
+		var nodeDetailText = details_Object.get_node("Details_Text")
+		nodeDetailText.text = "%s: %s" % [attr_ref, str(DicTier1[attr_ref])]
+		details_Object.current_attr = attr_ref
+		details_Object.current_Dic = current_Dic_name
+
+func ClearDetails():
+	var children = v_box_container_2.get_children()
+	for child in children :
+		child.queue_free()

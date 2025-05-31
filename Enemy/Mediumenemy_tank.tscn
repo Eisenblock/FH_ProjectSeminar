@@ -183,14 +183,13 @@ script = ExtResource("1_g8fec")
 MeeleEnemy = true
 DmgText = ExtResource("2_6krym")
 speed = 100
-dmg = 3
-health = 30
+dmg = 2
+health = 100
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemy"]]
 position = Vector2(17.8571, -2.85714)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ynhxe")
 
 [node name="ColorRect" type="ColorRect" parent="Area2D"]

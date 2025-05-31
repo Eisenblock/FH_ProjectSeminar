@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://btq4y2ac7hcs2"]
 
-[ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://portal.tscn" id="1_qxfde"]
+[ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://NichtSortiert/portal.tscn" id="1_qxfde"]
 [ext_resource type="PackedScene" path="res://character.tscn" id="2_14hel"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_jsrw8"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_jsrw8"]
+
 
 
 

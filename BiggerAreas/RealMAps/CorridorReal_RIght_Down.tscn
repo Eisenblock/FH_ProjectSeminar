@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_0hivh"]
 [ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="2_rx5hl"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="3_82583"]
-[ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://torch.tscn" id="6_p0i26"]
-[ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://torch2.tscn" id="7_jf6k0"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="3_82583"]
+[ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://NichtSortiert/torch.tscn" id="6_p0i26"]
+[ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://NichtSortiert/torch2.tscn" id="7_jf6k0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rx5hl"]
 texture = ExtResource("1_0hivh")
@@ -324,7 +324,7 @@ layer_0/tile_data = PackedInt32Array(-786415, 1, 8, -720879, 1, 8, -655343, 6553
 
 [node name="StartPoint" type="Node2D" parent="."]
 texture_filter = 1
-position = Vector2(-144, -64)
+position = Vector2(-157, -46)
 
 [node name="EndPoint" type="Node2D" parent="." groups=["Down"]]
 texture_filter = 1

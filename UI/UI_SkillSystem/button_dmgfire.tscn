@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bypj6mlbqgb18"]
+
+[ext_resource type="Texture2D" uid="uid://ce1qpj6ggarcl" path="res://Assets/New Piskel-1.png (2).png" id="1_8xanj"]
+[ext_resource type="Script" uid="uid://kmpygj2djs0w" path="res://UI/buttonStats.gd" id="2_xeoqx"]
+
+[node name="ButtonDmg" type="Button" node_paths=PackedStringArray("add_cost")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("1_8xanj")
+flat = true
+script = ExtResource("2_xeoqx")
+add_cost = NodePath("Label")
+addAttrButton_bool = true
+fireballShoot_bool = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -23.0
+offset_right = 53.0
+text = "1"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

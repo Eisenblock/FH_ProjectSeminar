@@ -68,8 +68,9 @@ fill_from = Vector2(0.522936, 0.518349)
 script = ExtResource("1_5wpr2")
 DarkBall_bool = true
 castTime = 5.0
-dmg = 3
+dmg = 20
 speed = 500.0
+lifetime = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8hlcf")

@@ -26,14 +26,14 @@ extends Button
 @onready var spawn_spell_ui: Node2D = $"../SpawnSpellUI"
 @onready var label: Label = $"../../../Label"
 @onready var current_spekk: Label = $"../CurrentSpekk"
-@export var UI_ShowAuto : PackedScene = load("res://UI/button_ShowAuto.tscn")
-@export var UI_ShowFire : PackedScene = load("res://UI/button_ShowFire.tscn")
-@export var UI_ShowDark : PackedScene = load("res://UI/button_Showdark.tscn")
-@export var UI_ShowCircle : PackedScene = load("res://UI/button_ShowCircle.tscn")
-@export var UI_ShowFire_Empthy : PackedScene = load("res://UI/button_ShowFire_empty.tscn")
-@export var UI_ShowDark_Empthy : PackedScene = load("res://UI/button_Showdark_empty.tscn")
-@export var UI_ShowAuto_Empthy : PackedScene = load("res://UI/button_ShowAuto_empty.tscn")
-@export var UI_ShowCircle_Empthy : PackedScene = load("res://UI/button_ShowCircle_empty.tscn")
+@export var UI_ShowAuto : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowAuto.tscn")
+@export var UI_ShowFire : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowFire.tscn")
+@export var UI_ShowDark : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_Showdark.tscn")
+@export var UI_ShowCircle : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle.tscn")
+@export var UI_ShowFire_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowFire_empty.tscn")
+@export var UI_ShowDark_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_Showdark_empty.tscn")
+@export var UI_ShowAuto_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowAuto_empty.tscn")
+@export var UI_ShowCircle_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle_empty.tscn")
 @onready var h_box_container: VBoxContainer = $"../HBoxContainer"
 
 var changeCost = 4
@@ -59,30 +59,7 @@ var availableAttributes_Armor = {
 		"Life_Reg" : 0.4
 			}
 	}
-var availableAttributes = {
-	
-	"tier1": {
-		"base_dmg": 2,    
-		"pierce"  : 1,  
-		"more_projectiles": 1,   
-		"attack_speed": 0.2,     
-		"lifetime": 0.5,         
-			},
-	"tier2": {
-		"base_dmg": 5,      
-		"pierce"  : 2,      
-		"more_projectiles": 2,   
-		"attack_speed": 0.5,     
-		"lifetime": 0.7,         
-			},
-	"tier3": {
-		"base_dmg": 10,    
-		"pierce"  : 3,  
-		"more_projectiles": 3,   
-		"attack_speed": 0.8,     
-		"lifetime": 0.9,         
-			}
-	}
+
 
 var track_dmg = 0
 var track_bonusdmg = 0
@@ -223,14 +200,14 @@ func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,scene
 
 		var old_key = keys[posInDic]  # Hole das Attribut basierend auf der Position
 		if Ability_bool :
-			if not availableAttributes["tier2"].has(old_key):
+			if not Global.availableAttributes["tier2"].has(old_key):
 				print("Fehler: Attribut existiert nicht in Tier 2!")
 				return
-			if availableAttributes["tier1"][old_key] == dicRef[old_key]:
-				new_value = availableAttributes["tier2"][old_key]
+			if Global.availableAttributes["tier1"][old_key] == dicRef[old_key]:
+				new_value = Global.availableAttributes["tier2"][old_key]
 				Global.expAmount -= 5
-			if availableAttributes["tier2"][old_key] == dicRef[old_key]:
-				new_value = availableAttributes["tier3"][old_key]
+			if Global.availableAttributes["tier2"][old_key] == dicRef[old_key]:
+				new_value = Global.availableAttributes["tier3"][old_key]
 				Global.expAmount -= 10
 		else:
 			if not availableAttributes_Armor["tier2"].has(old_key):
@@ -264,7 +241,7 @@ func UpgradeTierAttr2(Ability_bool : bool, dicRef : Dictionary, countRef  ,scene
 			spawn_spell_ui.updateTextFieldsRef(dicRef, "chest",countRef,sceneRef,sceneButtonRef)
 
 func CheckTypeAddAttr():
-	var keys = availableAttributes.keys()
+	var keys = Global.availableAttributes.keys()
 	var randNum = randi() % keys.size()
 	var selectedAttribute 
 	
@@ -277,28 +254,28 @@ func CheckTypeAddAttr():
 		Global.countAttrOnChest = result[1]
 	if autoShotButton_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.autoShootAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		#var attributeValue = availableAttributes[selectedAttribute]
 		var result = addAttribute(selectedAttribute, attributeValue,Global.autoShootAttribute,Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
 		Global.autoShootAttribute = result[0]
 		Global.countAttrOnAuto = result[1]
 	if circleShoot_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.circleShootAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		#var attributeValue = availableAttributes[selectedAttribute]
 		var result = addAttribute(selectedAttribute, attributeValue,Global.circleShootAttribute,Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
 		Global.circleShootAttribute = result[0]
 		Global.countAttrOnCircle = result[1]
 	if fireballShoot_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.fireballShootAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		#var attributeValue = availableAttributes[selectedAttribute]
 		var result = addAttribute(selectedAttribute, attributeValue,Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
 		Global.fireballShootAttribute = result[0]
 		Global.countAttrOnFire = result[1]
 	if darkButton_bool and addAttrButton_bool:
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		#var attributeValue = availableAttributes[selectedAttribute]
 		var result = addAttribute(selectedAttribute, attributeValue,Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 		Global.darkShootAttribute = result[0]
@@ -306,30 +283,30 @@ func CheckTypeAddAttr():
 
 
 func CheckTypeChangeAttr():
-	var keys = availableAttributes.keys()
+	var keys = Global.availableAttributes.keys()
 	var randNum = randi() % keys.size()
 	var selectedAttribute 
 	if changeAttrButton_bool:
 		if autoShotButton_bool :
 			selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.autoShootAttribute,keys)
 			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"autoShoot",Global.autoShootAttribute,Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
 		# Füge das Attribut und den Wert zum globalen Dictionary hinzu
 		if circleShoot_bool : 
 			selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.circleShootAttribute,keys)
 			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.circleShootAttribute,Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
 		if fireballShoot_bool : 
 			selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.fireballShootAttribute,keys)
 			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
 		if darkButton_bool : 
 			selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
 			#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-			var attributeValue = availableAttributes["tier1"][selectedAttribute]
+			var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 		if chestButton_bool : 
 			keys = availableAttributes_Armor.keys()
@@ -339,29 +316,29 @@ func CheckTypeChangeAttr():
 			changeAttribute(selectedAttribute, attributeValue,"circleShoot",Global.ChestAttribute,Global.countAttrOnChest,UI_Chest,UI_Chest_Button)
 
 func CheckUPgradeTier():
-	var keys = availableAttributes.keys()
+	var keys = Global.availableAttributes.keys()
 	var randNum = randi() % keys.size()
 	var selectedAttribute 
 	if autoShotButton_bool :
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.autoShootAttribute,keys)
 		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		UpgradeTierAttr2(true,Global.autoShootAttribute,Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
 	# Füge das Attribut und den Wert zum globalen Dictionary hinzu
 	if circleShoot_bool : 
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.circleShootAttribute,keys)
 		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		UpgradeTierAttr2(true,Global.circleShootAttribute,Global.countAttrOnCircle,UI_Circle,UI_Circle_Button)
 	if fireballShoot_bool : 
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.fireballShootAttribute,keys)
 		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		UpgradeTierAttr2(true,Global.fireballShootAttribute,Global.countAttrOnFire,UI_Fire,UI_Fire_Button)
 	if darkButton_bool : 
 		selectedAttribute = CheckAttr_isValid(false,rigthValue,Global.darkShootAttribute,keys)
 		#var attributeValue = availableAttributes["tier1"][selectedAttribute]
-		var attributeValue = availableAttributes["tier1"][selectedAttribute]
+		var attributeValue = Global.availableAttributes["tier1"][selectedAttribute]
 		UpgradeTierAttr2(true,Global.darkShootAttribute,Global.countAttrOnDark,UI_Dark,UI_Dark_Button)
 	if chestButton_bool : 
 		var newkeys = availableAttributes_Armor.keys()
@@ -397,7 +374,7 @@ func _on_pressed() -> void:
 	# Wähle zufällig ein Attribut aus avaibleAttributes aus
 	rigthValue  = false
 	#var keys = availableAttributes["tier1"].keys()
-	var keys = availableAttributes.keys()
+	var keys = Global.availableAttributes.keys()
 	var randNum = randi() % keys.size()
 	var selectedAttribute 
 	#Switch Attr
@@ -423,8 +400,8 @@ func CheckAttr_isValid(refType_bool: bool, ref_RightValue_bool: bool, ref_Dic: D
 	
 	while not ref_RightValue_bool: 
 		if refType_bool == false :
-			var randNum = randi() % availableAttributes["tier1"].keys().size()
-			selectedAttribute = availableAttributes["tier1"].keys()[randNum]
+			var randNum = randi() % Global.availableAttributes["tier1"].keys().size()
+			selectedAttribute = Global.availableAttributes["tier1"].keys()[randNum]
 			#print(selectedAttribute)# Wähle ein zufälliges Attribut
 		else :
 			var randNum = randi() % availableAttributes_Armor["tier1"].keys().size()
@@ -440,6 +417,8 @@ func CheckAttr_isValid(refType_bool: bool, ref_RightValue_bool: bool, ref_Dic: D
 func _on_pressedAuto() -> void:
 	if Global.expAmount >= addCost :
 		Global.expAmount -= addCost
+		spawn_spell_ui.SwitchAttribute(Global.autoShootAttribute,"auto")
+		current_spekk.text = "Auto"
 		var player_nodes = get_tree().get_nodes_in_group("player")
 		if player_nodes.size() > 0:
 			var player2 = player_nodes[0]
@@ -460,6 +439,8 @@ func _on_pressedAuto() -> void:
 func _on_pressedCircle() -> void:
 	if Global.expAmount >= addCost :
 		Global.expAmount -= addCost
+		spawn_spell_ui.SwitchAttribute(Global.autoShootAttribute,"circleball")
+		current_spekk.text = "Circle"
 		var player_nodes = get_tree().get_nodes_in_group("player")
 		if player_nodes.size() > 0:
 			var player2 = player_nodes[0]
@@ -479,6 +460,8 @@ func _on_pressedCircle() -> void:
 func _on_pressedDark() -> void:
 	if Global.expAmount >= addCost :
 		Global.expAmount -= addCost
+		spawn_spell_ui.SwitchAttribute(Global.autoShootAttribute,"darkball")
+		current_spekk.text = "Darkball"
 		var player_nodes = get_tree().get_nodes_in_group("player")
 		if player_nodes.size() > 0:
 			var player2 = player_nodes[0]
@@ -498,6 +481,8 @@ func _on_pressedDark() -> void:
 func _on_pressedFire() -> void:
 	if Global.expAmount >= addCost :
 		Global.expAmount -= addCost
+		spawn_spell_ui.SwitchAttribute(Global.autoShootAttribute,"fireball")
+		current_spekk.text = "Fireball"
 		var player_nodes = get_tree().get_nodes_in_group("player")
 		if player_nodes.size() > 0:
 			var player2 = player_nodes[0]
@@ -523,8 +508,8 @@ func _on_reste_ability_pressedResetAbilityFire() -> void:
 		player2.fireBall = false 
 	if Global.learned_abilities.has("fireball"):
 		Global.learned_abilities.erase("fireball")
-
-
+		spawn_spell_ui.ClearDetails()
+		current_spekk.text = "None"
 		var instance = UI_ShowFire_Empthy.instantiate()
 		instance.position = self.position
 		var box = get_tree().get_first_node_in_group("Ability_box")
@@ -542,8 +527,8 @@ func _on_reste_ability_pressedResetAbilityDark() -> void:
 		player2.darkBall = false 
 	if Global.learned_abilities.has("darkball"):
 		Global.learned_abilities.erase("darkball")
-
-
+		spawn_spell_ui.ClearDetails()
+		current_spekk.text = "None"
 		var instance = UI_ShowDark_Empthy.instantiate()
 		instance.position = self.position
 		var box = get_tree().get_first_node_in_group("Ability_box")
@@ -561,6 +546,8 @@ func _on_reste_ability_pressedResetAbilityCircle() -> void:
 		player2.circleBall = false 
 	if Global.learned_abilities.has("circleball"):
 		Global.learned_abilities.erase("circleball")
+		spawn_spell_ui.ClearDetails()
+		current_spekk.text = "None"
 		var instance = UI_ShowCircle_Empthy.instantiate()
 		instance.position = self.position
 		var box = get_tree().get_first_node_in_group("Ability_box")
@@ -578,6 +565,8 @@ func _on_reste_ability_pressedResetAbilityAuto() -> void:
 		player2.autoBall = false 
 	if Global.learned_abilities.has("auto"):
 		Global.learned_abilities.erase("auto")
+		spawn_spell_ui.ClearDetails()
+		current_spekk.text = "None"
 		var instance = UI_ShowAuto_Empthy.instantiate()
 		instance.position = self.position
 		var box = get_tree().get_first_node_in_group("Ability_box")

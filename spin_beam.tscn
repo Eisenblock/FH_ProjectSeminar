@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmamt6s1qff2u"]
+
+[ext_resource type="Script" uid="uid://bb32oaewqv8e8" path="res://spin_beam.gd" id="1_us2cd"]
+[ext_resource type="Texture2D" uid="uid://ed30i3pdbdob" path="res://Assets/Spells/pixelart_spells/Pixelart Spells/PNG Files/Black And White Ray.png" id="2_qiohf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmrc1"]
+atlas = ExtResource("2_qiohf")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esit1"]
+atlas = ExtResource("2_qiohf")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2ecp"]
+atlas = ExtResource("2_qiohf")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kagdb"]
+atlas = ExtResource("2_qiohf")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_av2ol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmrc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esit1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2ecp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kagdb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qiohf"]
+size = Vector2(254, 12)
+
+[node name="SpinBeam" type="Node2D" groups=["Beam"]]
+position = Vector2(240, 181)
+scale = Vector2(3.36, 1.24)
+script = ExtResource("1_us2cd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(20, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.590876
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(52, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.162243
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+position = Vector2(83, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(114, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="."]
+position = Vector2(146, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="."]
+position = Vector2(178, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="."]
+position = Vector2(210, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="."]
+position = Vector2(242, 0)
+sprite_frames = SubResource("SpriteFrames_av2ol")
+frame_progress = 0.618348
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(131, 0)
+shape = SubResource("RectangleShape2D_qiohf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

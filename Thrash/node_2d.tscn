@@ -2,14 +2,15 @@
 
 [ext_resource type="PackedScene" path="res://character.tscn" id="1_wtcfe"]
 [ext_resource type="PackedScene" path="res://projectile_player.tscn" id="4_0hol4"]
-[ext_resource type="PackedScene" uid="uid://csffq068w8sdw" path="res://UI/button_dmg.tscn" id="4_q6r6c"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://UI/Weakenemy.tscn" id="5_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://csffq068w8sdw" path="res://UI/UI_SkillSystem/button_dmg.tscn" id="4_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="5_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://c1g10e5gbdnfa" path="res://Thrash/spawner_enemy.tscn" id="6_d21ai"]
 [ext_resource type="PackedScene" uid="uid://7kmqu3nibddt" path="res://Thrash/trigger_spawner.tscn" id="8_4d7sh"]
 [ext_resource type="PackedScene" uid="uid://co7cud0d7veku" path="res://Enemy/Strongenemy.tscn" id="8_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="9_4d7sh"]
 [ext_resource type="Script" uid="uid://crl858vdbakvb" path="res://Thrash/trigger_spawner.gd" id="9_ir8iy"]
-[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/button_dmgCircle.tscn" id="10_ir8iy"]
+[ext_resource type="PackedScene" uid="uid://rkqb3oanae11" path="res://UI/UI_SkillSystem/button_dmgCircle.tscn" id="10_ir8iy"]
+
 
 
 

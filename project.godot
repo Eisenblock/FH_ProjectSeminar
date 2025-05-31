@@ -13,11 +13,11 @@ config_version=5
 config/name="FH_ProjectSeminar"
 run/main_scene="uid://cbso1ifet0uho"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://NichtSortiert/icon.svg"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://NichtSortiert/Global.gd"
 
 [display]
 
@@ -40,6 +40,10 @@ NameAbility=""
 spell_uiGlobal=""
 player=""
 Ability_box=""
+TileMap_Move=""
+BlockedField=""
+Boss=""
+Beam=""
 
 [input]
 

@@ -25,9 +25,10 @@ animations = [{
 script = ExtResource("1_6u74q")
 CircleBall_bool = true
 distance = 40.0
-castTime = 5.0
-dmg = 10
+castTime = 6.0
+dmg = 50
 speed = 5.0
+lifetime = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8hlcf")

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var  RangeEnemy : bool = false
 @export var ShotScene : PackedScene
 @export var DmgText : PackedScene 
+var pickUpLIfe : PackedScene = load("res://NichtSortiert/Pick_UP.tscn")
 var CDShot : bool = false
 var timerShot : float = 2
 @export var speed = 200
@@ -22,7 +23,7 @@ var gotTriggered : bool = false
 var targetPLayer : CharacterBody2D
 var accel = 7
 var direction = Vector3()
-
+var gotCrit = false
 var gotHit : bool = false
 var isDead :bool = false
 
@@ -144,31 +145,41 @@ func resetGotHit():
 	gotHit = false
 
 func take_damage(amount) :
-	gotTriggered = true
-	health -= amount
-	self.modulate = Color("ec0006")
-	#print("Lost Health Enemy: %s" % health)
-	timerResetTakeDamage = Timer.new()
-	add_child(timerResetTakeDamage)
-	timerResetTakeDamage.wait_time = 0.4
-	timerResetTakeDamage.one_shot = true
-	timerResetTakeDamage.connect("timeout", self.ResetModular)
-	timerResetTakeDamage.start()
-	var dmgText = DmgText.instantiate()
-	get_tree().root.add_child(dmgText)
-	dmgText.dmg_value = amount
-	dmgText.position = self.global_position #Vector2(5,-40)
-	if health <= 0 and !isDead :
-		isDead = true
-		Global.enemyList.erase(self)
-		Global.expAmount += 1
-		Dead()
+	if !isDead :
+		gotTriggered = true
+		health -= amount
+		self.modulate = Color("ec0006")
+		#print("Lost Health Enemy: %s" % health)
+		timerResetTakeDamage = Timer.new()
+		add_child(timerResetTakeDamage)
+		timerResetTakeDamage.wait_time = 0.4
+		timerResetTakeDamage.one_shot = true
+		timerResetTakeDamage.connect("timeout", self.ResetModular)
+		timerResetTakeDamage.start()
+		var dmgText = DmgText.instantiate()
+		if gotCrit :
+			dmgText.modulate = Color("ffff3b")
+			gotCrit = false
+		get_tree().root.add_child(dmgText)
+		dmgText.dmg_value = amount
+		dmgText.position = self.global_position #Vector2(5,-40)
+		if health <= 0 and !isDead :
+			isDead = true
+			Global.enemyList.erase(self)
+			Global.expAmount += 1
+			Dead()
 
 func Dead():
 	speed = 0
+	var randNumHealth = randi_range(0,20)
+	if randNumHealth < 1 :
+		var instance = pickUpLIfe.instantiate()
+		instance.global_position = self.global_position
+		get_tree().root.add_child(instance)
 	if animated_sprite_2d :
 		animated_sprite_2d.play("dead")
 		await  get_tree().create_timer(0.5).timeout
+		Global.enemy_kills += 1
 		queue_free()
 	else :
 		queue_free()
@@ -202,3 +213,6 @@ func DoRangeAttack():
 		instance.SetDmg(dmg)
 		CDShot = true
 		get_tree().root.add_child(instance)
+
+func GotCritTrue():
+	gotCrit = true

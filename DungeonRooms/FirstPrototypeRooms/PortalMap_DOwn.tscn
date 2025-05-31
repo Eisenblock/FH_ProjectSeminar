@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://c13orlkubj3jr"]
 
-[ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://portal.tscn" id="2_c63tp"]
+[ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://NichtSortiert/portal.tscn" id="2_c63tp"]
 [ext_resource type="Script" uid="uid://cv4sh7d5y3y3x" path="res://DungeonRooms/FirstPrototypeRooms/spawn_spells.gd" id="3_xeu2g"]
-[ext_resource type="PackedScene" uid="uid://ck6c2ethilv3r" path="res://Pick_UP_fireball.tscn" id="4_ld5bx"]
-[ext_resource type="PackedScene" uid="uid://dp6shdpmpyc0j" path="res://Pick_UP_darkball.tscn" id="5_3hn5f"]
-[ext_resource type="PackedScene" uid="uid://drlvu8encyq73" path="res://Pick_UP_circleball.tscn" id="6_42bm0"]
-[ext_resource type="PackedScene" uid="uid://c2jpi378ri660" path="res://Pick_UP_bumerang.tscn" id="7_6s7f1"]
+[ext_resource type="PackedScene" uid="uid://ck6c2ethilv3r" path="res://NichtSortiert/Pick_UP_fireball.tscn" id="4_ld5bx"]
+[ext_resource type="PackedScene" uid="uid://dp6shdpmpyc0j" path="res://NichtSortiert/Pick_UP_darkball.tscn" id="5_3hn5f"]
+[ext_resource type="PackedScene" uid="uid://drlvu8encyq73" path="res://NichtSortiert/Pick_UP_circleball.tscn" id="6_42bm0"]
+[ext_resource type="PackedScene" uid="uid://c2jpi378ri660" path="res://NichtSortiert/Pick_UP_bumerang.tscn" id="7_6s7f1"]
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="8_h03uk"]
-[ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://node_2dTeest.tscn" id="9_q2icm"]
+[ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://NichtSortiert/node_2dTeest.tscn" id="9_q2icm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_n2ewd"]
 vertices = PackedVector2Array(235.109, 76.8594, 247.117, 219.063, -252.156, 221.938, -255.188, 43.9219, -252.617, -55.9531, -257.578, -177.07, 258.609, -180.922, 253.617, -49.1563, -342.383, 53.0391, -355.703, -46.0391, 317.578, -48.1563, 312.398, 77.8672)

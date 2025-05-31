@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=3 uid="uid://dd4xhmifhhmwb"]
 
 [ext_resource type="Script" uid="uid://cvoqggtun04pv" path="res://Projectiles/projectile_enemy.gd" id="1_xtdy5"]
-[ext_resource type="PackedScene" uid="uid://di5a8048r60vf" path="res://enemy_ProjectileScene.tscn" id="2_4llo8"]
+[ext_resource type="PackedScene" uid="uid://di5a8048r60vf" path="res://NichtSortiert/enemy_ProjectileScene.tscn" id="2_4llo8"]
 [ext_resource type="Texture2D" uid="uid://ejylamxnvpvi" path="res://Assets/enemy/flyer_0.png" id="3_0gb7k"]
 [ext_resource type="PackedScene" uid="uid://blo4gv0bpd0fh" path="res://UI/dmg_text.tscn" id="3_dqpoj"]
 [ext_resource type="Texture2D" uid="uid://d023fnxxegcej" path="res://Assets/enemy/centipede_0.png" id="4_4llo8"]
@@ -232,7 +232,9 @@ script = ExtResource("1_xtdy5")
 RangeEnemy = true
 ShotScene = ExtResource("2_4llo8")
 DmgText = ExtResource("3_dqpoj")
+speed = 100
 dmg = 2
+health = 50
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
