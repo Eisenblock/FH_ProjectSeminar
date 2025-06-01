@@ -69,7 +69,7 @@ script = ExtResource("1_5wpr2")
 DarkBall_bool = true
 castTime = 5.0
 dmg = 20
-speed = 500.0
+speed = 350.0
 lifetime = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

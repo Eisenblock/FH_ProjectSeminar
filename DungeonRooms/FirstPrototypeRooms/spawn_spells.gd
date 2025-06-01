@@ -6,12 +6,6 @@ extends Node2D
 @export var bumerang_PickUP : PackedScene  
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if Global.count_stage == 0 :
-		SpawnPickUP()
-	if Global.count_stage == 4 :
-		SpawnPickUP()
-	if Global.count_stage == 6 :
-		SpawnPickUP()
 	"""if randNum == 3:
 		instance = bumerang_PickUP.instantiate()
 		instance.position = Vector2(31.265,-119)

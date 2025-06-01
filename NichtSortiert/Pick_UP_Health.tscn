@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4uy52"]
 size = Vector2(25, 23)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["Life"]]
 script = ExtResource("1_qq60b")
 
 [node name="PickUP" type="Area2D" parent="."]

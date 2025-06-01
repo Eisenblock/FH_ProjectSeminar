@@ -87,7 +87,6 @@ func _ready():
 			corridor = corridor_scene.instantiate()
 			add_child(corridor)
 	
-	
 		# Position des Korridors setzen
 		var corridor_start = corridor.get_node("StartPoint")
 		corridor.position = room_exit.global_position - corridor_start.position
@@ -130,10 +129,6 @@ func _ready():
 	else:
 		max_rooms += 1
 	Global.global_maxRooms += 1
-	if first_Area :
-		Global.count_stage += 1
-	else :
-		first_Area = true
 	#update_all_navigation_regions()
 
 func update_all_navigation_regions():

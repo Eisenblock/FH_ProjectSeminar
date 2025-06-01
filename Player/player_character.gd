@@ -46,7 +46,7 @@ var timerbumerangShoot : Timer
 var dash_speed = 500
 var dash_time = 0.2
 var dash_cooldown = 2
-
+var progressBar 
 var is_dashing = false
 var dash_timer = 0.0
 var dash_cooldown_timer = 2
@@ -56,7 +56,7 @@ var countProjectile = 0
 func _ready() -> void:
 	spawnUI = get_tree().get_first_node_in_group("spell_ui")
 	health = Global.life_player
-	print("Leeeeeeeeeeeeeeeeben",health)
+	progressBar = get_node("ProgressBar")
 	load_abilities()
 	UpdatePlayerAttr(Global.ChestAttribute)
 	#StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"SpawnBumerangBall"),"bumerang")
@@ -159,11 +159,11 @@ func _process(delta: float) -> void:
 	#camera_2d.position = global_position
 
 func spawnCircleShoot() :  
-	
-	if Global.circleShootAttribute.has("more_projectiles") :
+	var radius = 80
+	if Global.circleShootAttribute.has("count") :
 		countProjectile = 0
-		var size = Global.circleShootAttribute["more_projectiles"] + projectileAmount
-		var radius = 75  # Abstand vom Zentrum (also von global_position)
+		var size = Global.circleShootAttribute["count"] + projectileAmount
+ # Abstand vom Zentrum (also von global_position)
 		var angle_step = TAU / size  # TAU = 2*PI = voller Kreis
 		
 		for i in range(size):
@@ -179,6 +179,7 @@ func spawnCircleShoot() :
 			if instance != null :
 					var direction = (get_global_mouse_position() - global_position).normalized()
 					instance.position = global_position 
+					instance.distance = radius
 					instance.SetProjectile(Global.circleShootAttribute)
 					get_tree().root.add_child(instance)
 
@@ -273,6 +274,7 @@ func take_damage(amount) :
 	if !is_immune :
 		health -= amount
 		Global.life_player = health
+		progressBar.self_modulate = Color.RED
 		animated_sprite_2d.modulate = Color.RED
 		is_immune = true
 		immune_timer = Timer.new()
@@ -410,6 +412,7 @@ func load_abilities():
 func _end_immunity():
 	is_immune = false
 	animated_sprite_2d.modulate = Color.WHITE
+	progressBar.self_modulate = Color("#00ff00")
 	immune_timer.queue_free()  # Timer löschen
 	immune_timer = null
 	print("Immunität ist vorbei")

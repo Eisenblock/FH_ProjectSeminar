@@ -23,6 +23,7 @@ addAttrButton_bool = true
 chestButton_bool = true
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 13.0
 offset_top = -23.0
 offset_right = 53.0

@@ -340,6 +340,7 @@ navigation_polygon = SubResource("NavigationPolygon_n2ewd")
 [node name="Portal" parent="." instance=ExtResource("2_c63tp")]
 position = Vector2(142, -9)
 MapChange = "res://game_statePrototypeREalMap.tscn"
+increaseValue = true
 
 [node name="SpawnSpells" type="Node2D" parent="."]
 script = ExtResource("3_xeu2g")

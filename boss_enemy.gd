@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var health : float = 2000
+var health : float = 5000
 var start_health = 0
 var timerBeam = 0
 var timerBombs = 0
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 		animated_sprite_2d.play("dead")
 	if (start_health /4) * 3 > health and !Stage_I:
 		First_Stage()
-	if (start_health /3) * 2 > health and !isEnrage:
+	if (start_health /3) * 1 > health and !isEnrage:
 		Enrage()
 func _on_spawnTimer_timeout() -> void:
 	for bomb in range(bombs_to_spawn):

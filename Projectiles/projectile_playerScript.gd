@@ -187,6 +187,13 @@ func _on_area_entered(area: Area2D) -> void:
 			var instance = explodeScene.instantiate()
 			instance.position = global_position
 			instance.dmg = dmg
+			var min_scale = 0.5
+			var max_scale = 1.5
+			var max_dmg = 70.0
+
+			# Normales Scaling innerhalb dieser Range
+			var scale_factor = lerp(min_scale, max_scale, clamp(dmg / max_dmg, 0.0, 1.0))
+			instance.scale = Vector2.ONE * scale_factor
 			get_tree().root.add_child(instance)
 			enemy = area.get_parent()
 			#enemy.take_damage(dmg)

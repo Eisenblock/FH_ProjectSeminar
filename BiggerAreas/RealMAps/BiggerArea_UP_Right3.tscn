@@ -350,7 +350,6 @@ texture_filter = 1
 position = Vector2(684, 93)
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 texture_filter = 1
 position = Vector2(61, -3)
 script = ExtResource("3_c38uk")
@@ -419,7 +418,6 @@ position = Vector2(-753, 220)
 scale = Vector2(4, 4)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 texture_filter = 1
 navigation_polygon = SubResource("NavigationPolygon_fbjjk")
 

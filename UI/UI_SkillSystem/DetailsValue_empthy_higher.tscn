@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://je1rbulmuf02"]
+
+[ext_resource type="Script" uid="uid://de0qp4tdktd0d" path="res://UI/DetailsTEst.gd" id="1_kmfl1"]
+[ext_resource type="FontFile" uid="uid://bm1g6w65ittlo" path="res://Assets/PixelOperator8.ttf" id="2_6gmp0"]
+[ext_resource type="Texture2D" uid="uid://pn5cxqn7vaqd" path="res://Assets/sprite_UI1.png" id="3_pns17"]
+[ext_resource type="Texture2D" uid="uid://bh8n5wa4061jp" path="res://Assets/New Piskel-1.png (3).png" id="4_v83r6"]
+[ext_resource type="Texture2D" uid="uid://ce1qpj6ggarcl" path="res://Assets/New Piskel-1.png (2).png" id="5_5hbqv"]
+
+[node name="DetailsValue" type="Control"]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kmfl1")
+
+[node name="Details_Text" type="Label" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = 11.0
+offset_top = 18.0
+offset_right = 161.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("2_6gmp0")
+theme_override_font_sizes/font_size = 12
+text = "Hee"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SpriteUi2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(98, 85)
+scale = Vector2(3.20745, 3.149)
+texture = ExtResource("3_pns17")
+
+[node name="AddAttr" type="Button" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = -81.4166
+offset_top = 8.59349
+offset_right = -66.4166
+offset_bottom = 23.5935
+scale = Vector2(2.28919, 2.25643)
+flat = true
+
+[node name="HighetTier" type="Button" parent="."]
+visible = false
+z_index = 3
+layout_mode = 0
+offset_left = 235.0
+offset_top = 4.0
+offset_right = 283.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("2_6gmp0")
+theme_override_font_sizes/font_size = 16
+text = "w"
+flat = true
+alignment = 0
+
+[node name="Reset" type="Button" parent="."]
+visible = false
+z_index = 3
+layout_mode = 0
+offset_left = 301.0
+offset_right = 360.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_6gmp0")
+theme_override_font_sizes/font_size = 12
+text = "Reset"
+flat = true
+
+[node name="NewPiskel-1_png(3)" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(263, 25)
+scale = Vector2(2, 1.885)
+texture = ExtResource("4_v83r6")
+
+[node name="NewPiskel-1_png(3)2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(331, 25)
+scale = Vector2(2, 1.885)
+texture = ExtResource("4_v83r6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NewPiskel-1_png(2)" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-65.2932, 25.8557)
+scale = Vector2(1.16917, 1.11598)
+texture = ExtResource("5_5hbqv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -84.0
+offset_top = 48.0
+offset_right = -37.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_6gmp0")
+theme_override_font_sizes/font_size = 14
+text = "c : 4"
+
+[connection signal="pressed" from="AddAttr" to="." method="_on_add_attr_pressedHigher"]
+[connection signal="pressed" from="HighetTier" to="." method="_on_highet_tier_pressedUpgrade"]
+[connection signal="pressed" from="Reset" to="." method="_on_reset_pressedRest"]

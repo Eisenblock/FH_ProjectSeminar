@@ -37,11 +37,10 @@ var countAttrOnCircle = 0
 var countAttrOnFire = 0
 var countAttrOnDark = 0
 var countAttrOnBumerang = 0
-var availableAttributes = {
-	
+var all_availableAttributes = {
 	"tier1": {
-		"base_dmg": 10,    
-		"pierce_count"  : 1,  
+		"base_dmg": 10,     
+		"pierce_count": 1,  
 		"count": 1,   
 		"cooldown": 0.5,     
 		"lifetime": 0.5,  
@@ -49,8 +48,8 @@ var availableAttributes = {
 		"crit_dmg": 20
 			},
 	"tier2": {
-		"base_dmg": 20,    
-		"pierce_count"  : 2,  
+		"base_dmg": 20,   
+		"pierce_count": 2,  
 		"count": 2,   
 		"cooldown": 1.0,   
 		"lifetime": 0.7,   
@@ -58,8 +57,8 @@ var availableAttributes = {
 		"crit_dmg": 50         
 			},
 	"tier3": {
-		"base_dmg": 30,    
-		"pierce_count"  : 3,  
+		"base_dmg": 30,  
+		"pierce_count": 3,  
 		"count": 3,   
 		"cooldown": 1.5,     
 		"lifetime": 0.9,   
@@ -67,7 +66,57 @@ var availableAttributes = {
 		"crit_dmg": 80         
 			}
 	}
-
+var availableAttributes = {
+		"tier1": {
+		"base_dmg": 10,     
+		"cooldown": 0.5,     
+		"lifetime": 0.5,  
+		"crit_chance" : 10,
+		"crit_dmg": 20
+			},
+	"tier2": {
+		"base_dmg": 20,   
+		"cooldown": 1.0,   
+		"lifetime": 1,   
+		"crit_chance" : 20,
+		"crit_dmg": 50         
+			},
+	"tier3": {
+		"base_dmg": 30,  
+		"cooldown": 1.5,     
+		"lifetime": 1.5,   
+		"crit_chance" : 30,
+		"crit_dmg": 80         
+			},
+	"tier4": {
+		"base_dmg": 40,  
+		"cooldown": 2,     
+		"lifetime": 2,   
+		"crit_chance" : 40,
+		"crit_dmg": 80         
+			},
+	"tier5": {
+		"base_dmg": 50,  
+		"cooldown": 2.5,     
+		"lifetime": 2.5,   
+		"crit_chance" : 50,
+		"crit_dmg": 10         
+			}
+	}
+var availableAttributes_higher = {
+	"tier1": {
+		"pierce_count": 1,  
+		"count": 1,   
+			},
+	"tier2": { 
+		"pierce_count": 2,  
+		"count": 2,           
+			},
+	"tier3": {
+		"pierce_count": 3,  
+		"count": 3,      
+			}
+	}
 func ResetValues() :
 	autoShootAttribute.clear()
 	fireballShootAttribute.clear()
@@ -76,3 +125,4 @@ func ResetValues() :
 	life_player = 20
 	expAmount = 60
 	count_stage = 0
+	learned_abilities.clear()

@@ -4,14 +4,23 @@ extends Node2D
 @export var fireball_boolPIckUP : bool = false
 @export var circleball_boolPickUp : bool = false
 @export var darkball_boolPickUp : bool = false
-
+var killTimer : Timer
 
 func _ready() -> void:
 	pass
+	"""killTimer = Timer.new()
+	killTimer.wait_time = 8
+	killTimer.one_shot = true
+	killTimer.timeout.connect(Callable(self, "KillObject"))
+	add_child(killTimer)
+	killTimer.start()"""
 
 
 func GetPLayer():
 	var nodes_in_group = get_tree().get_nodes_in_group("player")
+
+func KillObject():
+	queue_free()
 
 func save_ability(name: String, is_active: bool):
 	Global.learned_abilities[name] = is_active  # Speichern, ob aktiv oder nicht
@@ -47,4 +56,6 @@ func SetPickUPValue(nameRef :String):
 func _on_pick_up_area_enteredHealth(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		Global.life_player += 5
+		if Global.life_player > 20 :
+			Global.life_player = 20
 		queue_free()

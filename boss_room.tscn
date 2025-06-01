@@ -554,7 +554,9 @@ script = ExtResource("20_40hin")
 position = Vector2(-22, -19)
 shape = SubResource("RectangleShape2D_42sov")
 
-[node name="Portal" parent="." instance=ExtResource("20_q33mc")]
-position = Vector2(2163, 47)
+[node name="Portal2" parent="." instance=ExtResource("20_q33mc")]
+position = Vector2(2130, -35)
+MapChange = "res://game_statePrototypeREalMap.tscn"
+bossMap = true
 
 [connection signal="body_entered" from="StartBossFight" to="StartBossFight" method="_on_body_enteredStartGame"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FH_ProjectSeminar"
-run/main_scene="uid://cbso1ifet0uho"
+run/main_scene="uid://bos0girf0pbw1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://NichtSortiert/icon.svg"
 
@@ -44,6 +44,7 @@ TileMap_Move=""
 BlockedField=""
 Boss=""
 Beam=""
+Life=""
 
 [input]
 
