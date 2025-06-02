@@ -17,8 +17,10 @@ var room_exit = null
 var corridor = null
 var first_Area = false
 var lastRoom : bool = false
-var lastRandValue = -1
+var lastRandValue_Right = -1
+var lastRandValue_Down = -1
 var lastTag = ""
+var portalRoomFInish = false
 
 func _ready():
 	if Global.global_maxRooms == 0 :
@@ -34,30 +36,28 @@ func _ready():
 		if previous_exit != null :
 			if previous_exit.is_in_group("Right"):
 				var randNumi = randi() % room_scene_ERight.size() 
-				if lastTag == "Right":
-					if room_scene_ERight.size() > 1 :
-						while true:
-							randNumi = randi() % room_scene_ERight.size()
-							if randNumi != lastRandValue:
-								break
-					else:
-						randNumi = randi() % room_scene_ERight.size()  
-				lastRandValue = randNumi
+				if room_scene_ERight.size() > 1 :
+					while true:
+						randNumi = randi() % room_scene_ERight.size()
+						if randNumi != lastRandValue_Right:
+							break
+				else:
+					randNumi = randi() % room_scene_ERight.size()  
+				lastRandValue_Right = randNumi
 				lastTag = "Right"
 				room = room_scene_ERight[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
 				add_child(room)
 			if previous_exit.is_in_group("Down"):
 				var randNumi = randi() % room_scene_EDown.size() 
-				if lastTag == "Down":
-					if room_scene_EDown.size() > 1 :
-						while true:
-							randNumi = randi() % room_scene_EDown.size()
-							if randNumi != lastRandValue:
-								break
-					else:
-						randNumi = randi() % room_scene_EDown.size()  
-				lastRandValue = randNumi
+				if room_scene_EDown.size() > 1 :
+					while true:
+						randNumi = randi() % room_scene_EDown.size()
+						if randNumi != lastRandValue_Down:
+							break
+				else:
+					randNumi = randi() % room_scene_EDown.size()  
+				lastRandValue_Down = randNumi
 				lastTag = "Down"
 				room = room_scene_EDown[randNumi].instantiate()
 				var spawner = room.get_node("Area2D")
@@ -100,6 +100,7 @@ func _ready():
 		var roomStart =  room.get_node("StartPoint")
 		var roomPortal = room.get_node("Portal")
 		roomPortal.portalActive = true
+		room.StartMovement()
 		lastRoom = true
 	if previous_exit.is_in_group("Down"):
 		room = portal_scene_EDown.instantiate()
@@ -107,6 +108,7 @@ func _ready():
 		var roomStart =  room.get_node("StartPoint")
 		var roomPortal = room.get_node("Portal")
 		roomPortal.portalActive = true
+		room.StartMovement()
 		lastRoom = true
 	
 	if previous_exit and room != null:
@@ -143,6 +145,9 @@ func update_all_navigation_regions():
 
 func _process(delta: float) -> void:
 	#print("EnemyLIst",Global.enemyList.size())
+	if Global.enemyList.size() <= 0 and !portalRoomFInish:
+		room.ResetMovement()
+		portalRoomFInish = true
 	"""if Global.enemyList.size() <= 0 and !lastRoom :
 		room = room_scene.instantiate()
 		add_child(room)

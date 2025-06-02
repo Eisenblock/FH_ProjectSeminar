@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://c13orlkubj3jr"]
+[gd_scene load_steps=15 format=3 uid="uid://c13orlkubj3jr"]
 
+[ext_resource type="Script" uid="uid://b2ybq1l4xp08a" path="res://DungeonRooms/FirstPrototypeRooms/portal_mapMovement.gd" id="1_g7uqs"]
 [ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://NichtSortiert/portal.tscn" id="2_c63tp"]
 [ext_resource type="Script" uid="uid://cv4sh7d5y3y3x" path="res://DungeonRooms/FirstPrototypeRooms/spawn_spells.gd" id="3_xeu2g"]
 [ext_resource type="PackedScene" uid="uid://ck6c2ethilv3r" path="res://NichtSortiert/Pick_UP_fireball.tscn" id="4_ld5bx"]
@@ -327,6 +328,8 @@ sources/2 = SubResource("TileSetAtlasSource_77rp7")
 sources/4 = SubResource("TileSetScenesCollectionSource_qn1wu")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_g7uqs")
+direction = Vector2(0, 1)
 
 [node name="StartPoint" type="Node2D" parent="."]
 position = Vector2(0, -206)

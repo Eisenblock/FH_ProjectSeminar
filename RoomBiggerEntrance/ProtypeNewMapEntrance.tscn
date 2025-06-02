@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_v3tf3"]
 [ext_resource type="PackedScene" uid="uid://pgawfm3o633l" path="res://NichtSortiert/PrototypeMap_Left_RIght_PLayer.tscn" id="3_f35c5"]
 [ext_resource type="PackedScene" uid="uid://cs4exb2561wom" path="res://RoomBiggerEntrance/Corridor/BiggerEntranceCorridor_Right_Down.tscn" id="4_bflw1"]
-[ext_resource type="PackedScene" uid="uid://d2etmhlvtl2cf" path="res://RoomBiggerEntrance/Rooms/BiggerEntrance_Right_Right-Clone.tscn" id="4_rfanu"]
+[ext_resource type="PackedScene" uid="uid://b84jxcc8lrydp" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Down_2.tscn" id="4_g14ru"]
 [ext_resource type="PackedScene" uid="uid://btqkf5spytsaa" path="res://RoomBiggerEntrance/Corridor/BiggerEntranceCorridor_Right_Right.tscn" id="5_1u8uk"]
-[ext_resource type="PackedScene" uid="uid://buul41irvl8te" path="res://RoomBiggerEntrance/Rooms/BiggerEntrance_Right_Right.tscn" id="5_l0ogh"]
-[ext_resource type="PackedScene" uid="uid://de0qirxto54vt" path="res://RoomBiggerEntrance/Rooms/BiggerEntrance_UP_Right.tscn" id="6_x8j1e"]
-[ext_resource type="PackedScene" uid="uid://isim04vfirtf" path="res://RoomBiggerEntrance/Rooms/BiggerEntrance_UP_Right_Clone.tscn" id="7_g14ru"]
+[ext_resource type="PackedScene" uid="uid://d2etmhlvtl2cf" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Right-Clone.tscn" id="5_n730f"]
+[ext_resource type="PackedScene" uid="uid://b7hvgcwmw0hfa" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Right_2.tscn" id="5_x8j1e"]
+[ext_resource type="PackedScene" uid="uid://de0qirxto54vt" path="res://RoomBiggerEntrance/Rooms/Down/BiggerEntrance_UP_Right.tscn" id="6_x8j1e"]
 [ext_resource type="PackedScene" uid="uid://c13orlkubj3jr" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap_DOwn.tscn" id="10_5cb85"]
 [ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="11_l65vt"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="12_to36k"]
@@ -339,8 +339,8 @@ script = ExtResource("1_8ltm4")
 room_scene = ExtResource("2_v3tf3")
 max_rooms = 1
 room_scene_Start = Array[PackedScene]([ExtResource("3_f35c5")])
-room_scene_ERight = Array[PackedScene]([ExtResource("4_rfanu"), ExtResource("5_l0ogh")])
-room_scene_EDown = Array[PackedScene]([ExtResource("6_x8j1e"), ExtResource("7_g14ru")])
+room_scene_ERight = Array[PackedScene]([ExtResource("4_g14ru"), ExtResource("5_n730f"), ExtResource("5_x8j1e")])
+room_scene_EDown = Array[PackedScene]([ExtResource("6_x8j1e"), ExtResource("6_x8j1e")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("4_bflw1"), ExtResource("5_1u8uk")])
 portal_scene_ERight = ExtResource("2_v3tf3")
 portal_scene_EDown = ExtResource("10_5cb85")
