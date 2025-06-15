@@ -21,6 +21,13 @@ var spawnUI
 @onready var canvas_layer_2: CanvasLayer = $CanvasLayer2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var progress_bar_2: ProgressBar = $ProgressBar2
+
+#all Timer
+var circleTime = 0
+var autoTime = 0
+var darkTime = 0
+var fireTime = 0
+
 var is_immune = false
 var immune_timer: Timer
 #Spell Active Bool
@@ -52,6 +59,13 @@ var dash_timer = 0.0
 var dash_cooldown_timer = 2
 var projectileAmount = 1
 var countProjectile = 0
+@onready var cd_spell: ProgressBar = $CD_Timer/CD_Spell
+@onready var progress_bar_test: ProgressBar = $ProgressBarTest
+var progress_bar_auto: ProgressBar 
+var castbar_fire 
+var castbar_cirle
+
+
 
 func _ready() -> void:
 	spawnUI = get_tree().get_first_node_in_group("spell_ui")
@@ -75,6 +89,10 @@ func _ready() -> void:
 	timerLifeReg.connect("timeout", self.DoLifeReg)
 	add_child(timerLifeReg) 
 	timerLifeReg.start()
+	cd_spell = get_tree().get_first_node_in_group("CastBar_Dark")
+	progress_bar_auto = get_tree().get_first_node_in_group("CastBar_Auto")
+	castbar_fire = get_tree().get_first_node_in_group("CastBar_Fire")
+	castbar_cirle = get_tree().get_first_node_in_group("CastBar_Circle")
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
@@ -131,7 +149,6 @@ func _physics_process(delta):
 	
 
 func _process(delta: float) -> void:
-	
 	#ActivateAbilityAttr()
 	if autoBall and !autoShootonCD :
 		StartAttacksRef(normalShootScene2,Global.autoShootAttribute,Callable(self, "ResetAttackTimerAuto"),"auto")
@@ -150,13 +167,37 @@ func _process(delta: float) -> void:
 	if bumerang and !BumerangShootonCD :
 		#SpawnBumerangBall()
 		StartAttacksRef(BumerangShootScene,Global.bumerangShootAttribute,Callable(self,"ResetAttackTimerBumerang"),"bumerang")
-	
+	DoTimerCD(delta)
+	if cd_spell == null :
+		cd_spell = get_tree().get_first_node_in_group("CastBar_Dark")
+		if cd_spell :
+			cd_spell.max_value = 5
+	if progress_bar_auto == null :
+		progress_bar_auto = get_tree().get_first_node_in_group("CastBar_Auto")
+		if progress_bar_auto :
+			progress_bar_auto.max_value = 4
+	if castbar_fire == null :
+		castbar_fire = get_tree().get_first_node_in_group("CastBar_Fire")
+		if castbar_fire :
+			castbar_fire.max_value = 5
+	if castbar_cirle == null :
+		castbar_cirle = get_tree().get_first_node_in_group("CastBar_Circle")
+		if castbar_cirle :
+			castbar_cirle.max_value = 6
 	if healthBar :
 		health = Global.life_player
 		healthBar.value = health
 	if progress_bar_2 :
 		progress_bar_2.value = dash_cooldown_timer
 	#camera_2d.position = global_position
+	if cd_spell :
+		cd_spell.value = darkTime
+	if progress_bar_auto :
+		progress_bar_auto.value = autoTime
+	if castbar_cirle :
+		castbar_cirle.value = circleTime
+	if castbar_fire :
+		castbar_fire.value = fireTime
 
 func spawnCircleShoot() :  
 	var radius = 80
@@ -314,16 +355,17 @@ func ActivateAbilityAttr():
 func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_method_param: Callable, nameAbility : String):
 	attack_method = attack_method_param  # Speichere die übergebene Methode
 	var timerRef = null
+	var cast_time
 	timerRef = Timer.new()
 	add_child(timerRef)
 	if dicRef.has("cooldown"):
 		var temp_instance = shotSceneRef.instantiate()
-		var cast_time = temp_instance.castTime - dicRef["cooldown"]
+		cast_time = temp_instance.castTime - dicRef["cooldown"]
 		timerRef.wait_time = cast_time
 		temp_instance.queue_free() 
 	else :
 		var temp_instance = shotSceneRef.instantiate()
-		var cast_time = temp_instance.castTime
+		cast_time = temp_instance.castTime
 		temp_instance.queue_free()
 		timerRef.wait_time = cast_time 
 	timerRef.one_shot = true
@@ -331,18 +373,31 @@ func StartAttacksRef(shotSceneRef: PackedScene, dicRef: Dictionary, attack_metho
 	timerRef.start()
 	
 	if nameAbility == "circle" and circleBall and !circleShootonCD:
+		if castbar_cirle :
+			castbar_cirle.max_value = cast_time
+		circleTime = 0
 		circleShootonCD = true
 		timercirleShoot = timerRef 
 		spawnCircleShoot()
 	if nameAbility == "fire" and fireBall and !fireShootonCD:
+		fireTime = 0
+		if castbar_fire :
+			castbar_fire.max_value = cast_time
 		fireShootonCD = true
 		timerfireShoot = timerRef 
 		spawnFireShoot()
 	if nameAbility == "auto" and  !autoShootonCD :
+		if progress_bar_auto :
+			progress_bar_auto.max_value = cast_time
+		autoTime = cast_time
 		autoShootonCD = true
 		timerautoShoot = timerRef
 		spawnAutoShoot()
 	if nameAbility == "dark" and  !darkShootonCD:
+		if cd_spell:
+			cd_spell.max_value = cast_time
+		darkTime = cast_time
+		print("Spawn-------------------",darkTime)
 		darkShootonCD = true
 		timerdarkShoot = timerRef
 		SPawnDarkBall()
@@ -416,3 +471,9 @@ func _end_immunity():
 	immune_timer.queue_free()  # Timer löschen
 	immune_timer = null
 	print("Immunität ist vorbei")
+
+func DoTimerCD(deltaTime):
+	fireTime += deltaTime
+	circleTime += deltaTime
+	darkTime -= deltaTime
+	autoTime -= deltaTime

@@ -1,14 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://bos0girf0pbw1"]
+[gd_scene load_steps=28 format=3 uid="uid://bos0girf0pbw1"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://NichtSortiert/game_state.gd" id="1_8ltm4"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_v3tf3"]
 [ext_resource type="PackedScene" uid="uid://pgawfm3o633l" path="res://NichtSortiert/PrototypeMap_Left_RIght_PLayer.tscn" id="3_f35c5"]
 [ext_resource type="PackedScene" uid="uid://cs4exb2561wom" path="res://RoomBiggerEntrance/Corridor/BiggerEntranceCorridor_Right_Down.tscn" id="4_bflw1"]
-[ext_resource type="PackedScene" uid="uid://b84jxcc8lrydp" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Down_2.tscn" id="4_g14ru"]
+[ext_resource type="PackedScene" uid="uid://d2msa7e3rbrm8" path="res://RoomBiggerEntrance/Rooms/Right2/BiggerEntrance_Right_Right2-Clone.tscn" id="4_n730f"]
 [ext_resource type="PackedScene" uid="uid://btqkf5spytsaa" path="res://RoomBiggerEntrance/Corridor/BiggerEntranceCorridor_Right_Right.tscn" id="5_1u8uk"]
-[ext_resource type="PackedScene" uid="uid://d2etmhlvtl2cf" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Right-Clone.tscn" id="5_n730f"]
-[ext_resource type="PackedScene" uid="uid://b7hvgcwmw0hfa" path="res://RoomBiggerEntrance/Rooms/Right/BiggerEntrance_Right_Right_2.tscn" id="5_x8j1e"]
-[ext_resource type="PackedScene" uid="uid://de0qirxto54vt" path="res://RoomBiggerEntrance/Rooms/Down/BiggerEntrance_UP_Right.tscn" id="6_x8j1e"]
+[ext_resource type="PackedScene" uid="uid://d2etmhlvtl2cf" path="res://RoomBiggerEntrance/Rooms/Right2/BiggerEntrance_Right_Right-Clone.tscn" id="5_n730f"]
+[ext_resource type="PackedScene" uid="uid://d3iyrfus3nvtr" path="res://RoomBiggerEntrance/Rooms/Right2/BiggerEntrance_Right_Right3-Clone.tscn" id="5_pmnfb"]
+[ext_resource type="PackedScene" uid="uid://de0qirxto54vt" path="res://RoomBiggerEntrance/Rooms/Down2/BiggerEntrance_UP_Right.tscn" id="6_x8j1e"]
+[ext_resource type="PackedScene" uid="uid://cph1y6wmewq0o" path="res://RoomBiggerEntrance/Rooms/Down2/BiggerEntrance_UP_Right2.tscn" id="7_dx575"]
+[ext_resource type="PackedScene" uid="uid://dnjs73exl4ivr" path="res://RoomBiggerEntrance/Rooms/Down2/BiggerEntrance_UP_Right3.tscn" id="8_yj35k"]
 [ext_resource type="PackedScene" uid="uid://c13orlkubj3jr" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap_DOwn.tscn" id="10_5cb85"]
 [ext_resource type="Texture2D" uid="uid://dn6loa1a0oc2n" path="res://Assets/sprite_UI0.png" id="11_l65vt"]
 [ext_resource type="PackedScene" uid="uid://bkv378lw3o8u6" path="res://UI/spawn_spell_ui.tscn" id="12_to36k"]
@@ -339,15 +341,14 @@ script = ExtResource("1_8ltm4")
 room_scene = ExtResource("2_v3tf3")
 max_rooms = 1
 room_scene_Start = Array[PackedScene]([ExtResource("3_f35c5")])
-room_scene_ERight = Array[PackedScene]([ExtResource("4_g14ru"), ExtResource("5_n730f"), ExtResource("5_x8j1e")])
-room_scene_EDown = Array[PackedScene]([ExtResource("6_x8j1e"), ExtResource("6_x8j1e")])
+room_scene_ERight = Array[PackedScene]([ExtResource("4_n730f"), ExtResource("5_pmnfb"), ExtResource("5_n730f")])
+room_scene_EDown = Array[PackedScene]([ExtResource("7_dx575"), ExtResource("8_yj35k"), ExtResource("6_x8j1e")])
 corridor_scene_ERight = Array[PackedScene]([ExtResource("4_bflw1"), ExtResource("5_1u8uk")])
 portal_scene_ERight = ExtResource("2_v3tf3")
 portal_scene_EDown = ExtResource("10_5cb85")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -388,11 +389,19 @@ text = "Exp Points :"
 metadata/_edit_use_anchors_ = true
 
 [node name="learnedAbilitys" type="Label" parent="CanvasLayer"]
-offset_left = 264.0
-offset_top = 151.0
-offset_right = 393.0
-offset_bottom = 174.0
-text = "learned Abilitys :"
+offset_left = 464.0
+offset_top = 143.0
+offset_right = 593.0
+offset_bottom = 166.0
+text = "learned Abilities :"
+metadata/_edit_use_anchors_ = true
+
+[node name="avaibleABILITY" type="Label" parent="CanvasLayer"]
+offset_left = 261.0
+offset_top = 141.0
+offset_right = 390.0
+offset_bottom = 164.0
+text = "avaible Abilities :"
 metadata/_edit_use_anchors_ = true
 
 [node name="Details" type="Label" parent="CanvasLayer"]
@@ -434,6 +443,13 @@ offset_bottom = 162.0
 text = "None"
 
 [node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer" groups=["Ability_box"]]
+offset_left = 464.0
+offset_top = 190.0
+offset_right = 504.0
+offset_bottom = 230.0
+theme_override_constants/separation = 35
+
+[node name="avaibleAbility" type="VBoxContainer" parent="CanvasLayer" groups=["Ability_avaibleAbility"]]
 offset_left = 264.0
 offset_top = 198.0
 offset_right = 304.0
@@ -516,5 +532,13 @@ theme_override_fonts/font = ExtResource("17_0e0v8")
 theme_override_font_sizes/font_size = 12
 text = "Stage : 10"
 script = ExtResource("21_swenf")
+
+[node name="Cd_TimerBox" type="HBoxContainer" parent="UI_DuringPlayTime"]
+offset_left = 343.0
+offset_top = 638.0
+offset_right = 1287.0
+offset_bottom = 678.0
+scale = Vector2(0.62, 0.62)
+theme_override_constants/separation = 250
 
 [connection signal="pressed" from="CanvasLayer2/Button" to="CanvasLayer2/Button" method="_on_pressed"]

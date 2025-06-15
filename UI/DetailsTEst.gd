@@ -34,7 +34,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if label :
-		label.text = " c:" + str(addCost)
+		label.text = "  ->" + str(addCost)
 
 func addAttrNormal():
 	if Global.expAmount >= addCost:

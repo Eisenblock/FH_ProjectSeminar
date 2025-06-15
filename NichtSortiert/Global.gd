@@ -17,6 +17,7 @@ var global_maxRooms = 0
 var life_player = 20
 var count_stage = 0
 var enemy_kills = 0
+var bosslifeIncrease = 0
 #WeakEnemy
 var enemyCount_small_min = 2
 var enemyCount_small_max = 3
@@ -117,6 +118,7 @@ var availableAttributes_higher = {
 		"count": 3,      
 			}
 	}
+
 func ResetValues() :
 	autoShootAttribute.clear()
 	fireballShootAttribute.clear()

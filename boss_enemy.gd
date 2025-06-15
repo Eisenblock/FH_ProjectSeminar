@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var health : float = 5000
+var health : float = 4000
 var start_health = 0
 var timerBeam = 0
 var timerBombs = 0
@@ -30,6 +30,7 @@ var allBlock_tilemaps = null
 func _ready() -> void:
 	allMove_tilemaps = get_tree().get_nodes_in_group("TileMap_Move")
 	allBlock_tilemaps = get_tree().get_nodes_in_group("BlockedField")
+	health = health + Global.bosslifeIncrease
 	start_health = health
 	if progress_bar_life :
 		progress_bar_life.max_value = start_health
@@ -148,6 +149,7 @@ func ResetColor():
 	animated_sprite_2d.self_modulate = Color.WHITE
 
 func DoDeath():
+	Global.bosslifeIncrease += 2000
 	queue_free()
 
 func Enrage():

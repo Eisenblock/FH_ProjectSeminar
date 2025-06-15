@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://buul41irvl8te"]
+[gd_scene load_steps=12 format=3 uid="uid://i3mrsyr8nh21"]
 
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_7xkxq"]
 [ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://NichtSortiert/node_2dTeest.tscn" id="2_4mgpl"]

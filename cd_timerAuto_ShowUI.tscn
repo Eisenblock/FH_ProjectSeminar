@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxnjik7cqu68y"]
+
+[ext_resource type="FontFile" uid="uid://bm1g6w65ittlo" path="res://Assets/PixelOperator8.ttf" id="1_mt7hc"]
+[ext_resource type="Texture2D" uid="uid://cfvtj7kuc15ai" path="res://Assets/New Piskel-1.png (4).png" id="2_vorrn"]
+[ext_resource type="Texture2D" uid="uid://c658ijfhbbdoc" path="res://Assets/Spells/pixelart_spells/Pixelart Spells/PNG Files/Fireball.png" id="3_mt7hc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vorrn"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnj5m"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pd6u"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq4xk"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rljl2"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5poso"]
+atlas = ExtResource("3_mt7hc")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77qlr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vorrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnj5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pd6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pq4xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rljl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5poso")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CD_Timer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = -1278.0
+offset_bottom = -722.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="cd_spellBarFire" type="ProgressBar" parent="." groups=["CastBar_Fire"]]
+z_index = 1
+layout_mode = 0
+offset_left = -37.9229
+offset_top = 8.78943
+offset_right = 16.0771
+offset_bottom = 35.7894
+scale = Vector2(1.49205, 1.30247)
+theme_override_fonts/font = ExtResource("1_mt7hc")
+
+[node name="Box" type="Sprite2D" parent="."]
+position = Vector2(0.0770569, -1.21063)
+scale = Vector2(1.84616, 1.86842)
+texture = ExtResource("2_vorrn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(2, -18)
+scale = Vector2(4.05667, 3.72003)
+sprite_frames = SubResource("SpriteFrames_77qlr")

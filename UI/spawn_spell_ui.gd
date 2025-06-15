@@ -8,7 +8,6 @@ extends Node2D
 @export var buttonObject2 : PackedScene
 @onready var exp_points: Label = $"../CanvasLayer/ExpPoints"
 @onready var v_box_container_2: VBoxContainer = $"../CanvasLayer/VBoxContainer2"
-
 @export var UI_Details_text = load("res://UI/UI_SkillSystem/DetailsValue.tscn")
 @export var UI_Details_text_emphty = load("res://UI/UI_SkillSystem/DetailsValue_empthy.tscn")
 @export var UI_Details_text_emphty_higher = load("res://UI/UI_SkillSystem/DetailsValue_empthy_higher.tscn")
@@ -23,6 +22,13 @@ extends Node2D
 @export var UI_Circle_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle.tscn")
 @export var UI_circle_Show_Button_empty : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle_empty.tscn")
 @export var UI_chest_Show_Button : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowChest.tscn")
+@onready var cd_timer_box: HBoxContainer = $"../UI_DuringPlayTime/Cd_TimerBox"
+@onready var avaible_ability: VBoxContainer = $"../CanvasLayer/avaibleAbility"
+
+var UITimerDark : PackedScene = load("res://cd_timer_ShowUI.tscn")
+var UITImerAuto: PackedScene = load("res://cd_timerFire_ShowUI.tscn")
+var UITImerCircle: PackedScene = load("res://cd_timercircle_ShowUI.tscn")
+var UITimerFire : PackedScene= load("res://cd_timerAuto_ShowUI.tscn")
 var details_Object
 var upgradeCost = [5,10,15,20,"Max"]
 var upgradeCost_higher = [10,20,"Max"]
@@ -71,6 +77,7 @@ var availableAttributes_Armor = {
 	}
 func _ready() -> void:
 	DoDetails()
+	SetTimerAbility()
 	current_attribute = Global.ChestAttribute
 	#updateTextFieldsRef(Global.autoShootAttribute, "autoShoot",Global.countAttrOnAuto,UI_Auto,UI_Auto_Button)
 	if Global.learned_abilities.has("fireball"):
@@ -94,7 +101,7 @@ func _ready() -> void:
 
 func SpawmButtonShow(buttonRef):
 	var button_instance = buttonRef.instantiate()
-	h_box_container.add_child(button_instance)
+	avaible_ability.add_child(button_instance)
 	#button_instance.position = Vector2(-355.0, -158.0 + 0)
 	button_instance.position = Vector2(100.0 + a * 60, -158.0 )
 	button_instance.scale = Vector2(0.2, 0.2)
@@ -225,11 +232,13 @@ func _process(delta: float) -> void:
 		if !isInInterface :
 			isInInterface = true
 			canvas_layer.visible = true
+			cd_timer_box.visible = false
 			var arrayChild = get_tree().get_nodes_in_group("spell_ui")  # Spiel pausieren
 			get_tree().paused = true
 		else :
 			isInInterface = false
 			canvas_layer.visible = false
+			cd_timer_box.visible = true
 			get_tree().paused = false
 	"""
 	if Input.is_action_just_pressed("TestInput"):
@@ -242,7 +251,10 @@ func _process(delta: float) -> void:
 			SwitchAttribute(Global.autoShootAttribute,"circleShoot",Global.countAttrOnCircle)
 			isSwitch = false
 			label.text = "CircleShoot"
-"""
+	"""
+	
+
+
 
 func SwitchAttribute(dicRef : Dictionary, name : String):
 	current_attribute = dicRef
@@ -412,3 +424,21 @@ func DoEmpthyDetails(refBool : bool,refDic_Global : Dictionary):
 			details_Object.current_attr = attr
 			details_Object.current_Dic = current_Dic_name
 		v_box_container_2.add_child(details_Object)
+
+
+func SetTimerAbility():
+	var children = cd_timer_box.get_children()
+	for child in children :
+		child.queue_free()
+	if Global.learned_abilities.has("fireball"):
+		var instance = UITimerFire.instantiate()
+		cd_timer_box.add_child(instance)
+	if Global.learned_abilities.has("circleball"):
+		var instance = UITImerCircle.instantiate()
+		cd_timer_box.add_child(instance)
+	if Global.learned_abilities.has("darkball"):
+		var instance = UITimerDark.instantiate()
+		cd_timer_box.add_child(instance)
+	if Global.learned_abilities.has("auto"):
+		var instance = UITImerAuto.instantiate()
+		cd_timer_box.add_child(instance)

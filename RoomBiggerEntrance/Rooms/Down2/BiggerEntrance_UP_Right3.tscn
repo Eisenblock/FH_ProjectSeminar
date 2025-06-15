@@ -1,17 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://de0qirxto54vt"]
+[gd_scene load_steps=16 format=3 uid="uid://dnjs73exl4ivr"]
 
-[ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_3slo2"]
-[ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://NichtSortiert/node_2dTeest.tscn" id="2_7aauu"]
-[ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="3_v57br"]
-[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="4_xw0cj"]
-[ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://NichtSortiert/torch.tscn" id="5_6aren"]
-[ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://NichtSortiert/torch2.tscn" id="6_ao1ue"]
+[ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_vlubs"]
+[ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://NichtSortiert/node_2dTeest.tscn" id="2_t325l"]
+[ext_resource type="Script" uid="uid://ffiu7xffi5qt" path="res://DungeonRooms/EDown/spawnInArea.gd" id="3_khx0u"]
+[ext_resource type="PackedScene" uid="uid://dnq0jg5uun2v0" path="res://Enemy/Weakenemy.tscn" id="4_emr00"]
+[ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://NichtSortiert/torch.tscn" id="5_nqc3p"]
+[ext_resource type="PackedScene" uid="uid://bmvsed8p4apdu" path="res://NichtSortiert/torch2.tscn" id="6_hbefk"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nwp7"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ic6ok"]
-texture = ExtResource("1_3slo2")
+texture = ExtResource("1_vlubs")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, -5.39576, -5.93534, -5.2159, -5.75548, 8)
 1:0/0 = 0
@@ -309,7 +309,7 @@ texture = ExtResource("1_3slo2")
 11:21/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f5ghu"]
-scenes/1/scene = ExtResource("2_7aauu")
+scenes/1/scene = ExtResource("2_t325l")
 
 [sub_resource type="TileSet" id="TileSet_i3ca5"]
 occlusion_layer_0/light_mask = 1
@@ -329,7 +329,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-378, -321, 439, -317, 
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iot33"]
-texture = ExtResource("1_3slo2")
+texture = ExtResource("1_vlubs")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, -5.39576, -5.93534, -5.2159, -5.75548, 8)
 1:0/0 = 0
@@ -626,7 +626,7 @@ texture = ExtResource("1_3slo2")
 11:21/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_etlac"]
-scenes/1/scene = ExtResource("2_7aauu")
+scenes/1/scene = ExtResource("2_t325l")
 
 [sub_resource type="TileSet" id="TileSet_k8vf7"]
 occlusion_layer_0/light_mask = 1
@@ -658,8 +658,8 @@ position = Vector2(687, 31)
 [node name="Area2D" type="Area2D" parent="."]
 texture_filter = 1
 position = Vector2(61, -3)
-script = ExtResource("3_v57br")
-enemy_scene = ExtResource("4_xw0cj")
+script = ExtResource("3_khx0u")
+enemy_scene = ExtResource("4_emr00")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 texture_filter = 1
@@ -670,47 +670,47 @@ disabled = true
 [node name="Area2D2" type="Area2D" parent="." groups=["Wall"]]
 texture_filter = 1
 
-[node name="Node2D" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(-538, 115)
 
-[node name="Node2D2" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D2" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(-238, 115)
 
-[node name="Node2D3" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D3" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(43, 119)
 
-[node name="Node2D4" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D4" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(367, 109)
 
-[node name="Node2D5" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D5" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(345, 382)
 
-[node name="Node2D6" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D6" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(-232, 401)
 
-[node name="Node2D7" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D7" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(-299, -106)
 
-[node name="Node2D8" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D8" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(-189, -277)
 
-[node name="Node2D9" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D9" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(263, -277)
 
-[node name="Node2D10" parent="." instance=ExtResource("5_6aren")]
+[node name="Node2D10" parent="." instance=ExtResource("5_nqc3p")]
 texture_filter = 1
 position = Vector2(149, -68)
 
-[node name="Node2D11" parent="." instance=ExtResource("6_ao1ue")]
+[node name="Node2D11" parent="." instance=ExtResource("6_hbefk")]
 texture_filter = 1
 position = Vector2(-753, 220)
 scale = Vector2(4, 4)
@@ -719,7 +719,7 @@ scale = Vector2(4, 4)
 texture_filter = 1
 navigation_polygon = SubResource("NavigationPolygon_fbjjk")
 
-[node name="Node2D14" parent="." instance=ExtResource("6_ao1ue")]
+[node name="Node2D14" parent="." instance=ExtResource("6_hbefk")]
 texture_filter = 1
 position = Vector2(99, 571)
 

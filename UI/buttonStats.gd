@@ -35,6 +35,7 @@ extends Button
 @export var UI_ShowAuto_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowAuto_empty.tscn")
 @export var UI_ShowCircle_Empthy : PackedScene = load("res://UI/UI_SkillSystem/UI_Abilitys/button_ShowCircle_empty.tscn")
 @onready var h_box_container: VBoxContainer = $"../HBoxContainer"
+@onready var avaible_ability: Label = $CanvasLayer/avaibleABILITY
 
 var changeCost = 4
 var upgradeCost = 5
@@ -431,6 +432,7 @@ func _on_pressedAuto() -> void:
 			instance.position = self.position
 			var box = get_tree().get_first_node_in_group("Ability_box")
 			box.add_child(instance)
+			spawn_spell_ui.SetTimerAbility()
 			self.queue_free()
 		else:
 			print("Kein Player gefunden!")
@@ -452,6 +454,7 @@ func _on_pressedCircle() -> void:
 			instance.position = self.position
 			var box = get_tree().get_first_node_in_group("Ability_box")
 			box.add_child(instance)
+			spawn_spell_ui.SetTimerAbility()
 			self.queue_free()
 		else:
 			print("Kein Player gefunden!")
@@ -474,6 +477,7 @@ func _on_pressedDark() -> void:
 			instance.position = self.position
 			var box = get_tree().get_first_node_in_group("Ability_box")
 			box.add_child(instance)
+			spawn_spell_ui.SetTimerAbility()
 			self.queue_free()
 		else:
 			print("Kein Player gefunden!")
@@ -494,6 +498,7 @@ func _on_pressedFire() -> void:
 			instance.position = self.position
 			var box = get_tree().get_first_node_in_group("Ability_box")
 			box.add_child(instance)
+			spawn_spell_ui.SetTimerAbility()
 			self.queue_free()
 		else:
 			print("Kein Player gefunden!")
@@ -511,9 +516,11 @@ func _on_reste_ability_pressedResetAbilityFire() -> void:
 		spawn_spell_ui.ClearDetails()
 		current_spekk.text = "None"
 		var instance = UI_ShowFire_Empthy.instantiate()
-		instance.position = self.position
-		var box = get_tree().get_first_node_in_group("Ability_box")
+		#instance.position = self.position
+		var box = get_tree().get_first_node_in_group("Ability_avaibleAbility")
+		print("Box gefunden:", box)
 		box.add_child(instance)
+		spawn_spell_ui.SetTimerAbility()
 		self.queue_free()
 	else:
 		print("Kein Player gefunden!")
@@ -531,8 +538,9 @@ func _on_reste_ability_pressedResetAbilityDark() -> void:
 		current_spekk.text = "None"
 		var instance = UI_ShowDark_Empthy.instantiate()
 		instance.position = self.position
-		var box = get_tree().get_first_node_in_group("Ability_box")
+		var box = get_tree().get_first_node_in_group("Ability_avaibleAbility")
 		box.add_child(instance)
+		spawn_spell_ui.SetTimerAbility()
 		self.queue_free()
 	else:
 		print("Kein Player gefunden!")
@@ -550,8 +558,9 @@ func _on_reste_ability_pressedResetAbilityCircle() -> void:
 		current_spekk.text = "None"
 		var instance = UI_ShowCircle_Empthy.instantiate()
 		instance.position = self.position
-		var box = get_tree().get_first_node_in_group("Ability_box")
+		var box = get_tree().get_first_node_in_group("Ability_avaibleAbility")
 		box.add_child(instance)
+		spawn_spell_ui.SetTimerAbility()
 		self.queue_free()
 	else:
 		print("Kein Player gefunden!")
@@ -569,8 +578,9 @@ func _on_reste_ability_pressedResetAbilityAuto() -> void:
 		current_spekk.text = "None"
 		var instance = UI_ShowAuto_Empthy.instantiate()
 		instance.position = self.position
-		var box = get_tree().get_first_node_in_group("Ability_box")
+		var box = get_tree().get_first_node_in_group("Ability_avaibleAbility")
 		box.add_child(instance)
+		spawn_spell_ui.SetTimerAbility()
 		self.queue_free()
 	else:
 		print("Kein Player gefunden!")

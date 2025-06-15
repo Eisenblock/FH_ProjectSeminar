@@ -11,6 +11,7 @@ extends Node2D
 @export var corridor_scene_EDown: Array[PackedScene]
 @export var portal_scene_ERight: PackedScene
 @export var portal_scene_EDown: PackedScene
+var growth_factor := 1.5  # z.B. 20 % pro Stufe
 var previous_exit = null
 var room = null
 var room_exit = null
@@ -46,6 +47,7 @@ func _ready():
 				lastRandValue_Right = randNumi
 				lastTag = "Right"
 				room = room_scene_ERight[randNumi].instantiate()
+				room_scene_ERight.erase(randNumi)
 				var spawner = room.get_node("Area2D")
 				add_child(room)
 			if previous_exit.is_in_group("Down"):
@@ -100,7 +102,7 @@ func _ready():
 		var roomStart =  room.get_node("StartPoint")
 		var roomPortal = room.get_node("Portal")
 		roomPortal.portalActive = true
-		room.StartMovement()
+		#room.StartMovement()
 		lastRoom = true
 	if previous_exit.is_in_group("Down"):
 		room = portal_scene_EDown.instantiate()
@@ -108,23 +110,25 @@ func _ready():
 		var roomStart =  room.get_node("StartPoint")
 		var roomPortal = room.get_node("Portal")
 		roomPortal.portalActive = true
-		room.StartMovement()
+		#room.StartMovement()
 		lastRoom = true
 	
 	if previous_exit and room != null:
 		var room_start = room.get_node("StartPoint")
 		room.position = previous_exit.global_position - room_start.position
 	
-	#WeakEnemy
-	Global.enemyCount_small_min += 1
-	Global.enemyCount_small_max += 3
-	#MediumENemy
-	Global.enemyCount_medium_min += 1
-	Global.enemyCount_medium_max += 2
-	#Highenemy
-	if Global.count_stage >=  1:
-		Global.enemyCount_High_min += 1
-		Global.enemyCount_High_max += 2
+	# Weak Enemy
+	Global.enemyCount_small_min = ceil(1 * pow(growth_factor, Global.count_stage))
+	Global.enemyCount_small_max = ceil(3 * pow(growth_factor, Global.count_stage))
+
+	# Medium Enemy
+	Global.enemyCount_medium_min = ceil(1 * pow(growth_factor, Global.count_stage))
+	Global.enemyCount_medium_max = ceil(2 * pow(growth_factor, Global.count_stage))
+
+	# High Enemy (erst ab Stufe 1)
+	if Global.count_stage >= 1:
+		Global.enemyCount_High_min = ceil(1 * pow(growth_factor, Global.count_stage - 1))
+		Global.enemyCount_High_max = ceil(2 * pow(growth_factor, Global.count_stage - 1))
 	#More Rooms
 	if max_rooms == 3 :
 		max_rooms = 3
@@ -145,9 +149,9 @@ func update_all_navigation_regions():
 
 func _process(delta: float) -> void:
 	#print("EnemyLIst",Global.enemyList.size())
-	if Global.enemyList.size() <= 0 and !portalRoomFInish:
+	"""if Global.enemyList.size() <= 0 and !portalRoomFInish:
 		room.ResetMovement()
-		portalRoomFInish = true
+		portalRoomFInish = true"""
 	"""if Global.enemyList.size() <= 0 and !lastRoom :
 		room = room_scene.instantiate()
 		add_child(room)

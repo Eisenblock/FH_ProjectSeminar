@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8t1ml023lejq"]
+
+[ext_resource type="Script" uid="uid://ba7qcoxe3j7vl" path="res://test_cd_visibility.gd" id="1_vyt0c"]
+
+[node name="TestCDVisibility" type="Node2D"]
+script = ExtResource("1_vyt0c")

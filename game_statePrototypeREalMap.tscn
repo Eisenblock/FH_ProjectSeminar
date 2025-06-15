@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cbso1ifet0uho"]
+[gd_scene load_steps=35 format=3 uid="uid://cbso1ifet0uho"]
 
 [ext_resource type="Script" uid="uid://cspi1gqomdnx1" path="res://NichtSortiert/game_state.gd" id="1_i2igu"]
 [ext_resource type="PackedScene" uid="uid://clwe8ycu5xnbs" path="res://DungeonRooms/FirstPrototypeRooms/PortalMap.tscn" id="2_jprbj"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://rbvdx01hqr3f" path="res://NichtSortiert/enemy_kills_label.gd" id="19_tpi50"]
 [ext_resource type="Script" uid="uid://dx3i15m3yif7j" path="res://NichtSortiert/stage_label.gd" id="20_7nj6o"]
 [ext_resource type="Script" uid="uid://cct0o1ydath71" path="res://NichtSortiert/current_exp_label.gd" id="20_axm0a"]
+[ext_resource type="Texture2D" uid="uid://cfvtj7kuc15ai" path="res://Assets/New Piskel-1.png (4).png" id="22_v81qt"]
+[ext_resource type="Texture2D" uid="uid://blarfhy5xca6j" path="res://Assets/Spells/pixelart_spells/Pixelart Spells/PNG Files/Arcane Bolt.png" id="23_ef8he"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nwp7"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -334,6 +336,56 @@ custom_data_layer_0/type = 0
 sources/2 = SubResource("TileSetAtlasSource_00m1j")
 sources/4 = SubResource("TileSetScenesCollectionSource_tpi50")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eaiuf"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uk6s"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjvad"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p867l"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwu3w"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg0hk"]
+atlas = ExtResource("23_ef8he")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f8pw3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eaiuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uk6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjvad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p867l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwu3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg0hk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="GameState" type="Node2D"]
 script = ExtResource("1_i2igu")
 room_scene = ExtResource("2_jprbj")
@@ -515,5 +567,36 @@ theme_override_fonts/font = ExtResource("18_naqpu")
 theme_override_font_sizes/font_size = 12
 text = "Stage : 10"
 script = ExtResource("20_7nj6o")
+
+[node name="CD_Timer" type="Control" parent="UI_DuringPlayTime"]
+z_index = 4
+layout_mode = 3
+anchors_preset = 0
+offset_left = 298.0
+offset_top = 600.0
+offset_right = 338.0
+offset_bottom = 640.0
+
+[node name="CD_Spell" type="ProgressBar" parent="UI_DuringPlayTime/CD_Timer"]
+z_index = 4
+layout_mode = 0
+offset_left = -38.9231
+offset_top = 14.7894
+offset_right = 15.0769
+offset_bottom = 41.7894
+scale = Vector2(1.49205, 1.30247)
+theme_override_fonts/font = ExtResource("18_naqpu")
+
+[node name="Box" type="Sprite2D" parent="UI_DuringPlayTime/CD_Timer"]
+z_index = 3
+position = Vector2(-0.922974, 4.78949)
+scale = Vector2(1.84616, 1.86842)
+texture = ExtResource("22_v81qt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI_DuringPlayTime/CD_Timer"]
+z_index = 3
+position = Vector2(1.07703, -10.2105)
+scale = Vector2(4.05667, 3.72003)
+sprite_frames = SubResource("SpriteFrames_f8pw3")
 
 [connection signal="pressed" from="CanvasLayer2/Button" to="CanvasLayer2/Button" method="_on_pressed"]
