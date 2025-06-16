@@ -467,7 +467,10 @@ func load_abilities():
 func _end_immunity():
 	is_immune = false
 	animated_sprite_2d.modulate = Color.WHITE
-	progressBar.self_modulate = Color("#00ff00")
+	if Global.life_player >= 11 :
+		progressBar.self_modulate = Color("#00ff00")
+	if Global.life_player <= 10 :
+		progressBar.self_modulate = Color("#FFFF00")
 	immune_timer.queue_free()  # Timer löschen
 	immune_timer = null
 	print("Immunität ist vorbei")

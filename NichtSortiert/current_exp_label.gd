@@ -9,4 +9,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var enemyScore = Global.expAmount
-	self.text = "Current Exp: " + str(enemyScore)
+	self.text = "Current Gold: " + str(enemyScore)

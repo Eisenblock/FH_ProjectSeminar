@@ -16,6 +16,7 @@ func _on_KillTimer_timeout() -> void:
 	if explode:
 		var explosion_instance = explode.instantiate()
 		explosion_instance.global_position = global_position
+		explosion_instance.dmg = 2
 		get_parent().add_child(explosion_instance)
 
 	# Dieses Objekt entfernen

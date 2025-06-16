@@ -362,10 +362,10 @@ func PrintActiveAttr(dicRef:Dictionary) :
 			b+=1
 		else:
 			if attr == "count" or attr == "pierce_count" :
-				nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost_higher[cost_type_upgrade])]
+				nodeUpgradeButton.text = "->%s\n\t->%s" % [str(DicTier2[attr]), str(upgradeCost_higher[cost_type_upgrade])]
 				details_Object.addCost = 8
 			else :
-				nodeUpgradeButton.text = "->%s\n c:%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
+				nodeUpgradeButton.text = "->%s\n                   ->%s" % [str(DicTier2[attr]), str(upgradeCost[cost_type_upgrade])]
 				details_Object.addCost = 4
 			details_Object.posInDic = b
 			b+=1

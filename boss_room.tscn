@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://5i7xxnws6rwm"]
+[gd_scene load_steps=32 format=3 uid="uid://5i7xxnws6rwm"]
 
 [ext_resource type="Texture2D" uid="uid://d1hds1cxhj63s" path="res://Assets/sewer_1.png" id="1_n8ie0"]
 [ext_resource type="PackedScene" uid="uid://cht3874ul1dnw" path="res://NichtSortiert/node_2dTeest.tscn" id="2_chy0o"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bhjik14bqa4yu" path="res://start_boss_fight.gd" id="20_40hin"]
 [ext_resource type="PackedScene" uid="uid://qmfr7qftyh4r" path="res://NichtSortiert/portal.tscn" id="20_q33mc"]
 [ext_resource type="PackedScene" uid="uid://dd1tnjick3xt1" path="res://NichtSortiert/torch.tscn" id="21_q33mc"]
+[ext_resource type="Texture2D" uid="uid://ox61fxrxii4f" path="res://Assets/4.png" id="22_fh3t8"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0nwp7"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -718,93 +719,6 @@ polygon = PackedVector2Array(-705, -93, -707, 226, -385, 226, -383, 357, 521, 35
 [node name="Boss_enemy" parent="." groups=["Boss"] instance=ExtResource("6_l6v35")]
 position = Vector2(674, 5)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-visible = false
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 383.0
-offset_top = 197.0
-offset_right = 423.0
-offset_bottom = 237.0
-
-[node name="Control3" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 383.0
-offset_top = 197.0
-offset_right = 423.0
-offset_bottom = 237.0
-
-[node name="SpriteUi0" type="Sprite2D" parent="CanvasLayer/Control3"]
-position = Vector2(269, 164)
-scale = Vector2(7.83349, 4.6)
-texture = ExtResource("6_e0o7y")
-
-[node name="ExpPoints" type="Label" parent="CanvasLayer"]
-offset_left = 337.0
-offset_top = 101.0
-offset_right = 377.0
-offset_bottom = 124.0
-
-[node name="Text_ExpPoints" type="Label" parent="CanvasLayer"]
-offset_left = 226.0
-offset_top = 98.0
-offset_right = 315.0
-offset_bottom = 121.0
-text = "Exp Points :"
-
-[node name="learnedAbilitys" type="Label" parent="CanvasLayer"]
-offset_left = 264.0
-offset_top = 151.0
-offset_right = 393.0
-offset_bottom = 174.0
-text = "learned Abilitys :"
-
-[node name="Details" type="Label" parent="CanvasLayer"]
-offset_left = 707.0
-offset_top = 139.0
-offset_right = 836.0
-offset_bottom = 162.0
-text = "Details :"
-
-[node name="Control2" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 49.0
-offset_top = -123.0
-offset_right = 185.0
-offset_bottom = 77.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 59
-
-[node name="CurrentSpekk" type="Label" parent="CanvasLayer" groups=["NameAbility"]]
-offset_left = 783.0
-offset_top = 139.0
-offset_right = 825.0
-offset_bottom = 162.0
-text = "None"
-
-[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer" groups=["Ability_box"]]
-offset_left = 264.0
-offset_top = 198.0
-offset_right = 304.0
-offset_bottom = 238.0
-theme_override_constants/separation = 35
-
 [node name="SpawnSpellUI" parent="." groups=["spell_uiGlobal"] instance=ExtResource("7_vc5vk")]
 process_mode = 3
 position = Vector2(85, 470)
@@ -980,5 +894,120 @@ position = Vector2(2278, -113)
 
 [node name="Node2D28" parent="." instance=ExtResource("21_q33mc")]
 position = Vector2(2278, -113)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 383.0
+offset_top = 197.0
+offset_right = 423.0
+offset_bottom = 237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Control3" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 383.0
+offset_top = 197.0
+offset_right = 423.0
+offset_bottom = 237.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SpriteUi0" type="Sprite2D" parent="CanvasLayer/Control3"]
+position = Vector2(269, 164)
+scale = Vector2(7.83349, 4.6)
+texture = ExtResource("6_e0o7y")
+
+[node name="ExpPoints" type="Label" parent="CanvasLayer"]
+offset_left = 337.0
+offset_top = 101.0
+offset_right = 377.0
+offset_bottom = 124.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Text_ExpPoints" type="Label" parent="CanvasLayer"]
+offset_left = 226.0
+offset_top = 98.0
+offset_right = 315.0
+offset_bottom = 121.0
+text = "                   :"
+metadata/_edit_use_anchors_ = true
+
+[node name="learnedAbilitys" type="Label" parent="CanvasLayer"]
+offset_left = 464.0
+offset_top = 143.0
+offset_right = 593.0
+offset_bottom = 166.0
+text = "learned Abilities :"
+metadata/_edit_use_anchors_ = true
+
+[node name="avaibleABILITY" type="Label" parent="CanvasLayer"]
+offset_left = 261.0
+offset_top = 141.0
+offset_right = 390.0
+offset_bottom = 164.0
+text = "avaible Abilities :"
+metadata/_edit_use_anchors_ = true
+
+[node name="Details" type="Label" parent="CanvasLayer"]
+offset_left = 707.0
+offset_top = 139.0
+offset_right = 836.0
+offset_bottom = 162.0
+text = "Details :"
+metadata/_edit_use_anchors_ = true
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -123.0
+offset_right = 185.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 59
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentSpekk" type="Label" parent="CanvasLayer" groups=["NameAbility"]]
+offset_left = 783.0
+offset_top = 139.0
+offset_right = 825.0
+offset_bottom = 162.0
+text = "None"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer" groups=["Ability_box"]]
+offset_left = 464.0
+offset_top = 190.0
+offset_right = 504.0
+offset_bottom = 230.0
+theme_override_constants/separation = 35
+
+[node name="avaibleAbility" type="VBoxContainer" parent="CanvasLayer" groups=["Ability_avaibleAbility"]]
+offset_left = 264.0
+offset_top = 198.0
+offset_right = 304.0
+offset_bottom = 238.0
+theme_override_constants/separation = 35
+
+[node name="4" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(260, 112)
+scale = Vector2(2.29547, 1.90955)
+texture = ExtResource("22_fh3t8")
 
 [connection signal="body_entered" from="StartBossFight" to="StartBossFight" method="_on_body_enteredStartGame"]
